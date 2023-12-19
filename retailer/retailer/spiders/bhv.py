@@ -121,6 +121,9 @@ class BhvSpider(scrapy.Spider):
 ################################
 
 class BhvSpiderCheck(scrapy.Spider):
+    """
+    Spider for checking if a product is discounted on the Bhv website.
+    """
     name = "bhv_check_spider"
 
 
