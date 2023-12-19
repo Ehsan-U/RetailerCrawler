@@ -1,0 +1,882 @@
+[
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/manteau+noir+a+col+fourrure+gerard+darel+-+38-gerard+darel/300408636627/320",
+        "product_name": "Manteau noir à col fourrure Gerard Darel - 38",
+        "brand_name": "Gerard Darel",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636627/G_300408636627_320_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "200,00 €",
+        "listed_price": "425,00 €",
+        "discounted_percent": 53,
+        "product_desc": "Produit de seconde main Manteau noir à col fourrure de la marque Gerard Darel Etat : Neuf sans étiquette Taille : 38 Couleur : Noir Matière principale : Manteau noir avec fourrure sur le col Marque Gerard Darel Couleur Noir Go for Good Seconde main Composition Autre Référence BHV 300408636627 EAN PARAD01623XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/manteau+greta+-+36-ines+de+la+fressange+paris/300408635714/278",
+        "product_name": "Manteau Greta - 36",
+        "brand_name": "Ines de la Fressange Paris",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635714/G_300408635714_278_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "207,00 €",
+        "listed_price": "690,00 €",
+        "discounted_percent": 70,
+        "product_desc": "Produit de seconde main Manteau Greta de la marque Ines de la Fressange Paris Etat : Neuf sans étiquette Taille : 36 Couleur : Marron Marque Ines de la Fressange Paris Couleur Marron Go for Good Seconde main Composition Autre Référence BHV 300408635714 EAN PARAD02440XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+sand+-+40-parisienne+et+alors/300408636941/60",
+        "product_name": "Veste Sand - 40",
+        "brand_name": "Parisienne et Alors",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636941/G_300408636941_60_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "92,00 €",
+        "listed_price": "205,00 €",
+        "discounted_percent": 55,
+        "product_desc": "Produit de seconde main Veste Sand de la marque Parisienne et Alors Etat : Neuf avec étiquette Taille : 40 Couleur : Beige Marque Parisienne et Alors Couleur Beige Go for Good Seconde main Composition Autre Référence BHV 300408636941 EAN PARAD02992XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/trench+bleu+-+36-ines+de+la+fressange+paris/300408636489/101",
+        "product_name": "Trench bleu - 36",
+        "brand_name": "Ines de la Fressange Paris",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636489/G_300408636489_101_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "208,00 €",
+        "listed_price": "520,00 €",
+        "discounted_percent": 60,
+        "product_desc": "Produit de seconde main Trench bleu de la marque Ines de la Fressange Paris Etat : Neuf avec étiquette Taille : 36 Couleur : Bleu Marque Ines de la Fressange Paris Couleur Bleu Go for Good Seconde main Composition Autre Référence BHV 300408636489 EAN PARAD02409XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+noire+a+epaulette+the+kooples+-+m-the+kooples/300408635538/320",
+        "product_name": "Veste noire à épaulette The Kooples - M",
+        "brand_name": "The Kooples",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635538/G_300408635538_320_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "98,00 €",
+        "listed_price": "307,00 €",
+        "discounted_percent": 68,
+        "product_desc": "Produit de seconde main Veste noire à épaulette de la marque The Kooples Etat : Neuf sans étiquette Taille : M Couleur : Noir Matière principale : 100% Polyester Veste noir avec détail chaines et épaulettes Marque The Kooples Couleur Noir Go for Good Seconde main Composition Polyester Référence BHV 300408635538 EAN PARAD01050XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/trench+bleu+-+36-ines+de+la+fressange+paris/300408636451/101",
+        "product_name": "Trench bleu - 36",
+        "brand_name": "Ines de la Fressange Paris",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636451/G_300408636451_101_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "208,00 €",
+        "listed_price": "520,00 €",
+        "discounted_percent": 60,
+        "product_desc": "Produit de seconde main Trench bleu de la marque Ines de la Fressange Paris Etat : Neuf avec étiquette Taille : 36 Couleur : Bleu Marque Ines de la Fressange Paris Couleur Bleu Go for Good Seconde main Composition Autre Référence BHV 300408636451 EAN PARAD02423XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+bleue+-+36-sandro/300408635172/101",
+        "product_name": "Veste bleue - 36",
+        "brand_name": "Sandro",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635172/G_300408635172_101_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "71,00 €",
+        "listed_price": "350,00 €",
+        "discounted_percent": 80,
+        "product_desc": "Produit de seconde main Veste bleue - 36 de la marque Sandro État : Très bon état Couleur : Bleu Matière principale : Coton Découvrez la pièce incontournable de la saison : la veste bleue - 36 de la prestigieuse marque Sandro. Cette merveilleuse création en coton incarne l'élégance et le raffinement à la perfection. Sa couleur bleue intemporelle apporte une touche de fraîcheur à votre garde-robe. Vous serez séduit par sa coupe impeccable et sa qualité irréprochable. De plus, cette veste présente des détails subtils qui ajoutent une touche d'originalité à votre tenue. À noter la présence de taches à l'intérieur, qui lui confèrent une allure unique. Optez pour cette pièce de seconde main et faites un geste responsable pour la planète, tout en restant à la pointe de la mode. Marque Sandro Couleur Bleu Go for Good Seconde main Composition Coton Référence BHV 300408635172 EAN PARAD03759XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/manteau+court+marron+avec+col+fourrure+gerard+darel+-+42-gerard+darel/300408636163/278",
+        "product_name": "Manteau court marron avec col fourrure Gerard Darel - 42",
+        "brand_name": "Gerard Darel",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636163/G_300408636163_278_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "79,00 €",
+        "listed_price": "226,00 €",
+        "discounted_percent": 65,
+        "product_desc": "Produit de seconde main Manteau court marron avec col fourrure de la marque Gerard Darel Etat : Très bon état Taille : 42 Couleur : Marron Matière principale : 10% Polyurtyane 90% Polyester Manteau court marron avec fourrure sur le col et les manches Marque Gerard Darel Couleur Marron Go for Good Seconde main Composition Autre Référence BHV 300408636163 EAN PARAD01612XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/trench+bleu+-+36-ines+de+la+fressange+paris/300408635232/101",
+        "product_name": "Trench bleu - 36",
+        "brand_name": "Ines de la Fressange Paris",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635232/G_300408635232_101_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "208,00 €",
+        "listed_price": "520,00 €",
+        "discounted_percent": 60,
+        "product_desc": "Produit de seconde main Trench bleu de la marque Ines de la Fressange Paris Etat : Neuf avec étiquette Taille : 36 Couleur : Bleu Marque Ines de la Fressange Paris Couleur Bleu Go for Good Seconde main Composition Autre Référence BHV 300408635232 EAN PARAD02429XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+bleue+-+36-ines+de+la+fressange+paris/300408635083/101",
+        "product_name": "Veste bleue - 36",
+        "brand_name": "Ines de la Fressange Paris",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635083/G_300408635083_101_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "216,00 €",
+        "listed_price": "540,00 €",
+        "discounted_percent": 60,
+        "product_desc": "Produit de seconde main Veste bleue de la marque Ines de la Fressange Paris Etat : Neuf avec étiquette Taille : 36 Couleur : Bleu Marque Ines de la Fressange Paris Couleur Bleu Go for Good Seconde main Composition Autre Référence BHV 300408635083 EAN PARAD02436XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+-+38-maje/300408663051/320",
+        "product_name": "Veste - 38",
+        "brand_name": "Maje",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408663051/G_300408663051_320_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "104,00 €",
+        "listed_price": "344,00 €",
+        "discounted_percent": 70,
+        "product_desc": "Produit de seconde main Veste - 38 de la marque Maje État : Très bon état Couleur : Noir Matière principale : Polyester Découvrez cette magnifique veste Maje au style intemporel et raffiné. Parfaite pour les journées fraîches, elle est dotée de manches longues qui apportent une touche d'élégance supplémentaire. Sa couleur noire, discrète et sophistiquée, s'adaptera à toutes vos tenues. Confectionnée en polyester de haute qualité, cette veste vous garantit un confort optimal tout en préservant l'environnement. Son type autre lui confère une originalité qui ne passera pas inaperçue. Optez pour cette pièce de seconde main et adoptez la mode responsable en donnant une seconde vie à cette veste d'exception. Soyez unique, soyez éthique, soyez à la pointe de la mode. Marque Maje Couleur Noir Go for Good Seconde main Composition Polyester Référence BHV 300408663051 EAN PARAD4414XXXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/manteau+ecru-gerard+darel/300408663243/60",
+        "product_name": "Manteau Ecru",
+        "brand_name": "Gerard Darel",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408663243/G_300408663243_60_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "125,00 €",
+        "listed_price": "226,00 €",
+        "discounted_percent": 45,
+        "product_desc": "Produit de seconde main Manteau Ecru de la marque Gerard Darel État : Neuf avec étiquette Couleur : Beige Matière principale : Laine Manteau écru col à revers Marque Gerard Darel Couleur Beige Go for Good Seconde main Composition Laine Référence BHV 300408663243 EAN PARAD03275XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/manteau+gris+-+s+36-claudie+pierlot/300408663249/230",
+        "product_name": "Manteau Gris - S/36",
+        "brand_name": "Claudie Pierlot",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408663249/G_300408663249_230_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "83,00 €",
+        "listed_price": "415,00 €",
+        "discounted_percent": 80,
+        "product_desc": "Produit de seconde main Manteau Gris - S/36 de la marque Claudie Pierlot État : Très bon état Couleur : Gris Matière principale : Laine Découvrez ce magnifique manteau de la marque Claudie Pierlot, véritable bijou de la mode haut de gamme. Avec ses manches longues et sa coupe, il épouse parfaitement les courbes féminines pour une silhouette élégante et raffinée. Sa couleur grise apporte une touche d'élégance et de modernité à votre tenue. Confectionné en laine de qualité supérieure, ce manteau offre un confort absolu tout en étant respectueux de l'environnement. Parfait pour les fashionistas soucieuses de leur empreinte écologique, ce vêtement de seconde main incarne la mode responsable et vous permet de vous démarquer avec style. Marque Claudie Pierlot Couleur Gris Go for Good Seconde main Composition Laine Référence BHV 300408663249 EAN PARAD03173XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/trench+bleu+-+36-ines+de+la+fressange+paris/300408635395/101",
+        "product_name": "Trench bleu - 36",
+        "brand_name": "Ines de la Fressange Paris",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635395/G_300408635395_101_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "208,00 €",
+        "listed_price": "520,00 €",
+        "discounted_percent": 60,
+        "product_desc": "Produit de seconde main Trench bleu de la marque Ines de la Fressange Paris Etat : Neuf avec étiquette Taille : 36 Couleur : Bleu Marque Ines de la Fressange Paris Couleur Bleu Go for Good Seconde main Composition Autre Référence BHV 300408635395 EAN PARAD02430XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+rose+legere+a+fleurs-sandro/300408636459/384",
+        "product_name": "Veste rose légère à fleurs",
+        "brand_name": "Sandro",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636459/G_300408636459_384_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "106,00 €",
+        "listed_price": "350,00 €",
+        "discounted_percent": 70,
+        "product_desc": "Produit de seconde main Veste rose légère à fleurs de la marque Sandro État : Neuf sans étiquette Couleur : Rose Matière principale : Polyester Veste rose légère à fleurs et col revers Marque Sandro Couleur Rose Go for Good Seconde main Composition Polyester Référence BHV 300408636459 EAN PARAD03339XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/kimono+vauvilliers+-+36-parisienne+et+alors/300408635982/356",
+        "product_name": "Kimono Vauvilliers - 36",
+        "brand_name": "Parisienne et Alors",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635982/G_300408635982_356_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "92,00 €",
+        "listed_price": "205,00 €",
+        "discounted_percent": 55,
+        "product_desc": "Produit de seconde main Kimono Vauvilliers de la marque Parisienne et Alors Etat : Neuf avec étiquette Taille : 36 Couleur : Orange Marque Parisienne et Alors Couleur Orange Go for Good Seconde main Composition Autre Référence BHV 300408635982 EAN PARAD4208XXXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/trench+gaultier+-+36-ines+de+la+fressange+paris/300408635795/101",
+        "product_name": "Trench Gaultier - 36",
+        "brand_name": "Ines de la Fressange Paris",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635795/G_300408635795_101_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "216,00 €",
+        "listed_price": "540,00 €",
+        "discounted_percent": 60,
+        "product_desc": "Produit de seconde main Trench Gaultier de la marque Ines de la Fressange Paris Etat : Très bon état Taille : 36 Couleur : Bleu Marque Ines de la Fressange Paris Couleur Bleu Go for Good Seconde main Composition Autre Référence BHV 300408635795 EAN PARAD02408XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+tournon+-+34-parisienne+et+alors/300408637006/384",
+        "product_name": "Veste Tournon - 34",
+        "brand_name": "Parisienne et Alors",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408637006/G_300408637006_384_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "92,00 €",
+        "listed_price": "205,00 €",
+        "discounted_percent": 55,
+        "product_desc": "Produit de seconde main Veste Tournon de la marque Parisienne et Alors Etat : Neuf avec étiquette Taille : 34 Couleur : Rose Marque Parisienne et Alors Couleur Rose Go for Good Seconde main Composition Autre Référence BHV 300408637006 EAN PARAD03005XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/manteau+noir+et+vert+bimba+y+lola+-+s-bimba+y+lola/300408635720/320",
+        "product_name": "Manteau noir et vert Bimba y Lola - S",
+        "brand_name": "Bimba Y Lola",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635720/G_300408635720_320_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "95,00 €",
+        "listed_price": "270,00 €",
+        "discounted_percent": 65,
+        "product_desc": "Produit de seconde main Manteau noir et vert de la marque Bimba y Lola Etat : Neuf sans étiquette Taille : S Couleur : Noir Matière principale : 50%Laine 42%Polyacrylique 8%Polyamide Manteau vert et noir oversize Marque Bimba Y Lola Couleur Noir Go for Good Seconde main Composition Laine Référence BHV 300408635720 EAN PARAD00991XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/trench+bleu+-+36-ines+de+la+fressange+paris/300408635665/101",
+        "product_name": "Trench bleu - 36",
+        "brand_name": "Ines de la Fressange Paris",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635665/G_300408635665_101_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "208,00 €",
+        "listed_price": "520,00 €",
+        "discounted_percent": 60,
+        "product_desc": "Produit de seconde main Trench bleu de la marque Ines de la Fressange Paris Etat : Neuf avec étiquette Taille : 36 Couleur : Bleu Marque Ines de la Fressange Paris Couleur Bleu Go for Good Seconde main Composition Autre Référence BHV 300408635665 EAN PARAD02432XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+rouge+zapa+-+44-zapa/300408636296/401",
+        "product_name": "Veste rouge ZAPA - 44",
+        "brand_name": "Zapa",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636296/G_300408636296_401_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "73,00 €",
+        "listed_price": "305,00 €",
+        "discounted_percent": 76,
+        "product_desc": "Produit de seconde main Veste rouge de la marque ZAPA Etat : Très bon état Taille : 44 Couleur : Rouge Matière principale : 53% Viscose 47% Lin Veste rouge avec fermeture à boutons. Veste de tailleur assortie au pantalon Zapa rouge également en vente sur le site. Marque Zapa Couleur Rouge Go for Good Seconde main Composition Viscose Référence BHV 300408636296 EAN PARAD00818XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+noire+-+t2-maje/300408663005/320",
+        "product_name": "Veste noire - T2",
+        "brand_name": "Maje",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408663005/G_300408663005_320_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "99,00 €",
+        "listed_price": "330,00 €",
+        "discounted_percent": 70,
+        "product_desc": "Produit de seconde main Veste noire de la marque Maje Etat : Très bon état Taille : T2 Couleur : Noir Matière principale : 100% Cuir Veste sans manches noire Marque Maje Couleur Noir Go for Good Seconde main Composition Cuir Référence BHV 300408663005 EAN PARAD01924XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+longue+noire+-+36-la+fee+maraboutee/300408663025/320",
+        "product_name": "Veste longue noire - 36",
+        "brand_name": "La fée maraboutée",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408663025/G_300408663025_320_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "89,00 €",
+        "listed_price": "311,00 €",
+        "discounted_percent": 71,
+        "product_desc": "Produit de seconde main Veste longue noire - 36 de la marque La Fée Maraboutée État : Très bon état Couleur : Noir Matière principale : Cuir Découvrez la pièce incontournable de la saison : la veste longue - 36 de La Fée Maraboutée. Cette merveille de la mode haut de gamme incarne l'élégance intemporelle avec sa couleur noir profond, qui ajoute une touche de mystère à votre tenue. Fabriquée à partir de cuir de haute qualité, cette veste offre un confort absolu et une durabilité exceptionnelle. Son design noir classique est à la fois polyvalent et audacieux, parfait pour toutes les occasions. Ajoutez une touche de sophistication à votre garde-robe avec cette pièce unique qui vous fera briller de mille feux. Et n'oubliez pas, la mode responsable de seconde main est le choix éclairé pour les fashionistas soucieuses de l'environnement. Marque La fée maraboutée Couleur Noir Go for Good Seconde main Composition Cuir Référence BHV 300408663025 EAN PARAD03807XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+isla+droite+carreaux-a+p+c+/85286802/57103",
+        "product_name": "Veste Isla droite carreaux",
+        "brand_name": "A.P.C.",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/852/85286802/G_85286802_57103_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "125,00 €",
+        "listed_price": "250,00 €",
+        "discounted_percent": 50,
+        "product_desc": "Cette veste droite épaisse A.P.C. présente un imprimé à carreaux, un col en pointe, une fermeture boutonnée et des poches. Ourlet fendu et poignets boutonnés. Marque A.P.C. Couleur Bleu et blanc Capuche Non Type de manche Manches longues Composition 85% coton, 13% polyester, 2% autres fibres Référence BHV 85286802 EAN 3613061182904 Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/kimono+vauvilliers+-+38-parisienne+et+alors/300408636271/356",
+        "product_name": "Kimono Vauvilliers - 38",
+        "brand_name": "Parisienne et Alors",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636271/G_300408636271_356_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "92,00 €",
+        "listed_price": "205,00 €",
+        "discounted_percent": 55,
+        "product_desc": "Produit de seconde main Kimono Vauvilliers de la marque Parisienne et Alors Etat : Neuf avec étiquette Taille : 38 Couleur : Orange Marque Parisienne et Alors Couleur Orange Go for Good Seconde main Composition Autre Référence BHV 300408636271 EAN PARAD4263XXXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+pissaro+-+40-parisienne+et+alors/300408635734/384",
+        "product_name": "Veste Pissaro - 40",
+        "brand_name": "Parisienne et Alors",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635734/G_300408635734_384_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "92,00 €",
+        "listed_price": "205,00 €",
+        "discounted_percent": 55,
+        "product_desc": "Produit de seconde main Veste Pissaro de la marque Parisienne et Alors Etat : Neuf avec étiquette Taille : 40 Couleur : Rose Marque Parisienne et Alors Couleur Rose Go for Good Seconde main Composition Autre Référence BHV 300408635734 EAN PARAD4258XXXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+lyma-des+petits+hauts/300408636173/101",
+        "product_name": "Veste Lyma",
+        "brand_name": "Des Petits Hauts",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636173/G_300408636173_101_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "87,00 €",
+        "listed_price": "174,00 €",
+        "discounted_percent": 50,
+        "product_desc": "Produit de seconde main Veste Lyma de la marque Des petits hauts État : Neuf sans étiquette Couleur : Bleu Matière principale : Acrylique Veste dorée avec feuillage bleu épais brodé Marque Des Petits Hauts Couleur Bleu Go for Good Seconde main Composition Acrylique Référence BHV 300408636173 EAN PARAD03308XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+tailleur+rose-la+fee+maraboutee/300408663081/384",
+        "product_name": "Veste tailleur rose",
+        "brand_name": "La fée maraboutée",
+        "prod_image": "https://www.bhv.fr/p/veste+tailleur+rose-la+fee+maraboutee/300408663081/384",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "74,00 €",
+        "listed_price": "162,00 €",
+        "discounted_percent": 54,
+        "product_desc": "Produit de seconde main Veste tailleur rose de la marque La Fée Maraboutée État : Neuf avec étiquette Couleur : Rose Matière principale : Lin Une veste tailleur en lin qui marie élégance et audace. Son col croisé capture l'essence même du chic. Osez être différente, tout en embrassant la mode responsable de seconde main. Marque La fée maraboutée Couleur Rose Go for Good Seconde main Composition Lin Référence BHV 300408663081 EAN PARAD03391XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/manteau+noir-vanessa+bruno/300408636404/320",
+        "product_name": "Manteau noir",
+        "brand_name": "Vanessa Bruno",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636404/G_300408636404_320_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "159,00 €",
+        "listed_price": "529,00 €",
+        "discounted_percent": 70,
+        "product_desc": "Produit de seconde main Manteau noir de la marque Vanessa Bruno État : Très bon état Couleur : Noir Matière principale : Laine Long manteau noir Marque Vanessa Bruno Couleur Noir Go for Good Seconde main Composition Laine Référence BHV 300408636404 EAN PARAD02842XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/manteau+noir-maje/300408635737/320",
+        "product_name": "Manteau noir",
+        "brand_name": "Maje",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635737/G_300408635737_320_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "75,00 €",
+        "listed_price": "371,00 €",
+        "discounted_percent": 80,
+        "product_desc": "Produit de seconde main Manteau noir de la marque Maje État : Bon état Couleur : Noir Matière principale : Laine Manteau noir à capuche Marque Maje Couleur Noir Go for Good Seconde main Composition Laine Référence BHV 300408635737 EAN PARAD03072XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+grise+zapa+-+42-zapa/300408636854/230",
+        "product_name": "Veste grise ZAPA - 42",
+        "brand_name": "Zapa",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636854/G_300408636854_230_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "110,00 €",
+        "listed_price": "305,00 €",
+        "discounted_percent": 64,
+        "product_desc": "Produit de seconde main Veste grise de la marque ZAPA Etat : Neuf avec étiquette Taille : 42 Couleur : Gris Matière principale : 40% Laine 25% Alpaga 20% Mohair 15% Polyamide Veste grise courte avec détails en fourrure au devant Marque Zapa Couleur Gris Go for Good Seconde main Composition Laine Référence BHV 300408636854 EAN PARAD00835XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/manteau+bleu-comptoir+des+cotonniers/300408635112/101",
+        "product_name": "Manteau bleu",
+        "brand_name": "Comptoir Des Cotonniers",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635112/G_300408635112_101_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "82,00 €",
+        "listed_price": "232,00 €",
+        "discounted_percent": 65,
+        "product_desc": "Produit de seconde main Manteau bleu de la marque Comptoir des Cotonniers État : Très bon état Couleur : Bleu Matière principale : Laine Manteau bleu à capuche Marque Comptoir Des Cotonniers Couleur Bleu Go for Good Seconde main Composition Laine Référence BHV 300408635112 EAN PARAD02839XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+en+jean+hila-ba+sh/300408635802/101",
+        "product_name": "Veste en jean Hila",
+        "brand_name": "Ba&sh",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635802/G_300408635802_101_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "94,00 €",
+        "listed_price": "266,00 €",
+        "discounted_percent": 65,
+        "product_desc": "Produit de seconde main Veste en jean Hila de la marque ba&sh État : Très bon état Couleur : Bleu Matière principale : Coton Veste en jean légère Marque Ba&sh Couleur Bleu Go for Good Seconde main Composition Coton Référence BHV 300408635802 EAN PARAD03040XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/manteau+gris-comptoir+des+cotonniers/300408636073/230",
+        "product_name": "Manteau gris",
+        "brand_name": "Comptoir Des Cotonniers",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636073/G_300408636073_230_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "82,00 €",
+        "listed_price": "232,00 €",
+        "discounted_percent": 65,
+        "product_desc": "Produit de seconde main Manteau gris de la marque Comptoir des Cotonniers État : Très bon état Couleur : Gris Matière principale : Laine Long manteau gris col à revers Marque Comptoir Des Cotonniers Couleur Gris Go for Good Seconde main Composition Laine Référence BHV 300408636073 EAN PARAD02826XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/bombers+naleso+-+36-parisienne+et+alors/300408636962/278",
+        "product_name": "Bombers Naleso - 36",
+        "brand_name": "Parisienne et Alors",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636962/G_300408636962_278_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "72,00 €",
+        "listed_price": "205,00 €",
+        "discounted_percent": 65,
+        "product_desc": "Produit de seconde main Bombers Naleso de la marque Parisienne et Alors Etat : Neuf sans étiquette Taille : 36 Couleur : Marron Marque Parisienne et Alors Couleur Marron Go for Good Seconde main Composition Autre Référence BHV 300408636962 EAN PARAD4169XXXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+bermau+-+38-parisienne+et+alors/300408636943/453",
+        "product_name": "Veste Bermau - 38",
+        "brand_name": "Parisienne et Alors",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636943/G_300408636943_453_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "92,00 €",
+        "listed_price": "205,00 €",
+        "discounted_percent": 55,
+        "product_desc": "Produit de seconde main Veste Bermau de la marque Parisienne et Alors Etat : Neuf avec étiquette Taille : 38 Couleur : Vert Marque Parisienne et Alors Couleur Vert Go for Good Seconde main Composition Autre Référence BHV 300408636943 EAN PARAD02975XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/trench+bleu+-+36-ines+de+la+fressange+paris/300408635691/101",
+        "product_name": "Trench bleu - 36",
+        "brand_name": "Ines de la Fressange Paris",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635691/G_300408635691_101_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "208,00 €",
+        "listed_price": "520,00 €",
+        "discounted_percent": 60,
+        "product_desc": "Produit de seconde main Trench bleu de la marque Ines de la Fressange Paris Etat : Neuf avec étiquette Taille : 36 Couleur : Bleu Marque Ines de la Fressange Paris Couleur Bleu Go for Good Seconde main Composition Autre Référence BHV 300408635691 EAN PARAD02421XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+sand+-+42-parisienne+et+alors/300408636181/85",
+        "product_name": "Veste Sand - 42",
+        "brand_name": "Parisienne et Alors",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636181/G_300408636181_85_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "92,00 €",
+        "listed_price": "205,00 €",
+        "discounted_percent": 55,
+        "product_desc": "Produit de seconde main Veste Sand de la marque Parisienne et Alors Etat : Neuf avec étiquette Taille : 42 Couleur : Blanc Marque Parisienne et Alors Couleur Blanc Go for Good Seconde main Composition Autre Référence BHV 300408636181 EAN PARAD4273XXXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/manteau+en+maille+thiers+-+36-parisienne+et+alors/300408635452/306",
+        "product_name": "Manteau en maille Thiers - 36",
+        "brand_name": "Parisienne et Alors",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635452/G_300408635452_306_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "106,00 €",
+        "listed_price": "235,00 €",
+        "discounted_percent": 55,
+        "product_desc": "Produit de seconde main Manteau en maille Thiers de la marque Parisienne et Alors Etat : Neuf avec étiquette Taille : 36 Couleur : Multicolore Marque Parisienne et Alors Couleur Multicolore Go for Good Seconde main Composition Autre Référence BHV 300408635452 EAN PARAD4282XXXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/trench+bleu+-+36-ines+de+la+fressange+paris/300408636518/101",
+        "product_name": "Trench bleu - 36",
+        "brand_name": "Ines de la Fressange Paris",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636518/G_300408636518_101_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "208,00 €",
+        "listed_price": "520,00 €",
+        "discounted_percent": 60,
+        "product_desc": "Produit de seconde main Trench bleu de la marque Ines de la Fressange Paris Etat : Neuf avec étiquette Taille : 36 Couleur : Bleu Marque Ines de la Fressange Paris Couleur Bleu Go for Good Seconde main Composition Autre Référence BHV 300408636518 EAN PARAD02410XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+sans+manche+en+tweed+bermau+-+40-parisienne+et+alors/300408636984/85",
+        "product_name": "Veste sans manche en tweed Bermau - 40",
+        "brand_name": "Parisienne et Alors",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636984/G_300408636984_85_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "92,00 €",
+        "listed_price": "205,00 €",
+        "discounted_percent": 55,
+        "product_desc": "Produit de seconde main Veste sans manche en tweed Bermau de la marque Parisienne et Alors Etat : Neuf avec étiquette Taille : 40 Couleur : Blanc Marque Parisienne et Alors Couleur Blanc Go for Good Seconde main Composition Autre Référence BHV 300408636984 EAN PARAD4174XXXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+sand+-+40-parisienne+et+alors/300408635636/85",
+        "product_name": "Veste Sand - 40",
+        "brand_name": "Parisienne et Alors",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635636/G_300408635636_85_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "92,00 €",
+        "listed_price": "205,00 €",
+        "discounted_percent": 55,
+        "product_desc": "Produit de seconde main Veste Sand de la marque Parisienne et Alors Etat : Neuf avec étiquette Taille : 40 Couleur : Blanc Marque Parisienne et Alors Couleur Blanc Go for Good Seconde main Composition Autre Référence BHV 300408635636 EAN PARAD4272XXXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/manteau+esme+-+36-ines+de+la+fressange+paris/300408636038/320",
+        "product_name": "Manteau Esme - 36",
+        "brand_name": "Ines de la Fressange Paris",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636038/G_300408636038_320_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "332,00 €",
+        "listed_price": "830,00 €",
+        "discounted_percent": 60,
+        "product_desc": "Produit de seconde main Manteau Esme de la marque Ines de la Fressange Paris Etat : Neuf avec étiquette Taille : 36 Couleur : Noir Marque Ines de la Fressange Paris Couleur Noir Go for Good Seconde main Composition Autre Référence BHV 300408636038 EAN PARAD02442XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+homewear+en+fourrure+essentiel+h73a+gris-lingerie+le+chat/300404373954/230",
+        "product_name": "Veste homewear en fourrure ESSENTIEL H73A Gris",
+        "brand_name": "Lingerie LE CHAT",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004043/300404373954/G_300404373954_230_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "87,20 €",
+        "listed_price": "109,00 €",
+        "discounted_percent": 20,
+        "product_desc": "• Veste homewear • Fausse fourrure très douce • Forme drappée • Idéale pour rester au chaud Longueur : 70 cm COMPOSITION : Fausse Fourrure 100% POLYESTER Marque Lingerie LE CHAT Couleur Gris Couleur Gris Exclusivité Internet Oui Composition Fausse fourrure : 100% POLYESTER Référence BHV 300404373954 EAN 3188541947736 Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/trench+bleu+-+36-ines+de+la+fressange+paris/300408636031/101",
+        "product_name": "Trench bleu - 36",
+        "brand_name": "Ines de la Fressange Paris",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408636031/G_300408636031_101_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "208,00 €",
+        "listed_price": "520,00 €",
+        "discounted_percent": 60,
+        "product_desc": "Produit de seconde main Trench bleu de la marque Ines de la Fressange Paris Etat : Neuf avec étiquette Taille : 36 Couleur : Bleu Marque Ines de la Fressange Paris Couleur Bleu Go for Good Seconde main Composition Autre Référence BHV 300408636031 EAN PARAD02422XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+sand+-+40-parisienne+et+alors/300408635873/85",
+        "product_name": "Veste Sand - 40",
+        "brand_name": "Parisienne et Alors",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408635873/G_300408635873_85_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "92,00 €",
+        "listed_price": "205,00 €",
+        "discounted_percent": 55,
+        "product_desc": "Produit de seconde main Veste Sand de la marque Parisienne et Alors Etat : Neuf avec étiquette Taille : 40 Couleur : Blanc Marque Parisienne et Alors Couleur Blanc Go for Good Seconde main Composition Autre Référence BHV 300408635873 EAN PARAD4286XXXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+longue+noire+-+36-la+fee+maraboutee/300408663239/320",
+        "product_name": "Veste longue noire - 36",
+        "brand_name": "La fée maraboutée",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408663239/G_300408663239_320_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "106,00 €",
+        "listed_price": "311,00 €",
+        "discounted_percent": 66,
+        "product_desc": "Produit de seconde main Veste longue noire - 36 de la marque La Fée Maraboutée État : Neuf sans étiquette Couleur : Noir Matière principale : Polyamide Découvrez cette magnifique veste longue - 36, un véritable bijou de la mode haut de gamme. Arborant une couleur bleue élégante, cette pièce signée La Fée Maraboutée est confectionnée avec soin en polyamide, offrant ainsi une qualité exceptionnelle. Son design intemporel et sa coupe parfaite font de cette veste un indispensable de votre garde-robe. Que ce soit pour une soirée chic ou une journée au bureau, elle saura vous sublimer avec classe et raffinement. Associez-la à une tenue sophistiquée et vous serez assurée d'attirer tous les regards. Optez pour la mode responsable de seconde main et offrez une seconde vie à cette pièce unique. Marque La fée maraboutée Couleur Noir Go for Good Seconde main Composition Polyamide Référence BHV 300408663239 EAN PARAD03751XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/veste+effet+tweed+-+36-maje/300408663209/320",
+        "product_name": "Veste effet tweed - 36",
+        "brand_name": "Maje",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/3004086/300408663209/G_300408663209_320_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "99,00 €",
+        "listed_price": "330,00 €",
+        "discounted_percent": 70,
+        "product_desc": "Produit de seconde main Veste effet tweed de la marque Maje Etat : Très bon état Taille : 36 Couleur : Noir Matière principale : 43% Coton 41% Acrylique 9% Polyester 5% Polyamide 2% Viscose Veste courte noire effet tweed avec filaments argentés Marque Maje Couleur Noir Go for Good Seconde main Composition Coton Référence BHV 300408663209 EAN PARAD00645XXX Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/trench-coat+long+latimore-woolrich/85726590/263",
+        "product_name": "Trench-coat long Latimore",
+        "brand_name": "Woolrich",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/857/85726590/G_85726590_263_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "395,00 €",
+        "listed_price": "790,00 €",
+        "discounted_percent": 50,
+        "product_desc": "Ce trench-coat long Woolrich composé de coton dispose d'un col classique, de boutons pression métalliques siglés, d'une ceinture à boucle ardillon carrée, d'une patte ajustable au niveau des poignets, de 2 poches latérales ainsi que d'une fente d'aisance à boutons pressionnés. Doublure sherpa. Marque Woolrich Couleur Kaki Longueur Long Capuche Non Type de manche Manches longues Composition 62% coton, 38% polyamide Référence BHV 85726590 Référence fournisseur CFWWOU0689FRUT3081 EAN 8056592789689 Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/doudoune+courte+janeth+recyclee+capuche-save+the+duck/85467670/435",
+        "product_name": "Doudoune courte Janeth recyclée capuche",
+        "brand_name": "Save the Duck",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/854/85467670/G_85467670_435_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "139,50 €",
+        "listed_price": "279,00 €",
+        "discounted_percent": 50,
+        "product_desc": "Cette doudoune courte, ample Save the Duck matelassée en polyester recyclé dispose d'une capuche, d'une fermeture zippée bidirectionnelle, de poches, de zips au niveau des poignets et de cordons de serrage à la base. Marque Save the Duck Couleur Taupe Longueur Court Capuche Oui Type de manche Manches longues Go for Good Matière recyclée Taille de l'article présenté T1 Taille mannequin 1m78 ARTICLE-STANDARD-SIZE Prenez votre taille habituelle. Composition 100% polyester recyclé Référence BHV 85467670 Référence fournisseur D30384W EAN 8053871547367 Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/parka+droite+a+capuche+jenny+mi-longue+en+coton-a+p+c+/83058899/119",
+        "product_name": "Parka droite à capuche Jenny mi-longue en coton",
+        "brand_name": "A.P.C.",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/830/83058899/G_83058899_119_ZP_2.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "270,00 €",
+        "listed_price": "540,00 €",
+        "discounted_percent": 50,
+        "product_desc": "Cette parka droite et mi-longue A.P.C. en coton présente une capuche dotée de cordons de serrage, des manches longues, un col montant et une fermeture boutonnée. Elle se distingue par ses poches obliques sur la poitrine, ses poches à rabat boutonné et par ses rabats boutonnés sur les poignets. Marque A.P.C. Couleur Bleu foncé Longueur Mi-long Capuche Oui Type de manche Manches longues Taille de l'article présenté Taille normalement Composition 100% coton Référence BHV 83058899 Référence fournisseur COEUU-F30172 EAN 3613061121590 Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/manteau+long+kuna+bi+matiere+capuche-woolrich/85726596/320",
+        "product_name": "Manteau long Kuna bi matière capuche",
+        "brand_name": "Woolrich",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/857/85726596/G_85726596_320_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "410,00 €",
+        "listed_price": "820,00 €",
+        "discounted_percent": 50,
+        "product_desc": "Ce manteau long et droit Woolrich bi matière composé de laine vierge présente un parement matelassé zippé amovible doté d'un col à capuche. Il dispose également d'une fermeture à boutons pression ainsi que de 2 poches plates à l'avant. Marque Woolrich Couleur Noir Longueur Long Capuche Oui Type de manche Manches longues Composition 70% laine vierge, 20% polyamide, 10% cachemire Référence BHV 85726596 Référence fournisseur CFWWOU0704FRUT2705 EAN 8056592792733 Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/parka+droite+a+capuche+jenny+mi-longue+en+coton-a+p+c+/83058899/60",
+        "product_name": "Parka droite à capuche Jenny mi-longue en coton",
+        "brand_name": "A.P.C.",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/830/83058899/G_83058899_60_ZP_2.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "270,00 €",
+        "listed_price": "540,00 €",
+        "discounted_percent": 50,
+        "product_desc": "Cette parka droite et mi-longue A.P.C. en coton présente une capuche dotée de cordons de serrage, des manches longues, un col montant et une fermeture boutonnée. Elle se distingue par ses poches obliques sur la poitrine, ses poches à rabat boutonné et par ses rabats boutonnés sur les poignets. Marque A.P.C. Couleur Beige Longueur Mi-long Capuche Oui Type de manche Manches longues Taille de l'article présenté Taille normalement Composition 100% coton Référence BHV 83058899 Référence fournisseur COEUU-F30172 EAN 3613061121552 Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/doudoune+longue+aliquippa+capuche-woolrich/85726606/175",
+        "product_name": "Doudoune longue Aliquippa capuche",
+        "brand_name": "Woolrich",
+        "prod_image": "https://static.bhv.fr/cdn-cgi/image/width=616,height=672,quality=85,format=auto,fit=crop,gravity=auto/media/857/85726606/G_85726606_175_ZP_1.jpg",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "450,00 €",
+        "listed_price": "900,00 €",
+        "discounted_percent": 50,
+        "product_desc": "Cette doudoune longue Woolrich est munie d'une capuche, d'un col montant, d'une fermeture zippée sous boutons pression, de liens de serrage à la taille, de 2 poches latérales, de boutons métalliques siglés pressionnés sur les côtés ainsi que de cordons de serrage à la base. Rembourrage plumes et duvet de canard. Marque Woolrich Couleur Cognac Longueur Long Capuche Oui Type de manche Manches longues Composition 100% polyamide Référence BHV 85726606 Référence fournisseur CFWWOU0719FRUT3085 EAN 8056592797035 Disponibilité en magasin voir plus"
+    },
+    {
+        "user_id": 1,
+        "country_id": 10,
+        "retailer_id": 100,
+        "product_url": "https://www.bhv.fr/p/doudoune+ajustee+cgi+down+blocked+a+capuche+courte-under+armour/85765458/306",
+        "product_name": "Doudoune ajustée CGI Down Blocked à capuche courte",
+        "brand_name": "Under Armour",
+        "prod_image": "https://www.bhv.fr/p/doudoune+ajustee+cgi+down+blocked+a+capuche+courte-under+armour/85765458/306",
+        "reviews": [
+            {}
+        ],
+        "discounted_price": "125,00 €",
+        "listed_price": "250,00 €",
+        "discounted_percent": 50,
+        "product_desc": "Cette doudoune ajustée et courte Under Armour présente une capuche, des manches longues, une fermeture zippée et des poches latérales. Elle se distingue par sa technologie UA Storm déperlante et respirante ainsi que par son garnissage en duvet de canard 700. Elle est dotée d'une doublure ColdGear® Infrared qui intègre un revêtement thermoconducteur doux pour absorber et retenir la chaleur corporelle. Elle arbore le logo écusson tissé sur la manche gauche. Marque Under Armour Couleur Multicolore Longueur Court Capuche Oui Type de manche Manches longues Taille de l'article présenté Taille normalement Composition 100% nylon Référence BHV 85765458 Référence fournisseur 1372645 EAN 0195253568268 Disponibilité en magasin voir plus"
+    }
+]
