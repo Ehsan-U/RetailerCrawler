@@ -100,7 +100,7 @@ class BhvSpider(scrapy.Spider):
         loader.add_value("product_url", response.url)
         loader.add_value("product_name", response.xpath(self.product_name_path).get())
         loader.add_value("brand_name", response.xpath(self.brand_name_path).get())
-        loader.add_value("prod_image", response.urljoin(response.xpath(self.product_image_path).get()))
+        loader.add_value("prod_image", response.urljoin(response.xpath(self.product_image_path).get('')))
         loader.add_value("reviews", [{}])
         loader.add_value("discounted_price", response.xpath(self.discount_price_path).get())
         loader.add_value("listed_price", response.xpath(self.listed_price_path).get())
