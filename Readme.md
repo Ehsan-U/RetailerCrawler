@@ -2,7 +2,7 @@
 - Add `ZYTE_API=<api-key>`
 
 
-<br>Now spiders can run by this command:
+<br>Now spider can run by this command:
 
-`scrapy crawl <spider-name>`
+`scrapy crawl retailer_spider`
 
