@@ -12,13 +12,10 @@ from retailer.settings import SCRAPY_XPATHS_RULES
 
 
 
-################################
-#            Spider 1          #
-################################
 
 class RetailerSpider(scrapy.Spider):
     """
-    Spider for scraping data from the i-run.fr website.
+    class for requests handling.
     """
     name = "retailer_spider"
     PAGE_NO = 1
@@ -32,21 +29,11 @@ class RetailerSpider(scrapy.Spider):
             generator: A generator of scrapy.Request objects.
         """
         pages = [
-            # {
-            #     "url": "https://www.i-run.fr/chaussures_homme/?sorter=&st=&m=&t=&s=b&c=&cat=23&ter=&u=&pc=&pmn=&pmx=&dmn=&dmx=&pxmn=&pxmx=&d=#bc_filtres",
-            #     "user_id": 1,
-            #     "country_id": 1,
-            #     "retailer_id": 1,
-            # },
-            # {
-            #     "url": "https://www.bhv.fr/c/mode-femme-vetements-veste+et+manteau/fttr/0+-10+/10+-20+/20+-30+/30+-40+/40+-50+/50+-60+/60+-70+/70+-80+/80+-90+/prix/71-2250",
-            #     "user_id": 2,
-            #     "country_id": 2,
-            #     "retailer_id": 2,
-            # }
             {
-                "url": "https://www.bhv.fr/p/manteau+long+kuna+bi+matiere+capuche-woolrich/85726596/320",
-                "id": 3,
+                "url": "https://www.i-run.fr/chaussures_homme/?sorter=&st=&m=&t=&s=b&c=&cat=23&ter=&u=&pc=&pmn=&pmx=&dmn=&dmx=&pxmn=&pxmx=&d=#bc_filtres",
+                "user_id": 1,
+                "country_id": 1,
+                "retailer_id": 1,
             }
         ]
 
@@ -119,12 +106,3 @@ class RetailerSpider(scrapy.Spider):
                 loader.add_value(k, v)
             
         yield loader.load_item()
-
-
-
-
-
-
-# crawler = CrawlerProcess()
-# crawler.crawl(IrunSpider)
-# crawler.start()
