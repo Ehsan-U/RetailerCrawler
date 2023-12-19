@@ -86,3 +86,7 @@ class RetailerItem(scrapy.Item):
         output_processor=TakeFirst()
     )
 
+    discounted_flag = scrapy.Field(
+        output_processor=TakeFirst()
+    )
+

@@ -8,6 +8,14 @@
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 import os
 from dotenv import load_dotenv
+from web_poet import ApplyRule
+
+from retailer.page_objects.pages import ProductPage
+from retailer.page_objects.irun import IRunProduct
+from retailer.page_objects.bhv import BhvProduct
+from retailer.selectors import *
+
+
 load_dotenv() 
 
 BOT_NAME = "retailer"
@@ -99,9 +107,28 @@ DOWNLOAD_HANDLERS = {
     "http": "scrapy_zyte_api.ScrapyZyteAPIDownloadHandler",
     "https": "scrapy_zyte_api.ScrapyZyteAPIDownloadHandler",
 }
+
 DOWNLOADER_MIDDLEWARES = {
+    "scrapy_poet.InjectionMiddleware": 543,
     "scrapy_zyte_api.ScrapyZyteAPIDownloaderMiddleware": 1000,
 }
+
+SPIDER_MIDDLEWARES = {
+    "scrapy_poet.RetryMiddleware": 275,
+}
+
 REQUEST_FINGERPRINTER_CLASS = "scrapy_zyte_api.ScrapyZyteAPIRequestFingerprinter"
 ZYTE_API_KEY = os.getenv("ZYTE_API")
 ZYTE_API_TRANSPARENT_MODE = True
+
+
+SCRAPY_POET_RULES = [
+    ApplyRule("i-run.fr", use=IRunProduct, instead_of=ProductPage),
+    ApplyRule("bhv.fr", use=BhvProduct, instead_of=ProductPage),
+]
+
+
+SCRAPY_XPATHS_RULES = {
+    "i-run.fr": IrunPaths,
+    "bhv.fr": BhvPaths
+}
