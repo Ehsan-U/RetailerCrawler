@@ -1,5 +1,5 @@
 from price_parser import Price
-from urllib.parse import urljoin, urlencode, urlsplit, urlunsplit, unquote
+from urllib.parse import urlencode, urlsplit, urlunsplit, unquote
 
 
 
@@ -51,7 +51,7 @@ def build_paginated_url(url: str, page_no: int):
     elif ('farfetch.com' in netloc):
         params = dict(qc.split("=") for qc in query.split("&")) if query else {}
         params["page"] = str(page_no)
-        params['discount'] = unquote(params['discount'])
+        params['discount'] = unquote(params.get('discount', ''))
         updated_query = urlencode(params)
         updated_url = urlunsplit((scheme, netloc, path, updated_query, fragment))
 

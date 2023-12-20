@@ -30,7 +30,7 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://www.farfetch.com/fr/shopping/women/coats-1/items.aspx?page=1&view=96&sort=3&discount=30-50%7C50-60%7C60-100%7C0-30",
+                "url": "https://www.i-run.fr/chaussures_homme/?sorter=&st=&m=&t=&s=b&c=&cat=23&ter=&u=&pc=&pmn=&pmx=&dmn=&dmx=&pxmn=&pxmx=&d=#bc_filtres",
                 "user_id": 1,
                 "country_id": 1,
                 "retailer_id": 1,
