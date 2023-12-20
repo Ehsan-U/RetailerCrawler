@@ -16,8 +16,8 @@ class IRunProduct(ProductPage):
     _review_text = ".//div[@class='bc_comment_content_body']/text()"
     _discounted_price = "//span[@itemprop='price']/text()"
     _listed_price = "//div[@class='reduc']/span[@class='prixbarre']/text()"
-    _product_desc = "//div[@id='bc_avis-irun']//text()"
-    _discounted_flag = "//span[@class='prixbarre']"
+    _product_desc = "//div[@id='bc_avis-irun']//text()[not(parent::style or parent::script)]"
+
 
     @field
     def product_name(self):
@@ -57,8 +57,8 @@ class IRunProduct(ProductPage):
     
     @field
     def product_desc(self):
-        return self.response.xpath(self._product_desc).get()
+        return " ".join(self.response.xpath(self._product_desc).getall())
     
     @field
     def discounted_flag(self):
-        return bool(self.response.xpath(self._discounted_flag).get())
+        return bool(self.response.xpath(self._listed_price).get())

@@ -30,7 +30,7 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://www.i-run.fr/chaussures_homme/?sorter=&st=&m=&t=&s=b&c=&cat=23&ter=&u=&pc=&pmn=&pmx=&dmn=&dmx=&pxmn=&pxmx=&d=#bc_filtres",
+                "url": "https://www.farfetch.com/fr/shopping/women/coats-1/items.aspx?page=1&view=96&sort=3&discount=30-50%7C50-60%7C60-100%7C0-30",
                 "user_id": 1,
                 "country_id": 1,
                 "retailer_id": 1,
@@ -74,7 +74,7 @@ class RetailerSpider(scrapy.Spider):
                     yield scrapy.Request(url, cb_kwargs={"meta": meta}, callback=self.parse_product)
 
             # pagination
-            if not response.xpath(path.ERROR):
+            if not response.xpath(path.LAST_PAGE):
                 self.PAGE_NO += 1
                 next_page = build_paginated_url(meta['url'], self.PAGE_NO)
                 yield scrapy.Request(url=next_page, cb_kwargs={"meta": meta}, callback=self.parse)

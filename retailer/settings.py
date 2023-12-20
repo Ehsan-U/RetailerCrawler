@@ -13,6 +13,7 @@ from web_poet import ApplyRule
 from retailer.page_objects.pages import ProductPage
 from retailer.page_objects.irun import IRunProduct
 from retailer.page_objects.bhv import BhvProduct
+from retailer.page_objects.farfetch import FarfetchProduct
 from retailer.selectors import *
 
 
@@ -125,10 +126,12 @@ ZYTE_API_TRANSPARENT_MODE = True
 SCRAPY_POET_RULES = [
     ApplyRule("i-run.fr", use=IRunProduct, instead_of=ProductPage),
     ApplyRule("bhv.fr", use=BhvProduct, instead_of=ProductPage),
+    ApplyRule("farfetch.com", use=FarfetchProduct, instead_of=ProductPage),
 ]
 
 
 SCRAPY_XPATHS_RULES = {
     "i-run.fr": IrunPaths,
-    "bhv.fr": BhvPaths
+    "bhv.fr": BhvPaths,
+    "farfetch.com": FarfetchPaths,
 }
