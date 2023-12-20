@@ -1,8 +1,7 @@
-from enum import Enum
 import scrapy
 from scrapy.loader import ItemLoader
-from scrapy.http import Response
-from typing import Dict
+from scrapy.http import Response, Request
+from typing import Dict, Union
 from urllib.parse import urlparse
 
 from retailer.utils import build_paginated_url
@@ -15,18 +14,19 @@ from retailer.settings import SCRAPY_XPATHS_RULES
 
 class RetailerSpider(scrapy.Spider):
     """
-    class for requests handling.
+    Spider class for scraping retailer websites.
     """
+
     name = "retailer_spider"
     PAGE_NO = 1
 
 
-    def start_requests(self):
+    def start_requests(self) -> Request:
         """
-        Method to generate initial requests for scraping.
+        Generates initial requests to start scraping.
 
         Returns:
-            generator: A generator of scrapy.Request objects.
+            Request: The initial request to be processed.
         """
         pages = [
             {
@@ -42,18 +42,18 @@ class RetailerSpider(scrapy.Spider):
             yield scrapy.Request(url, callback=self.parse, cb_kwargs={"meta": page})
 
 
-    async def parse(self, response: Response, page: ProductPage, meta: Dict):
+    async def parse(self, response: Response, page: ProductPage, meta: Dict) -> Union[Request, Dict]:
         """
-        Method to parse the response and extract product URLs.
+        Parses the response from the initial request or subsequent requests.
 
         Args:
-            response (scrapy.http.Response): The response object.
-            page (dict): The page information.
+            response (Response): The response object.
+            page (ProductPage): The product page object.
+            meta (Dict): The metadata associated with the request.
 
-        Yields:
-            scrapy.Request: A scrapy.Request object for each product URL.
+        Returns:
+            Union[Request, Dict]: The next request to be processed or the scraped item.
         """
-
         # presence of id in meta indicate status check call
         if meta.get("id"):
             partial_item = await page.to_item()
@@ -62,12 +62,11 @@ class RetailerSpider(scrapy.Spider):
                 "discounted": partial_item.get("discounted_flag")
             }
             yield item
-
         else:
             # injection of xpaths based on domain
             domain = urlparse(response.url).netloc.lstrip('www.')
             path = SCRAPY_XPATHS_RULES[domain]()
-            
+
             for product in response.xpath(path.PRODUCTS):
                 # only discounted products
                 if product.xpath(path.DISCOUNTED):
@@ -76,22 +75,22 @@ class RetailerSpider(scrapy.Spider):
 
             # pagination
             if not response.xpath(path.ERROR):
-                self.PAGE_NO +=1
+                self.PAGE_NO += 1
                 next_page = build_paginated_url(meta['url'], self.PAGE_NO)
                 yield scrapy.Request(url=next_page, cb_kwargs={"meta": meta}, callback=self.parse)
 
 
-
-    async def parse_product(self, response: Response, page: ProductPage, meta: Dict):
+    async def parse_product(self, response: Response, page: ProductPage, meta: Dict) -> RetailerItem:
         """
-        Method to parse the product details.
+        Parses the response from the product page request.
 
         Args:
-            response (scrapy.http.Response): The response object.
-            page (dict): The page information.
+            response (Response): The response object.
+            page (ProductPage): The product page object.
+            meta (Dict): The metadata associated with the request.
 
-        Yields:
-            dict: The scraped product data.
+        Returns:
+            RetailerItem: The scraped item.
         """
         partial_item = await page.to_item()
         item = {**meta, **partial_item}
@@ -104,5 +103,5 @@ class RetailerSpider(scrapy.Spider):
             # skip the discounted_flag
             if k != 'discounted_flag':
                 loader.add_value(k, v)
-            
+
         yield loader.load_item()
