@@ -5,6 +5,7 @@
 
 import re
 import scrapy
+from price_parser import Price
 from itemloaders.processors import Join, MapCompose, TakeFirst
 
 
@@ -25,6 +26,22 @@ def clean_str(value: str) -> str:
 
     return value
 
+
+def clean_price(value: str) -> float:
+    """
+    Cleans a price string by stripping whitespace and other potential unwanted characters.
+
+    Args:
+        value: The price string to clean.
+
+    Returns:
+        The cleaned price string.
+    """
+    if isinstance(value, str):
+        value = Price.fromstring(value).amount_float
+        return value
+
+    return value
 
 
 class RetailerItem(scrapy.Item):
@@ -71,11 +88,11 @@ class RetailerItem(scrapy.Item):
     )
     reviews = scrapy.Field()
     discounted_price=scrapy.Field(
-        input_processor=MapCompose(clean_str),
+        input_processor=MapCompose(clean_str, clean_price),
         output_processor=TakeFirst()
     )
     listed_price=scrapy.Field(
-        input_processor=MapCompose(clean_str),
+        input_processor=MapCompose(clean_str, clean_price),
         output_processor=TakeFirst()
     )
     discounted_percent=scrapy.Field(
