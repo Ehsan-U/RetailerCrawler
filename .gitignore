@@ -4,3 +4,4 @@ test.py
 .scrapy/
 __pycache__/
 *.json
+.idea/
