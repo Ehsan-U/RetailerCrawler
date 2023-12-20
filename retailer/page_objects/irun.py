@@ -57,7 +57,7 @@ class IRunProduct(ProductPage):
     
     @field
     def product_desc(self):
-        return self.response.xpath(self._product_desc).get()
+        return " ".join(self.response.xpath(self._product_desc).getall())
     
     @field
     def discounted_flag(self):
