@@ -8,8 +8,8 @@ class IRunProduct(ProductPage):
     Page object for the product page on i-run.fr.
     """
 
-    _product_name = "//div[@id='bc_titre']/h1/text()[1]"
-    _brand_name = "//div[@id='bc_titre']/h1/text()[2]"
+    _product_name = "//div[@id='bc_titre']/h1/text()[2]"
+    _brand_name = "//div[@id='bc_titre']/h1/text()[1]"
     _prod_image = "//img[@id='img_principale']/@src"
     _reviews = "//div[@id='bc_comment_global']/div[@class='bc_comment']"
     _review_stars = ".//span[@class='bc_mark_star']/text()"
