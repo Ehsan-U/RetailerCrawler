@@ -1,4 +1,4 @@
-- Create `.env` file in the `retailer` project dir<br>
+- Create `.env` file under the project dir<br>
 - Add `ZYTE_API=<api-key>`
 
 
