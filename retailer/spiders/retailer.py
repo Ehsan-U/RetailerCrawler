@@ -7,7 +7,6 @@ from urllib.parse import urlparse
 from retailer.utils import build_paginated_url
 from retailer.items import RetailerItem
 from retailer.page_objects.pages import ProductPage
-from retailer.settings import SCRAPY_XPATHS_RULES
 
 
 
@@ -30,10 +29,11 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://fr.vestiairecollective.com/sacs-femme/#categoryParent=Sacs%235_gender=Femme%231_discount=50%25-40%25-30%25-20%25_category=5%20%3E%20Pochettes%2357_color=Blanc%231-Jaune%233_materialParent=Fourrure%236-Cuir%20verni%2314",
+                "url": "https://www.placedestendances.com/fr/fr/baskets-femme/col/Argent/Beige",
                 "user_id": 1,
                 "country_id": 1,
                 "retailer_id": 1,
+                "category_ids": [1,2]
             }
         ]
 
@@ -67,7 +67,7 @@ class RetailerSpider(scrapy.Spider):
             yield item
         else:
             domain = urlparse(response.url).netloc.lstrip('www.')
-            path = SCRAPY_XPATHS_RULES[domain]()
+            path = self.settings.get("SCRAPY_XPATHS_RULES").get(domain)
 
             for product in response.xpath(path.PRODUCTS):
                 # only discounted products
@@ -140,13 +140,16 @@ class RetailerSpider(scrapy.Spider):
                 },
             })
         else:
-            request = scrapy.Request(url, cb_kwargs=cb_kwargs, callback=callback)
+            request = scrapy.Request(url, cb_kwargs=cb_kwargs, callback=callback, meta={
+                "zyte_api_automap": {
+                    "geolocation": "FR",
+                },
+            })
 
         return request
 
 
-    @staticmethod
-    def reached_end(response: Response, element_xpath: str) -> bool:
+    def reached_end(self, response: Response, element_xpath: str) -> bool:
         """
         Checks if the end of the page has been reached.
 
@@ -164,6 +167,11 @@ class RetailerSpider(scrapy.Spider):
             if element:
                 return False
             return True
+        
+        elif ('placedestendances.com' in domain): 
+            if int(element.get()) == self.PAGE_NO: # reached end when PAGE_NO equals the value of the element
+                return True
+            return False
         
         if element:
             return True

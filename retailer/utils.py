@@ -59,6 +59,10 @@ def build_paginated_url(url: str, page_no: int):
         updated_path = path.rstrip('/') + f"/p-{page_no}/"
         updated_url = urlunsplit((scheme, netloc, updated_path, query, fragment))
 
+    elif ("placedestendances.com" in netloc):
+        updated_path = path.rstrip('/') + f"/page/{page_no}"
+        updated_url = urlunsplit((scheme, netloc, updated_path, query, fragment))
+
     return updated_url
 
 

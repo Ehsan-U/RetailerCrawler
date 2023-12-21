@@ -61,3 +61,15 @@ class VestiaireCollectivePaths():
     DISCOUNTED = ".//span[contains(@class, 'price--discount')]"
     PRODUCT_URL = ".//a[not(@class)]/@href"
     ELEMENT = "//button[contains(@class, 'paginationButton--current')]" # reached end when not exists
+
+
+@dataclass
+class PlaceDesTendancesPaths():
+    """
+    Xpaths for the placedestendances.com domain.
+    """
+
+    PRODUCTS = "//div[@class='product']"
+    DISCOUNTED = ".//div[@class='labels text-picto']"
+    PRODUCT_URL = ".//a[not(@class)]/@href"
+    ELEMENT = "//div[@id='viewallPagination']/a[last()]/@data-page" # reached end when exists after page 1

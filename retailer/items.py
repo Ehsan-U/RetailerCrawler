@@ -52,6 +52,7 @@ class RetailerItem(scrapy.Item):
         user_id (scrapy.Field): The user ID associated with the item.
         country_id (scrapy.Field): The country ID associated with the item.
         retailer_id (scrapy.Field): The retailer ID associated with the item.
+        category_ids (scrapy.Field): The category IDs associated with the item.
         product_url (scrapy.Field): The URL of the product.
         product_name (scrapy.Field): The name of the product.
         brand_name (scrapy.Field): The brand name of the product.
@@ -60,6 +61,7 @@ class RetailerItem(scrapy.Item):
         discounted_price (scrapy.Field): The discounted price of the product.
         listed_price (scrapy.Field): The listed price of the product.
         product_desc (scrapy.Field): The description of the product.
+        discounted_flag (scrapy.Field): The discounted flag of the product.
     """
 
     user_id = scrapy.Field(
@@ -71,6 +73,7 @@ class RetailerItem(scrapy.Item):
     retailer_id = scrapy.Field(
         output_processor=TakeFirst()
     )
+    category_ids = scrapy.Field()
     product_url = scrapy.Field(
         output_processor=TakeFirst()
     )

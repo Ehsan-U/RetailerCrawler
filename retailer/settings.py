@@ -16,6 +16,7 @@ from retailer.page_objects.fr.bhv import BhvProduct
 from retailer.page_objects.fr.farfetch import FarfetchProduct
 from retailer.page_objects.fr.delsey import DelseyProduct
 from retailer.page_objects.fr.vestiairecollective import VestiaireCollectiveProduct
+from retailer.page_objects.fr.placedestendances import PlaceDestendancesProduct
 from retailer.selectors import *
 
 
@@ -131,6 +132,7 @@ SCRAPY_POET_RULES = [
     ApplyRule("farfetch.com", use=FarfetchProduct, instead_of=ProductPage),
     ApplyRule("fr.delsey.com", use=DelseyProduct, instead_of=ProductPage),
     ApplyRule("fr.vestiairecollective.com", use=VestiaireCollectiveProduct, instead_of=ProductPage),
+    ApplyRule("placedestendances.com", use=PlaceDestendancesProduct, instead_of=ProductPage),
 ]
 
 
@@ -140,9 +142,12 @@ SCRAPY_XPATHS_RULES = {
     "farfetch.com": FarfetchPaths,
     "fr.delsey.com": DelseyPaths,
     "fr.vestiairecollective.com": VestiaireCollectivePaths,
-}
+    "placedestendances.com": PlaceDesTendancesPaths,
 
+}
+# https://www./fr/fr/baskets-femme/sld/-15%25/-20%25/-25%25/-30%25/-40%25/-45%25/-50%25/mrk/IKKS/MEEKO/LIU+JO/I+CODE
 
 RETRY_ENABLED = True
 RETRY_TIMES = 3
 RETRY_HTTP_CODES = [403]
+REDIRECT_ENABLED = False
