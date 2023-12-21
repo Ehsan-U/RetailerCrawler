@@ -2,6 +2,7 @@
 from dataclasses import dataclass
 
 
+
 @dataclass
 class IrunPaths():
     """
@@ -11,7 +12,7 @@ class IrunPaths():
     PRODUCTS = "//section[@class='catalog-page-section']/div"
     DISCOUNTED = ".//span[@class='prixbarre']"
     PRODUCT_URL = "./a/@href"
-    LAST_PAGE = "//h1[text()='Erreur 404']"
+    ELEMENT = "//h1[text()='Erreur 404']" # reached end when exists
 
 
 @dataclass
@@ -23,7 +24,7 @@ class BhvPaths():
     PRODUCTS = "//ul[@class='category-products']/li"
     DISCOUNTED = ".//span[contains(@class, 'product-price-old')]"
     PRODUCT_URL = ".//div[contains(@class, 'product-link')]/@data-link"
-    LAST_PAGE = "//p[@class='category-noresults']"
+    ELEMENT = "//p[@class='category-noresults']" # reached end when exists
 
 
 @dataclass
@@ -35,7 +36,7 @@ class FarfetchPaths():
     PRODUCTS = "//ul[@data-testid='product-card-list']/li/div[@itemid]"
     DISCOUNTED = ".//p[@data-component='PriceOriginal']"
     PRODUCT_URL = "./a/@href"
-    LAST_PAGE = "//ul[@data-testid='product-card-list' and not(li)]"
+    ELEMENT = "//ul[@data-testid='product-card-list' and not(li)]" # reached end when exists
 
 
 @dataclass
@@ -47,4 +48,16 @@ class DelseyPaths():
     PRODUCTS = "//div[@class='grid-item__content']"
     DISCOUNTED = ".//div[@class='grid-product__tag grid-product__tag--sale']"
     PRODUCT_URL = "./a/@href"
-    LAST_PAGE = "//div[@class='index-section']"
+    ELEMENT = "//div[@class='index-section']" # reached end when exists
+
+
+@dataclass
+class VestiaireCollectivePaths():
+    """
+    Xpaths for the fr.vestiairecollective.com domain.
+    """
+
+    PRODUCTS = "//ul[contains(@class, 'product-search_catalog')]/li"
+    DISCOUNTED = ".//span[contains(@class, 'price--discount')]"
+    PRODUCT_URL = ".//a[not(@class)]/@href"
+    ELEMENT = "//button[contains(@class, 'paginationButton--current')]" # reached end when not exists

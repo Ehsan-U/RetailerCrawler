@@ -1,7 +1,7 @@
 import scrapy
 from scrapy.loader import ItemLoader
 from scrapy.http import Response, Request
-from typing import Dict, Union
+from typing import Dict, Union, Callable
 from urllib.parse import urlparse
 
 from retailer.utils import build_paginated_url
@@ -30,7 +30,7 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://fr.delsey.com/collections/valises-cabine",
+                "url": "https://fr.vestiairecollective.com/sacs-femme/#categoryParent=Sacs%235_gender=Femme%231_discount=50%25-40%25-30%25-20%25_category=5%20%3E%20Pochettes%2357_color=Blanc%231-Jaune%233_materialParent=Fourrure%236-Cuir%20verni%2314",
                 "user_id": 1,
                 "country_id": 1,
                 "retailer_id": 1,
@@ -38,32 +38,34 @@ class RetailerSpider(scrapy.Spider):
         ]
 
         for page in pages:
-            url = page.get('url')
-            yield scrapy.Request(url, callback=self.parse, cb_kwargs={"meta": page})
+            url = page['url']
+            js = self.use_javascript(url, page.get("retailer_id"))
+
+            request = self.make_request(url, callback=self.parse, cb_kwargs={"page_meta": page}, js=js)
+            yield request
 
 
-    async def parse(self, response: Response, page: ProductPage, meta: Dict) -> Union[Request, Dict]:
+    async def parse(self, response: Response, page: ProductPage, page_meta: Dict) -> Union[Request, Dict]:
         """
         Parses the response from the initial request or subsequent requests.
 
         Args:
             response (Response): The response object.
             page (ProductPage): The product page object.
-            meta (Dict): The metadata associated with the request.
+            page_meta (Dict): The metadata associated with the request.
 
         Returns:
             Union[Request, Dict]: The next request to be processed or the scraped item.
         """
         # presence of id in meta indicate status check call
-        if meta.get("id"):
+        if page_meta.get("id"):
             partial_item = await page.to_item()
             item = {
-                **meta,
+                **page_meta,
                 "discounted": partial_item.get("discounted_flag")
             }
             yield item
         else:
-            # injection of xpaths based on domain
             domain = urlparse(response.url).netloc.lstrip('www.')
             path = SCRAPY_XPATHS_RULES[domain]()
 
@@ -71,29 +73,34 @@ class RetailerSpider(scrapy.Spider):
                 # only discounted products
                 if product.xpath(path.DISCOUNTED):
                     url = response.urljoin(product.xpath(path.PRODUCT_URL).get())
-                    yield scrapy.Request(url, cb_kwargs={"meta": meta}, callback=self.parse_product)
+
+                    request = self.make_request(url, callback=self.parse_product, cb_kwargs={"page_meta": page_meta})
+                    yield request
 
             # pagination
-            if not response.xpath(path.LAST_PAGE):
+            if not self.reached_end(response, path.ELEMENT):
                 self.PAGE_NO += 1
-                next_page = build_paginated_url(meta['url'], self.PAGE_NO)
-                yield scrapy.Request(url=next_page, cb_kwargs={"meta": meta}, callback=self.parse)
+                next_page = build_paginated_url(page_meta['url'], self.PAGE_NO)
+                js = self.use_javascript(next_page, page_meta.get("retailer_id"))
+
+                request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta}, js=js)
+                yield request
 
 
-    async def parse_product(self, response: Response, page: ProductPage, meta: Dict) -> RetailerItem:
+    async def parse_product(self, response: Response, page: ProductPage, page_meta: Dict) -> RetailerItem:
         """
         Parses the response from the product page request.
 
         Args:
             response (Response): The response object.
             page (ProductPage): The product page object.
-            meta (Dict): The metadata associated with the request.
+            page_meta (Dict): The metadata associated with the request.
 
         Returns:
             RetailerItem: The scraped item.
         """
         partial_item = await page.to_item()
-        item = {**meta, **partial_item}
+        item = {**page_meta, **partial_item}
 
         # remove the source page url
         item.pop("url")
@@ -105,3 +112,81 @@ class RetailerSpider(scrapy.Spider):
                 loader.add_value(k, v)
 
         yield loader.load_item()
+
+
+    def make_request(self, url: str, callback: Callable, cb_kwargs: Dict, js: bool = False) -> Request:
+        """
+        Creates a scrapy Request object with the given parameters.
+
+        Args:
+            url (str): The URL to make the request to.
+            callback (Callable): The callback function to be called when the response is received.
+            cb_kwargs (Dict): Keyword arguments to be passed to the callback function.
+            js (bool, optional): Indicates whether JavaScript should be enabled for the request. Defaults to False.
+
+        Returns:
+            Request: The scrapy Request object.
+        """
+        if js:
+            request = scrapy.Request(url, cb_kwargs=cb_kwargs, callback=callback, meta={
+                "zyte_api_automap": {
+                    "geolocation": "FR",
+                    "browserHtml": True,
+                    "javascript": True,
+                    "actions": [
+                        {"action": "click", "selector": {"type": "xpath", "value": "//button[@title='Accepter']"}},
+                        {"action": "scrollBottom", "maxScrollCount": 1},
+                    ]
+                },
+            })
+        else:
+            request = scrapy.Request(url, cb_kwargs=cb_kwargs, callback=callback)
+
+        return request
+
+
+    @staticmethod
+    def reached_end(response: Response, element_xpath: str) -> bool:
+        """
+        Checks if the end of the page has been reached.
+
+        Args:
+            response (Response): The response object of the page.
+            element_xpath (str): The XPath expression to locate the element indicating the end of the page.
+
+        Returns:
+            bool: True if the end of the page has been reached, False otherwise.
+        """
+        domain = urlparse(response.url).netloc.lstrip('www.')
+        element = response.xpath(element_xpath)
+        
+        if ('fr.vestiairecollective.com' in domain):
+            if element:
+                return False
+            return True
+        
+        if element:
+            return True
+        return False
+
+
+    @staticmethod
+    def use_javascript(url: str, retailer_id: int) -> bool:
+        """
+        Determines whether JavaScript should be used for a given URL and retailer ID.
+
+        Args:
+            url (str): The URL to check.
+            retailer_id (int): The ID of the retailer.
+
+        Returns:
+            bool: True if JavaScript should be used, False otherwise.
+        """
+        domain = urlparse(url).netloc.lstrip('www.')
+
+        if ('fr.vestiairecollective.com' in domain) and retailer_id:
+            javascript = True
+        else:
+            javascript = False
+
+        return javascript

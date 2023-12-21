@@ -11,10 +11,11 @@ from dotenv import load_dotenv
 from web_poet import ApplyRule
 
 from retailer.page_objects.pages import ProductPage
-from retailer.page_objects.irun import IRunProduct
-from retailer.page_objects.bhv import BhvProduct
-from retailer.page_objects.farfetch import FarfetchProduct
-from retailer.page_objects.delsey import DelseyProduct
+from retailer.page_objects.fr.irun import IRunProduct
+from retailer.page_objects.fr.bhv import BhvProduct
+from retailer.page_objects.fr.farfetch import FarfetchProduct
+from retailer.page_objects.fr.delsey import DelseyProduct
+from retailer.page_objects.fr.vestiairecollective import VestiaireCollectiveProduct
 from retailer.selectors import *
 
 
@@ -94,7 +95,7 @@ COOKIES_ENABLED = False
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-HTTPCACHE_ENABLED = True
+HTTPCACHE_ENABLED = False
 #HTTPCACHE_EXPIRATION_SECS = 0
 #HTTPCACHE_DIR = "httpcache"
 #HTTPCACHE_IGNORE_HTTP_CODES = []
@@ -129,6 +130,7 @@ SCRAPY_POET_RULES = [
     ApplyRule("bhv.fr", use=BhvProduct, instead_of=ProductPage),
     ApplyRule("farfetch.com", use=FarfetchProduct, instead_of=ProductPage),
     ApplyRule("fr.delsey.com", use=DelseyProduct, instead_of=ProductPage),
+    ApplyRule("fr.vestiairecollective.com", use=VestiaireCollectiveProduct, instead_of=ProductPage),
 ]
 
 
@@ -137,4 +139,10 @@ SCRAPY_XPATHS_RULES = {
     "bhv.fr": BhvPaths,
     "farfetch.com": FarfetchPaths,
     "fr.delsey.com": DelseyPaths,
+    "fr.vestiairecollective.com": VestiaireCollectivePaths,
 }
+
+
+RETRY_ENABLED = True
+RETRY_TIMES = 3
+RETRY_HTTP_CODES = [403]
