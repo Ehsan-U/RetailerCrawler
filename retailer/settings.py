@@ -14,6 +14,7 @@ from retailer.page_objects.pages import ProductPage
 from retailer.page_objects.irun import IRunProduct
 from retailer.page_objects.bhv import BhvProduct
 from retailer.page_objects.farfetch import FarfetchProduct
+from retailer.page_objects.delsey import DelseyProduct
 from retailer.selectors import *
 
 
@@ -127,6 +128,7 @@ SCRAPY_POET_RULES = [
     ApplyRule("i-run.fr", use=IRunProduct, instead_of=ProductPage),
     ApplyRule("bhv.fr", use=BhvProduct, instead_of=ProductPage),
     ApplyRule("farfetch.com", use=FarfetchProduct, instead_of=ProductPage),
+    ApplyRule("fr.delsey.com", use=DelseyProduct, instead_of=ProductPage),
 ]
 
 
@@ -134,4 +136,5 @@ SCRAPY_XPATHS_RULES = {
     "i-run.fr": IrunPaths,
     "bhv.fr": BhvPaths,
     "farfetch.com": FarfetchPaths,
+    "fr.delsey.com": DelseyPaths,
 }

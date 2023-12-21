@@ -30,7 +30,7 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://www.i-run.fr/chaussures_homme/?sorter=&st=&m=&t=&s=b&c=&cat=23&ter=&u=&pc=&pmn=&pmx=&dmn=&dmx=&pxmn=&pxmx=&d=#bc_filtres",
+                "url": "https://fr.delsey.com/collections/valises-cabine",
                 "user_id": 1,
                 "country_id": 1,
                 "retailer_id": 1,

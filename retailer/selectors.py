@@ -36,3 +36,15 @@ class FarfetchPaths():
     DISCOUNTED = ".//p[@data-component='PriceOriginal']"
     PRODUCT_URL = "./a/@href"
     LAST_PAGE = "//ul[@data-testid='product-card-list' and not(li)]"
+
+
+@dataclass
+class DelseyPaths():
+    """
+    Xpaths for the fr.delsey.com domain.
+    """
+
+    PRODUCTS = "//div[@class='grid-item__content']"
+    DISCOUNTED = ".//div[@class='grid-product__tag grid-product__tag--sale']"
+    PRODUCT_URL = "./a/@href"
+    LAST_PAGE = "//div[@class='index-section']"

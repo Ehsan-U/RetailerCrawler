@@ -2,17 +2,18 @@ from retailer.page_objects.pages import ProductPage
 from web_poet import field
 
 
-class FarfetchProduct(ProductPage):
+
+class DelseyProduct(ProductPage):
     """
-    Page object for the product page on farfetch.com.
+    Page object for the product page on fr.delsey.com.
     """
 
-    _product_name = "//p[@data-testid='product-short-description']/text()"
-    _brand_name = "//a[@data-component='LinkGhostDark']/text()"
-    _prod_image = "//img[contains(@alt, 'Image')]/@src"
-    _discounted_price = "//p[@data-component='PriceFinalLarge']/text()"
-    _listed_price = "//p[@data-component='PriceOriginal']/text()"
-    _product_desc = "//section[@data-component='AccordionItem']//text()[not(parent::style or parent::script)]"
+    _product_name = "//h1[@class='h2 product-single__title text-uppercase']/text()"
+    _brand_name = "//div[@class='product_single_type text_letter_spacing text-uppercase']/text()"
+    _prod_image = "//div[@class='product-slideshow']/div[@class='product-main-slide starting-slide']//img[@class='lazyloaded']/@src"
+    _discounted_price = "//span[@class='product__price on-sale']/span[@class]/text()"
+    _listed_price = "//span[@class='product__price product__price--compare']/span[@class]/text()"
+    _product_desc = "//div[contains(@id, 'Product-content')]//text()[not(parent::style or parent::script)]"
 
 
     @field
