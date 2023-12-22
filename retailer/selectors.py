@@ -72,4 +72,16 @@ class PlaceDesTendancesPaths():
     PRODUCTS = "//div[@class='product']"
     DISCOUNTED = ".//div[@class='labels text-picto']"
     PRODUCT_URL = ".//a[not(@class)]/@href"
-    ELEMENT = "//div[@id='viewallPagination']/a[last()]/@data-page" # reached end when exists after page 1
+    ELEMENT = "//div[@id='viewallPagination']/a[last()]/@data-page" # reached end when self.PAGE_NO equals the value of the element
+
+
+@dataclass
+class SunglassHutPaths():
+    """
+    Xpaths for the sunglasshut.com domain.
+    """
+
+    PRODUCTS = "//article"
+    DISCOUNTED = ".//span[contains(text(), '% off')]"
+    PRODUCT_URL = "./div/a/@href"
+    ELEMENT = "//body" # dummy element, reached end on 2nd page

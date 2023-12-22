@@ -29,16 +29,16 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://www.placedestendances.com/fr/fr/baskets-femme/col/Argent/Beige",
+                "url": "https://www.sunglasshut.com/fr/balenciaga/6e000232-889652345284",
                 "user_id": 1,
-                "country_id": 1,
+                "country_id": 75,
                 "retailer_id": 1,
                 "category_ids": [1,2]
             }
         ]
 
         for page in pages:
-            url = page['url']
+            url = self.make_url(page)
             js = self.use_javascript(url, page.get("retailer_id"))
 
             request = self.make_request(url, callback=self.parse, cb_kwargs={"page_meta": page}, js=js)
@@ -114,6 +114,26 @@ class RetailerSpider(scrapy.Spider):
         yield loader.load_item()
 
 
+    @staticmethod
+    def make_url(page_meta: Dict) -> str:
+        """
+        Get url from page
+
+        Args:
+            page_meta (Dict): The data associated with the page
+
+        Returns:
+            Modified URL if needed otherwise as it is
+        """
+        url = page_meta['url']
+        domain = urlparse(url).netloc.lstrip('www.')
+
+        if ('sunglasshut.com' in domain) and page_meta.get("retailer_id"):
+            url = build_paginated_url(url, 0)
+
+        return url
+
+
     def make_request(self, url: str, callback: Callable, cb_kwargs: Dict, js: bool = False) -> Request:
         """
         Creates a scrapy Request object with the given parameters.
@@ -127,25 +147,35 @@ class RetailerSpider(scrapy.Spider):
         Returns:
             Request: The scrapy Request object.
         """
-        if js:
-            request = scrapy.Request(url, cb_kwargs=cb_kwargs, callback=callback, meta={
-                "zyte_api_automap": {
-                    "geolocation": "FR",
-                    "browserHtml": True,
-                    "javascript": True,
-                    "actions": [
-                        {"action": "click", "selector": {"type": "xpath", "value": "//button[@title='Accepter']"}},
-                        {"action": "scrollBottom", "maxScrollCount": 1},
-                    ]
-                },
-            })
-        else:
-            request = scrapy.Request(url, cb_kwargs=cb_kwargs, callback=callback, meta={
-                "zyte_api_automap": {
-                    "geolocation": "FR",
-                },
-            })
+        domain = urlparse(url).netloc.lstrip('www.')
+        location = self.settings["GEOLOCATIONS"][
+            cb_kwargs['page_meta'].get("country_id", 75)
+        ]
 
+        meta = {
+            "zyte_api_automap": {
+                "geolocation": location,
+            }
+        }
+
+        if js:
+            meta["zyte_api_automap"].update(
+                {'browserHtml': True, 'javascript': True}
+            )
+
+            if "fr.vestiairecollective.com" in domain:
+                meta["zyte_api_automap"]["actions"] = [
+                    {"action": "click", "selector": {"type": "xpath", "value": "//button[@title='Accepter']"},},
+                    {"action": "scrollBottom", "maxScrollCount": 1},
+                ]
+
+            elif "sunglasshut.com" in domain:
+                meta["zyte_api_automap"]["actions"] = [
+                    {"action": "click", "selector": {"type": "xpath", "value": "//div[@class='geo-buttons']/button"}},
+                    {"action": "scrollBottom", "maxScrollCount": 1},
+                ]
+
+        request = scrapy.Request(url, callback=callback, cb_kwargs=cb_kwargs, meta=meta)
         return request
 
 
@@ -172,7 +202,7 @@ class RetailerSpider(scrapy.Spider):
             if int(element.get()) == self.PAGE_NO: # reached end when PAGE_NO equals the value of the element
                 return True
             return False
-        
+
         if element:
             return True
         return False
@@ -192,7 +222,7 @@ class RetailerSpider(scrapy.Spider):
         """
         domain = urlparse(url).netloc.lstrip('www.')
 
-        if ('fr.vestiairecollective.com' in domain) and retailer_id:
+        if ('fr.vestiairecollective.com' in domain or "sunglasshut.com" in domain) and retailer_id:
             javascript = True
         else:
             javascript = False

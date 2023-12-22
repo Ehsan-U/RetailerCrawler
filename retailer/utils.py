@@ -63,6 +63,13 @@ def build_paginated_url(url: str, page_no: int):
         updated_path = path.rstrip('/') + f"/page/{page_no}"
         updated_url = urlunsplit((scheme, netloc, updated_path, query, fragment))
 
+    elif ("sunglasshut.com" in netloc):
+        static_page_value = 50 # get all products at once on 2nd page
+        params = dict(qc.split("=") for qc in query.split("&")) if query else {}
+        params["currentPage"] = str(static_page_value)
+        updated_query = urlencode(params)
+        updated_url = urlunsplit((scheme, netloc, path, updated_query, fragment))
+
     return updated_url
 
 
