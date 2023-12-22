@@ -97,3 +97,15 @@ class JacadiPaths():
     DISCOUNTED = ".//del[@class='jac-product-price-crossed']"
     PRODUCT_URL = "./figure/a/@href"
     ELEMENT = "//ul[@class='jac-pagination-list']/li[last()]/*/text()" # reached end when self.PAGE_NO equals the value of the element
+
+
+@dataclass
+class SneakersnStuffPaths():
+    """
+    Xpaths for the sneakersnstuff.com domain.
+    """
+
+    PRODUCTS = "//article[@class='card product']"
+    DISCOUNTED = ".//del[@class='price__original']"
+    PRODUCT_URL = ".//h3/a/@href"
+    ELEMENT = "//article[@class='page page--empty']" # reached end when exists
