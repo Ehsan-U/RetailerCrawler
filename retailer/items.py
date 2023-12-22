@@ -10,6 +10,15 @@ from itemloaders.processors import Join, MapCompose, TakeFirst
 
 
 
+# custom output processor instead of TakeFirst to handle lists
+class CustomTakeFirst(TakeFirst):
+    def __call__(self, values):
+        for value in values:
+            if value is not None and value != "":
+                return value
+        return ""
+
+
 def clean_str(value: str) -> str:
     """
     Cleans a string by stripping whitespace and other potential unwanted characters.
@@ -65,48 +74,48 @@ class RetailerItem(scrapy.Item):
     """
 
     user_id = scrapy.Field(
-        output_processor=TakeFirst()
+        output_processor=CustomTakeFirst()
     )
     country_id = scrapy.Field(
-        output_processor=TakeFirst()
+        output_processor=CustomTakeFirst()
     )
     retailer_id = scrapy.Field(
-        output_processor=TakeFirst()
+        output_processor=CustomTakeFirst()
     )
     category_ids = scrapy.Field()
     product_url = scrapy.Field(
-        output_processor=TakeFirst()
+        output_processor=CustomTakeFirst()
     )
     product_name = scrapy.Field(
         input_processor=MapCompose(clean_str),
-        output_processor=TakeFirst()
+        output_processor=CustomTakeFirst()
     )
     brand_name = scrapy.Field(
         input_processor=MapCompose(clean_str),
-        output_processor=TakeFirst()
+        output_processor=CustomTakeFirst()
     )
     prod_image = scrapy.Field(
         input_processor=MapCompose(clean_str),
-        output_processor=TakeFirst()
+        output_processor=CustomTakeFirst()
     )
     reviews = scrapy.Field()
     discounted_price=scrapy.Field(
         input_processor=MapCompose(clean_str, clean_price),
-        output_processor=TakeFirst()
+        output_processor=CustomTakeFirst()
     )
     listed_price=scrapy.Field(
         input_processor=MapCompose(clean_str, clean_price),
-        output_processor=TakeFirst()
+        output_processor=CustomTakeFirst()
     )
     discounted_percent=scrapy.Field(
-        output_processor=TakeFirst()
+        output_processor=CustomTakeFirst()
     )
     product_desc = scrapy.Field(
         input_processor=MapCompose(clean_str),
-        output_processor=TakeFirst()
+        output_processor=CustomTakeFirst()
     )
 
     discounted_flag = scrapy.Field(
-        output_processor=TakeFirst()
+        output_processor=CustomTakeFirst()
     )
 
