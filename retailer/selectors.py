@@ -84,4 +84,16 @@ class SunglassHutPaths():
     PRODUCTS = "//article"
     DISCOUNTED = ".//span[contains(text(), '% off')]"
     PRODUCT_URL = "./div/a/@href"
-    ELEMENT = "//body" # dummy element, reached end on 2nd page
+    ELEMENT = "//body" # dummy element, reached end on 1st page
+
+
+@dataclass
+class JacadiPaths():
+    """
+    Xpaths for the jacadi.fr domain.
+    """
+
+    PRODUCTS = "//div[@class='jac-product-list-item']"
+    DISCOUNTED = ".//del[@class='jac-product-price-crossed']"
+    PRODUCT_URL = "./figure/a/@href"
+    ELEMENT = "//ul[@class='jac-pagination-list']/li[last()]/*/text()" # reached end when self.PAGE_NO equals the value of the element

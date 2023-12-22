@@ -70,6 +70,13 @@ def build_paginated_url(url: str, page_no: int):
         updated_query = urlencode(params)
         updated_url = urlunsplit((scheme, netloc, path, updated_query, fragment))
 
+    elif ("jacadi.fr" in netloc):
+        params = dict(qc.split("=") for qc in query.split("&")) if query else {}
+        params['q'] = ":score-jacadi-fr"
+        params["page"] = str(page_no-1)
+        updated_query = urlencode(params)
+        updated_url = urlunsplit((scheme, netloc, path, updated_query, fragment))
+
     return updated_url
 
 

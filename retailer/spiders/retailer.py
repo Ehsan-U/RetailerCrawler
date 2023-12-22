@@ -29,7 +29,7 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://www.sunglasshut.com/fr/balenciaga/6e000232-889652345284",
+                "url": "https://www.jacadi.fr/outlet/enfant/fille/c/l1-3-2-1",
                 "user_id": 1,
                 "country_id": 75,
                 "retailer_id": 1,
@@ -198,7 +198,7 @@ class RetailerSpider(scrapy.Spider):
                 return False
             return True
         
-        elif ('placedestendances.com' in domain): 
+        elif ('placedestendances.com' in domain) or ("jacadi.fr" in domain): 
             if int(element.get()) == self.PAGE_NO: # reached end when PAGE_NO equals the value of the element
                 return True
             return False
