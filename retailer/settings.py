@@ -21,6 +21,7 @@ from retailer.page_objects.fr.sunglasshut import SunglasshutProduct
 from retailer.page_objects.fr.jacadi import JacadiProduct
 from retailer.page_objects.fr.sneakersnstuff import SneakersnStuffProduct
 from retailer.page_objects.fr.luisaviaroma import LuisaViaRomaProduct
+from retailer.page_objects.fr.intersport import IntersportProduct
 
 from retailer.selectors import *
 
@@ -142,7 +143,7 @@ SCRAPY_POET_RULES = [
     ApplyRule("jacadi.fr", use=JacadiProduct, instead_of=ProductPage),
     ApplyRule("sneakersnstuff.com", use=SneakersnStuffProduct, instead_of=ProductPage),
     ApplyRule("luisaviaroma.com", use=LuisaViaRomaProduct, instead_of=ProductPage),
-
+    ApplyRule("intersport.fr", use=IntersportProduct, instead_of=ProductPage),
 ]
 
 
@@ -157,11 +158,12 @@ SCRAPY_XPATHS_RULES = {
     "jacadi.fr": JacadiPaths,
     "sneakersnstuff.com": SneakersnStuffPaths,
     "luisaviaroma.com": LuisaViaRomaPaths,
+    "intersport.fr": IntersportPaths,
 }
 
 RETRY_ENABLED = True
 RETRY_TIMES = 3
-RETRY_HTTP_CODES = [403]
+RETRY_HTTP_CODES = [403, 520, 521]
 REDIRECT_ENABLED = False
 
 

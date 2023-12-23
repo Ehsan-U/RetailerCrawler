@@ -20,7 +20,10 @@ def calculate_discount(discounted_price: str, listed_price: str):
     discounted_price = Price.fromstring(discounted_price).amount_float
     listed_price = Price.fromstring(listed_price).amount_float
 
-    discounted_percent = ((listed_price - discounted_price) / listed_price) * 100
+    try:
+        discounted_percent = ((listed_price - discounted_price) / listed_price) * 100
+    except TypeError:
+        return float(0)
 
     return round(discounted_percent)
 
@@ -38,55 +41,50 @@ def build_paginated_url(url: str, page_no: int):
         str: The updated paginated URL.
     """
     scheme, netloc, path, query, fragment = urlsplit(url)
+    params = dict(qc.split("=") for qc in query.split("&")) if query else {}
 
     if ('i-run.fr' in netloc) or ('fr.delsey.com' in netloc):
-        params = dict(qc.split("=") for qc in query.split("&")) if query else {}
         params["page"] = str(page_no)
-        updated_query = urlencode(params)
-        updated_url = urlunsplit((scheme, netloc, path, updated_query, fragment))
-        
+        query = urlencode(params)
+
     elif ('bhv.fr' in netloc):
-        updated_url = f"{url.rstrip('/')}/p:{page_no}"
+        path = path.rstrip('/') + f"/p:{page_no}"
 
     elif ('farfetch.com' in netloc):
         params = dict(qc.split("=") for qc in query.split("&")) if query else {}
         params["page"] = str(page_no)
         params['discount'] = unquote(params.get('discount', ''))
-        updated_query = urlencode(params)
-        updated_url = urlunsplit((scheme, netloc, path, updated_query, fragment))
+        query = urlencode(params)
 
     elif ("fr.vestiairecollective.com" in netloc):
-        updated_path = path.rstrip('/') + f"/p-{page_no}/"
-        updated_url = urlunsplit((scheme, netloc, updated_path, query, fragment))
+        path = path.rstrip('/') + f"/p-{page_no}/"
 
     elif ("placedestendances.com" in netloc):
-        updated_path = path.rstrip('/') + f"/page/{page_no}"
-        updated_url = urlunsplit((scheme, netloc, updated_path, query, fragment))
+        path = path.rstrip('/') + f"/page/{page_no}"
 
     elif ("sunglasshut.com" in netloc):
         static_page_value = 50 # get all products at once on 2nd page
-        params = dict(qc.split("=") for qc in query.split("&")) if query else {}
         params["currentPage"] = str(static_page_value)
-        updated_query = urlencode(params)
-        updated_url = urlunsplit((scheme, netloc, path, updated_query, fragment))
+        query = urlencode(params)
 
     elif ("jacadi.fr" in netloc):
         params = dict(qc.split("=") for qc in query.split("&")) if query else {}
         params['q'] = ":score-jacadi-fr"
         params["page"] = str(page_no-1)
-        updated_query = urlencode(params)
-        updated_url = urlunsplit((scheme, netloc, path, updated_query, fragment))
+        query = urlencode(params)
 
     elif ("sneakersnstuff.com" in netloc):
-        updated_path = path.rstrip('/') + f"/{page_no}"
-        updated_url = urlunsplit((scheme, netloc, updated_path, query, fragment))
+        path = path.rstrip('/') + f"/{page_no}"
 
     elif ("luisaviaroma.com" in netloc):
-        params = dict(qc.split("=") for qc in query.split("&")) if query else {}
         params["Page"] = str(page_no)
-        updated_query = urlencode(params)
-        updated_url = urlunsplit((scheme, netloc, path, updated_query, fragment))
+        query = urlencode(params)
 
+    elif ("intersport.fr" in netloc):
+        params["page"] = str(page_no)
+        query = urlencode(params)
+
+    updated_url = urlunsplit((scheme, netloc, path, query, fragment))
     return updated_url
 
 

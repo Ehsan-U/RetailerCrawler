@@ -121,3 +121,15 @@ class LuisaViaRomaPaths():
     DISCOUNTED = ".//p[count(span)=3]"
     PRODUCT_URL = "./a/@href"
     ELEMENT = "//h1[@id='pnlFileNotFoundTitle']"  # reached end when exists
+
+
+@dataclass
+class IntersportPaths():
+    """
+    Xpaths for the intersport.fr domain.
+    """
+
+    PRODUCTS = "//div[@id='productList']/div"
+    DISCOUNTED = ".//span[contains(@class, 'price--suggested')]"
+    PRODUCT_URL = ".//div[@class='product-card__title']/a[@class='product-url']/@href"
+    ELEMENT = "//h1[@class='notfound']" # reached end when exists

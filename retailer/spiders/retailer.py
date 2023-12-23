@@ -29,7 +29,7 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://www.luisaviaroma.com/en-fr/shop/women/clothing/t-shirts?lvrid=_gw_i1_c8_s",
+                "url": "https://www.intersport.fr/bons-plans/mode/homme/chaussures/produits~~baskets_basses~baskets_montantes~sneakers/?priceMin=44&priceMax=147",
                 "user_id": 1,
                 "country_id": 75,
                 "retailer_id": 1,
@@ -134,7 +134,7 @@ class RetailerSpider(scrapy.Spider):
         return url
 
 
-    def make_request(self, url: str, callback: Callable, cb_kwargs: Dict, js: bool = False) -> Request:
+    def make_request(self, url: str, callback: Callable, cb_kwargs: Dict, js: bool = False, headers: Dict = None) -> Request:
         """
         Creates a scrapy Request object with the given parameters.
 
@@ -158,6 +158,15 @@ class RetailerSpider(scrapy.Spider):
             }
         }
 
+        if "intersport.fr" in domain:
+            headers = {"Referer": "https://www.intersport.fr/"}
+            meta["zyte_api_automap"].update(
+                {
+                    "httpResponseBody": True,
+                    "device": "mobile",
+                 }
+            )
+
         if js:
             meta["zyte_api_automap"].update(
                 {'browserHtml': True, 'javascript': True}
@@ -175,7 +184,7 @@ class RetailerSpider(scrapy.Spider):
                     {"action": "scrollBottom", "maxScrollCount": 1},
                 ]
 
-        request = scrapy.Request(url, callback=callback, cb_kwargs=cb_kwargs, meta=meta)
+        request = scrapy.Request(url, callback=callback, cb_kwargs=cb_kwargs, meta=meta, headers=headers)
         return request
 
 
