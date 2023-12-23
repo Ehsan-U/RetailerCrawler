@@ -29,7 +29,7 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://www.sneakersnstuff.com/fr/56/sale?p=406887&p=820&orderBy=Popularity",
+                "url": "https://www.luisaviaroma.com/en-fr/shop/women/clothing/t-shirts?lvrid=_gw_i1_c8_s",
                 "user_id": 1,
                 "country_id": 75,
                 "retailer_id": 1,

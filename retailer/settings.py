@@ -20,6 +20,7 @@ from retailer.page_objects.fr.placedestendances import PlaceDestendancesProduct
 from retailer.page_objects.fr.sunglasshut import SunglasshutProduct
 from retailer.page_objects.fr.jacadi import JacadiProduct
 from retailer.page_objects.fr.sneakersnstuff import SneakersnStuffProduct
+from retailer.page_objects.fr.luisaviaroma import LuisaViaRomaProduct
 
 from retailer.selectors import *
 
@@ -139,7 +140,9 @@ SCRAPY_POET_RULES = [
     ApplyRule("placedestendances.com", use=PlaceDestendancesProduct, instead_of=ProductPage),
     ApplyRule("sunglasshut.com", use=SunglasshutProduct, instead_of=ProductPage),
     ApplyRule("jacadi.fr", use=JacadiProduct, instead_of=ProductPage),
-    ApplyRule("sneakersnstuff.com", use=SneakersnStuffProduct, instead_of=ProductPage)
+    ApplyRule("sneakersnstuff.com", use=SneakersnStuffProduct, instead_of=ProductPage),
+    ApplyRule("luisaviaroma.com", use=LuisaViaRomaProduct, instead_of=ProductPage),
+
 ]
 
 
@@ -152,10 +155,9 @@ SCRAPY_XPATHS_RULES = {
     "placedestendances.com": PlaceDesTendancesPaths,
     "sunglasshut.com": SunglassHutPaths,
     "jacadi.fr": JacadiPaths,
-    "sneakersnstuff.com": SneakersnStuffPaths
-
+    "sneakersnstuff.com": SneakersnStuffPaths,
+    "luisaviaroma.com": LuisaViaRomaPaths,
 }
-# https://www./fr/fr/baskets-femme/sld/-15%25/-20%25/-25%25/-30%25/-40%25/-45%25/-50%25/mrk/IKKS/MEEKO/LIU+JO/I+CODE
 
 RETRY_ENABLED = True
 RETRY_TIMES = 3

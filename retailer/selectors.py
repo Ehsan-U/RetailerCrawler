@@ -109,3 +109,15 @@ class SneakersnStuffPaths():
     DISCOUNTED = ".//del[@class='price__original']"
     PRODUCT_URL = ".//h3/a/@href"
     ELEMENT = "//article[@class='page page--empty']" # reached end when exists
+
+
+@dataclass
+class LuisaViaRomaPaths():
+    """
+    Xpaths for the luisaviaroma.com domain.
+    """
+
+    PRODUCTS = "//article[@itemprop='itemListElement']"
+    DISCOUNTED = ".//p[count(span)=3]"
+    PRODUCT_URL = "./a/@href"
+    ELEMENT = "//h1[@id='pnlFileNotFoundTitle']"  # reached end when exists
