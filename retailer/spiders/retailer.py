@@ -29,7 +29,7 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://www.intersport.fr/bons-plans/mode/homme/chaussures/produits~~baskets_basses~baskets_montantes~sneakers/?priceMin=44&priceMax=147",
+                "url": "https://www.i-run.fr/chaussures_homme/?sorter=&st=&m=&t=&s=b&c=&cat=23&ter=&u=&pc=&pmn=&pmx=&dmn=&dmx=&pxmn=&pxmx=&d=#bc_filtres",
                 "user_id": 1,
                 "country_id": 75,
                 "retailer_id": 1,
