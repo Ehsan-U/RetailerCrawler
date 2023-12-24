@@ -1,3 +1,5 @@
+from base64 import b64decode
+
 import scrapy
 from scrapy.loader import ItemLoader
 from scrapy.http import Response, Request
@@ -29,7 +31,7 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://www.i-run.fr/chaussures_homme/?sorter=&st=&m=&t=&s=b&c=&cat=23&ter=&u=&pc=&pmn=&pmx=&dmn=&dmx=&pxmn=&pxmx=&d=#bc_filtres",
+                "url": "https://www.sunglasshut.com/fr/lunettes-de-soleil-femme?facet=Vente%3ATRUE",
                 "user_id": 1,
                 "country_id": 75,
                 "retailer_id": 1,
@@ -101,17 +103,21 @@ class RetailerSpider(scrapy.Spider):
         """
         partial_item = await page.to_item()
         item = {**page_meta, **partial_item}
+        # allow only discounted products
+        if item.get("discounted_percent"):
 
-        # remove the source page url
-        item.pop("url")
+            # remove the source page url
+            item.pop("url")
 
-        loader = ItemLoader(item=RetailerItem())
-        for k, v in item.items():
-            # skip the discounted_flag
-            if k != 'discounted_flag':
-                loader.add_value(k, v)
+            loader = ItemLoader(item=RetailerItem())
+            for k, v in item.items():
+                # skip the discounted_flag
+                if k != 'discounted_flag':
+                    loader.add_value(k, v)
 
-        yield loader.load_item()
+            yield loader.load_item()
+        else:
+            pass
 
 
     @staticmethod
@@ -174,12 +180,15 @@ class RetailerSpider(scrapy.Spider):
 
             if "fr.vestiairecollective.com" in domain:
                 meta["zyte_api_automap"]["actions"] = [
-                    {"action": "click", "selector": {"type": "xpath", "value": "//button[@title='Accepter']"},},
+                    # {"action": "waitForTimeout", "timeout": 5},
+                    {"action": "waitForSelector", "selector": {"type": "xpath", "value": "//button[@title='Accepter']"}, "timeout": 10},
+                    {"action": "click", "selector": {"type": "xpath", "value": "//button[@title='Accepter']"}},
                     {"action": "scrollBottom", "maxScrollCount": 1},
                 ]
 
             elif "sunglasshut.com" in domain:
                 meta["zyte_api_automap"]["actions"] = [
+                    {"action": "waitForSelector", "selector": {"type": "xpath", "value": "//div[@class='geo-buttons']/button"}, "timeout": 10},
                     {"action": "click", "selector": {"type": "xpath", "value": "//div[@class='geo-buttons']/button"}},
                     {"action": "scrollBottom", "maxScrollCount": 1},
                 ]
@@ -237,3 +246,16 @@ class RetailerSpider(scrapy.Spider):
             javascript = False
 
         return javascript
+
+
+    @staticmethod
+    def save_screenshot(response):
+        """
+        Saves a screenshot of the page.
+
+        Args:
+            response (Response): The response object of the page.
+        """
+        screenshot: bytes = b64decode(response.raw_api_response["screenshot"])
+        with open("screenshot.png", "wb") as f:
+            f.write(screenshot)

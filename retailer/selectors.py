@@ -57,7 +57,7 @@ class VestiaireCollectivePaths():
     Xpaths for the fr.vestiairecollective.com domain.
     """
 
-    PRODUCTS = "//ul[contains(@class, 'product-search_catalog')]/li"
+    PRODUCTS = "//ul[contains(@class, 'product-search_catalog')]/li[not(.//span[contains(@class, 'soldText')])]"
     DISCOUNTED = ".//span[contains(@class, 'price--discount')]"
     PRODUCT_URL = ".//a[not(@class)]/@href"
     ELEMENT = "//button[contains(@class, 'paginationButton--current')]" # reached end when not exists
