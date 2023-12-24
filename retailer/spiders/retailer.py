@@ -31,7 +31,7 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://fr.vestiairecollective.com/sacs-femme/#categoryParent=Sacs%235_gender=Femme%231_discount=50%25-40%25-30%25-20%25_category=5%20%3E%20Pochettes%2357",
+                "url": "https://www.sneakersnstuff.com/fr/56/sale?p=406887&p=820&orderBy=Popularity",
                 "user_id": 1,
                 "country_id": 75,
                 "retailer_id": 1,

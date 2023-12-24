@@ -26,15 +26,17 @@ class VestiaireCollectiveProduct(ProductPage):
 
     @field
     def prod_images(self) -> list:
-        images = set()
+        images = []
         imgs = self.response.xpath(self._prod_images).getall()
         for img in imgs:
             if img and isinstance(img, str):
                 src = img.split("768w,")[0].split("480w,")[-1].strip().replace("w=128", "w=768").replace("q=75", "q=70")
-                images.add(str(self.response.urljoin(src)))
+                src = str(self.response.urljoin(src))
+                if not src in images:
+                    images.append(src)
                 if len(images) == 3:
                     break
-        return list(images)
+        return images
 
     @field
     def discounted_price(self) -> str:

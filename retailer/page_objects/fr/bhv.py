@@ -26,14 +26,16 @@ class BhvProduct(ProductPage):
     
     @field
     def prod_images(self) -> list:
-        images = set()
+        images = []
         imgs = self.response.xpath(self._prod_images).getall()
         for img in imgs:
             if img and isinstance(img, str):
-                images.add(str(self.response.urljoin(img)))
+                src = str(self.response.urljoin(img))
+                if not src in images:
+                    images.append(src)
                 if len(images) == 3:
                     break
-        return list(images)
+        return images
     
     @field
     def discounted_price(self) -> str:

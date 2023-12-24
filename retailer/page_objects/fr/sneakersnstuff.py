@@ -10,7 +10,7 @@ class SneakersnStuffProduct(ProductPage):
 
     _product_name = "//span[@class='product-view__title-name']/text()"
     _brand_name = "//a[@class='product-view__title-brand']/text()"
-    _prod_images = "//a[@class='image-gallery__link']//img/@src"
+    _prod_images = "//a[@class='image-gallery__link']/@href"
     _discounted_price = "//div[@class='product-view__content']//span[@class='price__current']/text()"
     _listed_price = "//div[@class='product-view__content']//del[@class='price__original']/text()"
     _product_desc = "//div[@id='description']//text()[not(parent::style or parent::script)]"
@@ -26,14 +26,16 @@ class SneakersnStuffProduct(ProductPage):
 
     @field
     def prod_images(self) -> list:
-        images = set()
+        images = []
         imgs = self.response.xpath(self._prod_images).getall()
         for img in imgs:
             if img and isinstance(img, str):
-                images.add(str(self.response.urljoin(img)))
+                src = str(self.response.urljoin(img))
+                if not src in images:
+                    images.append(src)
                 if len(images) == 3:
                     break
-        return list(images)
+        return images
 
     @field
     def discounted_price(self) -> str:
