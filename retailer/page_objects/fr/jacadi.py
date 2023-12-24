@@ -21,7 +21,7 @@ class JacadiProduct(ProductPage):
 
     @field
     def brand_name(self) -> str:
-        return ""
+        return "Jacadi"
 
     @field
     def prod_image(self) -> str:
