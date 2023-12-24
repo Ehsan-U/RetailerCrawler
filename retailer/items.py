@@ -65,7 +65,7 @@ class RetailerItem(scrapy.Item):
         product_url (scrapy.Field): The URL of the product.
         product_name (scrapy.Field): The name of the product.
         brand_name (scrapy.Field): The brand name of the product.
-        prod_image (scrapy.Field): The image of the product.
+        prod_images (scrapy.Field): The images of the product.
         reviews (scrapy.Field): The reviews of the product.
         discounted_price (scrapy.Field): The discounted price of the product.
         listed_price (scrapy.Field): The listed price of the product.
@@ -94,10 +94,7 @@ class RetailerItem(scrapy.Item):
         input_processor=MapCompose(clean_str),
         output_processor=CustomTakeFirst()
     )
-    prod_image = scrapy.Field(
-        input_processor=MapCompose(clean_str),
-        output_processor=CustomTakeFirst()
-    )
+    prod_images = scrapy.Field()
     reviews = scrapy.Field()
     discounted_price=scrapy.Field(
         input_processor=MapCompose(clean_str, clean_price),

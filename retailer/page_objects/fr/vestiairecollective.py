@@ -10,7 +10,7 @@ class VestiaireCollectiveProduct(ProductPage):
 
     _product_name = "//div[@data-cy='productTitle_name']/text()"
     _brand_name = "//div[@data-cy='productTitle_brand']/a/text()"
-    _prod_image = "//div[contains(@class, 'images_imageContainer')]/img/@srcset"
+    _prod_images = "//div[contains(@class, 'images_imageContainer')]/img/@srcset"
     _discounted_price = "//span[contains(@class, 'price--promo')]/text()"
     _listed_price = "//span[contains(@class, 'price--strikeOut')]/text()"
     _product_desc = "//section[contains(@class, 'productPage__moreDetails')]//text()[not(parent::style or parent::script)]"
@@ -25,12 +25,16 @@ class VestiaireCollectiveProduct(ProductPage):
         return self.response.xpath(self._brand_name).get()
 
     @field
-    def prod_image(self) -> str:
-        img = self.response.xpath(self._prod_image).get()
-        if img:
-            src = img.split("768w,")[0].split("480w,")[-1].strip()
-            return str(self.response.urljoin(src))
-        return img
+    def prod_images(self) -> list:
+        images = set()
+        imgs = self.response.xpath(self._prod_images).getall()
+        for img in imgs:
+            if img and isinstance(img, str):
+                src = img.split("768w,")[0].split("480w,")[-1].strip().replace("w=128", "w=768").replace("q=75", "q=70")
+                images.add(str(self.response.urljoin(src)))
+                if len(images) == 3:
+                    break
+        return list(images)
 
     @field
     def discounted_price(self) -> str:

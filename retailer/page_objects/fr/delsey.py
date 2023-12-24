@@ -10,7 +10,7 @@ class DelseyProduct(ProductPage):
 
     _product_name = "//h1[@class='h2 product-single__title text-uppercase']/text()"
     _brand_name = "//div[@class='product_single_type text_letter_spacing text-uppercase']/text()"
-    _prod_image = "//div[@class='product-slideshow']/div[@class='product-main-slide starting-slide']//img[@class='lazyloaded']/@src"
+    _prod_images = "//div[@class='product__main-photos']//img[@class='lazyloaded']/@src"
     _discounted_price = "//span[@class='product__price on-sale']/span[@class]/text()"
     _listed_price = "//span[@class='product__price product__price--compare']/span[@class]/text()"
     _product_desc = "//div[contains(@id, 'Product-content')]//text()[not(parent::style or parent::script)]"
@@ -25,11 +25,15 @@ class DelseyProduct(ProductPage):
         return self.response.xpath(self._brand_name).get()
 
     @field
-    def prod_image(self) -> str:
-        img = self.response.xpath(self._prod_image).get()
-        if img:
-            return str(self.response.urljoin(img))
-        return img
+    def prod_images(self) -> list:
+        images = set()
+        imgs = self.response.xpath(self._prod_images).getall()
+        for img in imgs:
+            if img and isinstance(img, str):
+                images.add(str(self.response.urljoin(img)))
+                if len(images) == 3:
+                    break
+        return list(images)
 
     @field
     def discounted_price(self) -> str:

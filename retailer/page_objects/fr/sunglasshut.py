@@ -10,7 +10,7 @@ class SunglasshutProduct(ProductPage):
 
     _product_name = "//h1[@class='sgh-pdp__product-title ']/text()"
     _brand_name = "//p[@class='sgh-pdp__brand-name']/text()"
-    _prod_image = "//div[@id='pdpImgCarousel']//img/@src"
+    _prod_images = "//div[@id='pdpImgCarousel']//img/@src"
     _discounted_price = "//span[@class='sale-price price' and @id='offerPrice']/text()"
     _listed_price = "//span[@class='original-price' and @id='listPrice']/text()"
     _product_desc = "//div[@id='collapseTwo']//root/text()"
@@ -25,11 +25,15 @@ class SunglasshutProduct(ProductPage):
         return self.response.xpath(self._brand_name).get()
 
     @field
-    def prod_image(self) -> str:
-        img = self.response.xpath(self._prod_image).get()
-        if img:
-            return str(self.response.urljoin(img))
-        return img
+    def prod_images(self) -> list:
+        images = set()
+        imgs = self.response.xpath(self._prod_images).getall()
+        for img in imgs:
+            if img and isinstance(img, str):
+                images.add(str(self.response.urljoin(img)))
+                if len(images) == 3:
+                    break
+        return list(images)
 
     @field
     def discounted_price(self) -> str:

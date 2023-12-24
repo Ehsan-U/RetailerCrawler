@@ -10,7 +10,7 @@ class BhvProduct(ProductPage):
 
     _product_name = "//p[@class='product-name']/text()"
     _brand_name = "//a[@class='product-brand-text']/text()"
-    _prod_image = "//ul[@class='product-display-images']/li/img/@src[1]"
+    _prod_images = "//ul[@class='product-display-images']/li/img/@src"
     _discounted_price = "//p[@class='product-price-current']/text()"
     _listed_price = "//p[@class='product-price-old']/text()"
     _product_desc = "//div[@class='product-description']//text()[not(parent::style or parent::script)]"
@@ -25,11 +25,15 @@ class BhvProduct(ProductPage):
         return self.response.xpath(self._brand_name).get()
     
     @field
-    def prod_image(self) -> str:
-        img = self.response.xpath(self._prod_image).get()
-        if img:
-            return str(self.response.urljoin(img))
-        return img
+    def prod_images(self) -> list:
+        images = set()
+        imgs = self.response.xpath(self._prod_images).getall()
+        for img in imgs:
+            if img and isinstance(img, str):
+                images.add(str(self.response.urljoin(img)))
+                if len(images) == 3:
+                    break
+        return list(images)
     
     @field
     def discounted_price(self) -> str:

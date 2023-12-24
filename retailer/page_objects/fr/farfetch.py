@@ -9,7 +9,7 @@ class FarfetchProduct(ProductPage):
 
     _product_name = "//p[@data-testid='product-short-description']/text()"
     _brand_name = "//a[@data-component='LinkGhostDark']/text()"
-    _prod_image = "//img[contains(@alt, 'Image')]/@src"
+    _prod_images = "//img[contains(@alt, 'Image')]/@src"
     _discounted_price = "//p[@data-component='PriceFinalLarge']/text()"
     _listed_price = "//p[@data-component='PriceOriginal']/text()"
     _product_desc = "//section[@data-component='AccordionItem']//text()[not(parent::style or parent::script)]"
@@ -24,11 +24,15 @@ class FarfetchProduct(ProductPage):
         return self.response.xpath(self._brand_name).get()
 
     @field
-    def prod_image(self) -> str:
-        img = self.response.xpath(self._prod_image).get()
-        if img:
-            return str(self.response.urljoin(img))
-        return img
+    def prod_images(self) -> list:
+        images = set()
+        imgs = self.response.xpath(self._prod_images).getall()
+        for img in imgs:
+            if img and isinstance(img, str):
+                images.add(str(self.response.urljoin(img)))
+                if len(images) == 3:
+                    break
+        return list(images)
 
     @field
     def discounted_price(self) -> str:

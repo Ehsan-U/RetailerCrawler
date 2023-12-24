@@ -9,7 +9,7 @@ class JacadiProduct(ProductPage):
     """
 
     _product_name = "//h2[contains(@class, 'jac-title-center')]/text()"
-    _prod_image = "//figure[contains(@class, 'jac-product-splide')]/@data-src"
+    _prod_images = "//figure[contains(@class, 'jac-product-splide')]/@data-src"
     _discounted_price = "//span[@class='jac-product-price-value']/text()"
     _listed_price = "//del[@class='jac-product-price-crossed']/text()"
     _product_desc = "//section[@id='product-description-tab']//text()[not(parent::style or parent::script)]"
@@ -24,11 +24,15 @@ class JacadiProduct(ProductPage):
         return "Jacadi"
 
     @field
-    def prod_image(self) -> str:
-        img = self.response.xpath(self._prod_image).get()
-        if img:
-            return str(self.response.urljoin(img))
-        return img
+    def prod_images(self) -> list:
+        images = set()
+        imgs = self.response.xpath(self._prod_images).getall()
+        for img in imgs:
+            if img and isinstance(img, str):
+                images.add(str(self.response.urljoin(img)))
+                if len(images) == 3:
+                    break
+        return list(images)
 
     @field
     def discounted_price(self) -> str:

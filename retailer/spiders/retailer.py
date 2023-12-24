@@ -31,7 +31,7 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://www.sunglasshut.com/fr/lunettes-de-soleil-femme?facet=Vente%3ATRUE",
+                "url": "https://fr.vestiairecollective.com/sacs-femme/#categoryParent=Sacs%235_gender=Femme%231_discount=50%25-40%25-30%25-20%25_category=5%20%3E%20Pochettes%2357",
                 "user_id": 1,
                 "country_id": 75,
                 "retailer_id": 1,

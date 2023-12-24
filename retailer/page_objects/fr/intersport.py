@@ -9,7 +9,7 @@ class IntersportProduct(ProductPage):
 
     _product_name = "//div[@class='infos-produit--title']/h1/text()"
     _brand_name = "//div[@class='infos-produit--title']/h1/object/a/text()"
-    _prod_image = "//img[@id='replacementImg']/@src"
+    _prod_images = "//img[@id='replacementImg']/@src"
     _discounted_price = "//div[contains(@class, 'current-price')]/text()"
     _listed_price = "//div[@class='prix-baisse-conseil']/text()"
     _product_desc = "//div[@id='panel-description_id']//div[@class='body-panel']//text()[not(parent::style or parent::script)]"
@@ -23,11 +23,15 @@ class IntersportProduct(ProductPage):
         return self.response.xpath(self._brand_name).get()
 
     @field
-    def prod_image(self) -> str:
-        img = self.response.xpath(self._prod_image).get()
-        if img:
-            return str(self.response.urljoin(img))
-        return img
+    def prod_images(self) -> list:
+        images = set()
+        imgs = self.response.xpath(self._prod_images).getall()
+        for img in imgs:
+            if img and isinstance(img, str):
+                images.add(str(self.response.urljoin(img)))
+                if len(images) == 3:
+                    break
+        return list(images)
 
     @field
     def discounted_price(self) -> str:
