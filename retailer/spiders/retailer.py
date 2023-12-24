@@ -31,7 +31,7 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://www.sneakersnstuff.com/fr/56/sale?p=406887&p=820&orderBy=Popularity",
+                "url": "https://www.farfetch.com/fr/shopping/women/coats-1/items.aspx?page=1&view=96&sort=3&discount=30-50%7C50-60%7C60-100%7C0-30",
                 "user_id": 1,
                 "country_id": 75,
                 "retailer_id": 1,
@@ -157,7 +157,6 @@ class RetailerSpider(scrapy.Spider):
         location = self.settings["GEOLOCATIONS"][
             cb_kwargs['page_meta'].get("country_id", 75)
         ]
-
         meta = {
             "zyte_api_automap": {
                 "geolocation": location,
@@ -172,6 +171,10 @@ class RetailerSpider(scrapy.Spider):
                     "device": "mobile",
                  }
             )
+        
+        if 'farfetch.com' in domain:
+            headers = {"Accept-Language": "fr-FR"}
+
 
         if js:
             meta["zyte_api_automap"].update(
