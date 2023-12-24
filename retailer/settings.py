@@ -102,7 +102,7 @@ COOKIES_ENABLED = False
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-HTTPCACHE_ENABLED = True
+HTTPCACHE_ENABLED = False
 #HTTPCACHE_EXPIRATION_SECS = 0
 #HTTPCACHE_DIR = "httpcache"
 #HTTPCACHE_IGNORE_HTTP_CODES = []
@@ -162,7 +162,7 @@ SCRAPY_XPATHS_RULES = {
 }
 
 RETRY_ENABLED = True
-RETRY_TIMES = 3
+RETRY_TIMES = 5
 RETRY_HTTP_CODES = [403, 520, 521]
 REDIRECT_ENABLED = False
 
