@@ -31,7 +31,7 @@ class RetailerSpider(scrapy.Spider):
         """
         pages = [
             {
-                "url": "https://www.farfetch.com/fr/shopping/women/coats-1/items.aspx?page=1&view=96&sort=3&discount=30-50%7C50-60%7C60-100%7C0-30",
+                "url": "https://www.sunglasshut.com/fr/lunettes-de-soleil-femme?facet=Vente%3ATRUE",
                 "user_id": 1,
                 "country_id": 75,
                 "retailer_id": 1,
@@ -75,8 +75,9 @@ class RetailerSpider(scrapy.Spider):
                 # only discounted products
                 if product.xpath(path.DISCOUNTED):
                     url = response.urljoin(product.xpath(path.PRODUCT_URL).get())
+                    js = self.use_javascript(url, page_meta.get("retailer_id"), product_page=True)
 
-                    request = self.make_request(url, callback=self.parse_product, cb_kwargs={"page_meta": page_meta})
+                    request = self.make_request(url, callback=self.parse_product, cb_kwargs={"page_meta": page_meta}, js=js)
                     yield request
 
             # pagination
@@ -175,7 +176,6 @@ class RetailerSpider(scrapy.Spider):
         if 'farfetch.com' in domain:
             headers = {"Accept-Language": "fr-FR"}
 
-
         if js:
             meta["zyte_api_automap"].update(
                 {'browserHtml': True, 'javascript': True}
@@ -230,21 +230,28 @@ class RetailerSpider(scrapy.Spider):
 
 
     @staticmethod
-    def use_javascript(url: str, retailer_id: int) -> bool:
+    def use_javascript(url: str, retailer_id: int, product_page: bool = False) -> bool:
         """
         Determines whether JavaScript should be used for a given URL and retailer ID.
 
         Args:
             url (str): The URL to check.
             retailer_id (int): The ID of the retailer.
+            product_page (bool): Indicates whether the URL is a product page URL. Defaults to False.
 
         Returns:
             bool: True if JavaScript should be used, False otherwise.
         """
         domain = urlparse(url).netloc.lstrip('www.')
 
-        if ('fr.vestiairecollective.com' in domain or "sunglasshut.com" in domain) and retailer_id:
+        if ('fr.vestiairecollective.com' in domain) and retailer_id:
+            # use javascript only for products listing page
+            javascript = True if not product_page else False
+
+        elif ("sunglasshut.com" in domain) and retailer_id:
+            # always use javascript for sunglasshut
             javascript = True
+
         else:
             javascript = False
 

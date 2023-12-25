@@ -10,7 +10,7 @@ class SunglasshutProduct(ProductPage):
 
     _product_name = "//h1[@class='sgh-pdp__product-title ']/text()"
     _brand_name = "//p[@class='sgh-pdp__brand-name']/text()"
-    _prod_images = "//div[@id='pdpImgCarousel']//img/@src"
+    _prod_images = "//div[@id='pdpImgCarousel']//img[@alt]/@src"
     _discounted_price = "//span[@class='sale-price price' and @id='offerPrice']/text()"
     _listed_price = "//span[@class='original-price' and @id='listPrice']/text()"
     _product_desc = "//div[@id='collapseTwo']//root/text()"
