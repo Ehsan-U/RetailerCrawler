@@ -3,3 +3,4 @@ scrapy-zyte-api
 price-parser
 scrapy-poet
 web-poet
+python-dotenv
