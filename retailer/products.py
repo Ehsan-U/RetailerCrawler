@@ -27,7 +27,7 @@ class Products:
                 'id': 1,
                 'country_id': 231,
                 'url': 'https://www.jacadi.fr/outlet/Gants-enfant-fille/p/2030919_830',
-                'type': 'product'
+                'type': 'product_check'
             }
         ]
 
