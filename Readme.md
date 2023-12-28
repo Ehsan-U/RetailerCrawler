@@ -8,9 +8,9 @@
 
 #### Build
 
-<!--- docker rmi mycrawler -->
-docker build -t mycrawler .
+<!--- docker rmi deelio_crawler -->
+docker build -t deelio_crawler .
 
 #### Run
 
-docker run --rm --add-host host.docker.internal:host-gateway mycrawler scrapy crawl retailer_spider
+docker run --rm --add-host host.docker.internal:host-gateway deelio_crawler scrapy crawl retailer_spider
