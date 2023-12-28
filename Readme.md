@@ -13,4 +13,4 @@ docker build -t mycrawler .
 
 #### Run
 
-docker run --rm --add-host host.docker.internal:host-gateway mycrawler scrapy crawl retailer
+docker run --rm --add-host host.docker.internal:host-gateway mycrawler scrapy crawl retailer_spider
