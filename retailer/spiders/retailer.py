@@ -55,7 +55,7 @@ class RetailerSpider(scrapy.Spider):
             Union[Request, Dict]: The next request to be processed or the scraped item.
         """
         # presence of id in meta indicate status check call
-        if page_meta.get("scrappingtype") == "scrapping":
+        if page_meta.get("scrappingtype") != "scrapping":
             partial_item = await page.to_item()
             item = {
                 **page_meta,
