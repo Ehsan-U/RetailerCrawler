@@ -1,6 +1,7 @@
 import os
-from dotenv import load_dotenv
 import mysql.connector
+from dotenv import load_dotenv
+from scrapy.exceptions import DropItem
 
 class Products:
     db = ""
@@ -95,3 +96,64 @@ class Products:
         cursor.execute(query)
         self.db.commit()
         print('Product deactivated')
+
+    def store_product(self, item):
+        try:
+            exists = self.product_exists(item['product_url']);
+
+            if exists:
+                print('URL already exists')
+                if exists[0][1] == 'inactive':
+                    print('Updating product ' + str(exists[0][0]))
+                    update_inactive_prod = "UPDATE product SET price = %s, discount = %s, status = %s, updated_at = CURRENT_TIMESTAMP WHERE id = %s"
+                    update_values = (
+                        item['listed_price'],
+                        item['discounted_percent'],
+                        'active',
+                        exists[0][0]
+                    )
+                    self.cursor.execute(update_inactive_prod, update_values)
+                    self.db.commit()
+            else:
+                update_prods = "INSERT INTO product (title, url, description, price, discount, brandname, status, created_at, updated_at, country_id, brand_id, retailer_id) VALUES (%s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, %s)"
+                prods_val = (
+                    item['product_name'],
+                    item['product_url'],
+                    item['product_desc'],
+                    item['listed_price'],
+                    item['discounted_percent'],
+                    item['brand_name'],
+                    'active',
+                    item['country_id'],
+                    item['user_id'],
+                    item['retailer_id']
+                )
+
+                self.cursor.execute(update_prods, prods_val)
+                last_product_id = self.cursor.lastrowid
+                
+                for i in item['category_ids']:
+                    update_prod_cat = "INSERT INTO product_category (product_id, category_id) VALUES (%s, %s)"
+                    prod_cat_val = (last_product_id, i)
+                    self.cursor.execute(update_prod_cat, prod_cat_val)
+
+                for i in item['reviews']:
+                    update_images = "INSERT INTO product_image (product_id, src, filesrc) VALUES (%s, %s, %s)"
+                    images_val = (last_product_id, i, '')           
+                    self.cursor.execute(update_images, images_val)
+                
+                for i in item['reviews']:
+                    update_review = "INSERT INTO product_review (product_id, review, stars) VALUES (%s, %s, %s)"
+                    review_val = (last_product_id, i['review'], i['stars'])
+                    self.cursor.execute(update_review, review_val)
+                
+                self.db.commit()
+                print('Data inserted into products MariaDB')
+
+            return item
+        
+        except Exception as e:
+            print(f"Error inserting data into MariaDB: {e}")
+            raise DropItem("Item dropped due to database error")
+
+        return
