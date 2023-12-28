@@ -9,6 +9,7 @@ from urllib.parse import urlparse
 from retailer.utils import build_paginated_url
 from retailer.items import RetailerItem
 from retailer.page_objects.pages import ProductPage
+from retailer.products import Products
 
 
 
@@ -20,6 +21,7 @@ class RetailerSpider(scrapy.Spider):
 
     name = "retailer_spider"
     PAGE_NO = 1
+    scrappingtype = 'scrapping'
 
 
     def start_requests(self) -> Request:
@@ -29,15 +31,8 @@ class RetailerSpider(scrapy.Spider):
         Returns:
             Request: The initial request to be processed.
         """
-        pages = [
-            {
-                "url": "https://www.sunglasshut.com/fr/lunettes-de-soleil-femme?facet=Vente%3ATRUE",
-                "user_id": 1,
-                "country_id": 75,
-                "retailer_id": 1,
-                "category_ids": [1,2]
-            }
-        ]
+        products = Products();
+        pages = products.get_urls(self.scrappingtype)
 
         for page in pages:
             url = self.make_url(page)
