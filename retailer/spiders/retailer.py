@@ -21,7 +21,7 @@ class RetailerSpider(scrapy.Spider):
 
     name = "retailer_spider"
     PAGE_NO = 1
-    type = 'scrapping'
+    scrappingtype = 'scrapping'
 
 
     def start_requests(self) -> Request:
@@ -32,7 +32,7 @@ class RetailerSpider(scrapy.Spider):
             Request: The initial request to be processed.
         """
         products = Products();
-        pages = products.get_urls(self.type)
+        pages = products.get_urls(self.scrappingtype)
 
         for page in pages:
             url = self.make_url(page)
