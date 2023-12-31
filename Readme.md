@@ -4,5 +4,5 @@
 
 <br>Now spider can run by this command:
 
-`scrapy crawl retailer_spider`
+`scrapy crawl retailer`
 

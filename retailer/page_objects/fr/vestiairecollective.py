@@ -15,7 +15,6 @@ class VestiaireCollectiveProduct(ProductPage):
     _listed_price = "//span[contains(@class, 'price--strikeOut')]/text()"
     _product_desc = "//section[contains(@class, 'productPage__moreDetails')]//text()[not(parent::style or parent::script)]"
 
-
     @field
     def product_name(self) -> str:
         return self.response.xpath(self._product_name).get()

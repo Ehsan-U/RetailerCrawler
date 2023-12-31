@@ -19,9 +19,9 @@ class RetailerSpider(scrapy.Spider):
     Spider class for scraping retailer websites.
     """
 
-    name = "retailer_spider"
+    name = "retailer"
     PAGE_NO = 1
-    SPIDER_TYPE = 'scraper'
+    SPIDER_TYPE = 'checker'
 
 
     def start_requests(self) -> Request:
@@ -48,13 +48,12 @@ class RetailerSpider(scrapy.Spider):
         Returns:
             Union[Request, Dict]: The next request to be processed or the scraped item.
         """
-        # presence of id in meta indicate status check call
         spider_type = page_meta.get("spider_type")
         if spider_type != "scraper":
-            partial_item = await page.to_item()
+            page_item = await page.to_item()
             item = {
                 **page_meta,
-                "discounted": partial_item.get("discounted_flag")
+                "discounted": page_item.get("discounted_flag")
             }
             yield item
         else:
@@ -92,13 +91,14 @@ class RetailerSpider(scrapy.Spider):
         Returns:
             RetailerItem: The scraped item.
         """
-        partial_item = await page.to_item()
-        item = {**page_meta, **partial_item}
+        page_item = await page.to_item()
+        item = {**page_meta, **page_item}
         # allow only discounted products
         if item.get("discounted_percent"):
 
-            # remove the source page url
+            # remove the unncesessary fields
             item.pop("url")
+            item.pop("spider_type")
 
             loader = ItemLoader(item=RetailerItem())
             for k, v in item.items():
@@ -209,8 +209,13 @@ class RetailerSpider(scrapy.Spider):
                 return False
             return True
         
-        elif ('placedestendances.com' in domain) or ("jacadi.fr" in domain): 
+        elif ('placedestendances.com' in domain) or ("jacadi.fr" in domain):
             if int(element.get()) == self.PAGE_NO: # reached end when PAGE_NO equals the value of the element
+                return True
+            return False
+
+        elif ("marionnaud.fr" in domain):
+            if self.PAGE_NO > len(element.getall()): # reached end when PAGE_NO greater than the length of the element
                 return True
             return False
 
@@ -241,6 +246,10 @@ class RetailerSpider(scrapy.Spider):
         elif ("sunglasshut.com" in domain) and spider_type == "scraper":
             # always use javascript for sunglasshut
             javascript = True
+
+        elif ("marionnaud.fr" in domain) and spider_type == "scraper":
+            # use javascript only for product detail page
+            javascript = True if product_page else False
 
         else:
             javascript = False

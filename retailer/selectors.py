@@ -133,3 +133,15 @@ class IntersportPaths():
     DISCOUNTED = ".//span[contains(@class, 'price--suggested')]"
     PRODUCT_URL = ".//div[@class='product-card__title']/a[@class='product-url']/@href"
     ELEMENT = "//h1[@class='notfound']" # reached end when exists
+
+
+@dataclass
+class MarionnaudPaths():
+    """
+    Xpaths for the marionnaud.fr domain.
+    """
+
+    PRODUCTS = "//div[contains(@class, 'product-listing-area')]//ul[@class='product-listing product-grid']/li"
+    DISCOUNTED = ".//div[@class='striked']"
+    PRODUCT_URL = "./div/a/@href"
+    ELEMENT = "//a[@class='page-link']"  # reached end when PAGE_NO greater than the length of the element

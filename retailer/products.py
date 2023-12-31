@@ -10,7 +10,7 @@ class Products:
     def fetch_scrapping_urls(self):
         pages = [
             {
-                "url": "https://www.sunglasshut.com/fr/lunettes-de-soleil-femme?facet=Vente%3ATRUE",
+                "url": "https://www.marionnaud.fr/soin-visage/anti-rides-et-anti-age/soin-de-jour/c/V0301",
                 "user_id": 1,
                 "country_id": 75,
                 "retailer_id": 1,
@@ -26,7 +26,7 @@ class Products:
             {
                 'id': 1,
                 'country_id': 231,
-                'url': 'https://www.jacadi.fr/outlet/Gants-enfant-fille/p/2030919_830',
+                'url': 'https://www.marionnaud.fr/soin-visage/anti-rides-et-anti-age/soin-de-jour/absolue-creme-anti-age-absolue-creme-fondante-regenerante-illuminatrice-lancome/p/101577239',
                 'spider_type': 'checker'
             }
         ]

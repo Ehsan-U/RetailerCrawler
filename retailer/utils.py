@@ -84,6 +84,12 @@ def build_paginated_url(url: str, page_no: int):
         params["page"] = str(page_no)
         query = urlencode(params)
 
+    elif ("marionnaud.fr" in netloc):
+        params["page"] = str(page_no-1)
+        params["pageSize"] = 100
+        params['q'] = ':rank-desc'
+        query = urlencode(params)
+
     updated_url = urlunsplit((scheme, netloc, path, query, fragment))
     return updated_url
 
