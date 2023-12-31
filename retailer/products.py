@@ -1,7 +1,7 @@
 class Products:
 
-    def get_urls(self, scrappingtype):
-        if (scrappingtype == "product_check"):
+    def get_pages(self, spider_type):
+        if (spider_type == "checker"):
             return self.fetch_existing_products()
         else:
             return self.fetch_scrapping_urls()
@@ -15,7 +15,7 @@ class Products:
                 "country_id": 75,
                 "retailer_id": 1,
                 "category_ids": [1,2],
-                "scrappingtype": "scrapping"
+                "spider_type": "scraper"
             }
         ]
 
@@ -27,7 +27,7 @@ class Products:
                 'id': 1,
                 'country_id': 231,
                 'url': 'https://www.jacadi.fr/outlet/Gants-enfant-fille/p/2030919_830',
-                'scrappingtype': 'product_check'
+                'spider_type': 'checker'
             }
         ]
 

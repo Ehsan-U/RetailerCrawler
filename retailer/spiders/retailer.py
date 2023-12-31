@@ -21,22 +21,16 @@ class RetailerSpider(scrapy.Spider):
 
     name = "retailer_spider"
     PAGE_NO = 1
-    scrappingtype = 'scrapping'
+    SPIDER_TYPE = 'scraper'
 
 
     def start_requests(self) -> Request:
-        """
-        Generates initial requests to start scraping.
-
-        Returns:
-            Request: The initial request to be processed.
-        """
-        products = Products();
-        pages = products.get_urls(self.scrappingtype)
+        products = Products()
+        pages = products.get_pages(self.SPIDER_TYPE)
 
         for page in pages:
             url = self.make_url(page)
-            js = self.use_javascript(url, page.get("retailer_id"))
+            js = self.use_javascript(url, page.get("spider_type"))
 
             request = self.make_request(url, callback=self.parse, cb_kwargs={"page_meta": page}, js=js)
             yield request
@@ -55,7 +49,8 @@ class RetailerSpider(scrapy.Spider):
             Union[Request, Dict]: The next request to be processed or the scraped item.
         """
         # presence of id in meta indicate status check call
-        if page_meta.get("scrappingtype") != "scrapping":
+        spider_type = page_meta.get("spider_type")
+        if spider_type != "scraper":
             partial_item = await page.to_item()
             item = {
                 **page_meta,
@@ -70,7 +65,7 @@ class RetailerSpider(scrapy.Spider):
                 # only discounted products
                 if product.xpath(path.DISCOUNTED):
                     url = response.urljoin(product.xpath(path.PRODUCT_URL).get())
-                    js = self.use_javascript(url, page_meta.get("retailer_id"), product_page=True)
+                    js = self.use_javascript(url, spider_type, product_page=True)
 
                     request = self.make_request(url, callback=self.parse_product, cb_kwargs={"page_meta": page_meta}, js=js)
                     yield request
@@ -79,7 +74,7 @@ class RetailerSpider(scrapy.Spider):
             if not self.reached_end(response, path.ELEMENT):
                 self.PAGE_NO += 1
                 next_page = build_paginated_url(page_meta['url'], self.PAGE_NO)
-                js = self.use_javascript(next_page, page_meta.get("retailer_id"))
+                js = self.use_javascript(next_page, spider_type)
 
                 request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta}, js=js)
                 yield request
@@ -130,7 +125,7 @@ class RetailerSpider(scrapy.Spider):
         url = page_meta['url']
         domain = urlparse(url).netloc.lstrip('www.')
 
-        if ('sunglasshut.com' in domain) and page_meta.get("retailer_id"):
+        if ('sunglasshut.com' in domain) and page_meta["spider_type"] == "scraper":
             url = build_paginated_url(url, 0)
 
         return url
@@ -225,13 +220,13 @@ class RetailerSpider(scrapy.Spider):
 
 
     @staticmethod
-    def use_javascript(url: str, retailer_id: int, product_page: bool = False) -> bool:
+    def use_javascript(url: str, spider_type: str, product_page: bool = False) -> bool:
         """
-        Determines whether JavaScript should be used for a given URL and retailer ID.
+        Determines whether JavaScript should be used for a given URL and spider type.
 
         Args:
             url (str): The URL to check.
-            retailer_id (int): The ID of the retailer.
+            spider_type (str): The type of spider.
             product_page (bool): Indicates whether the URL is a product page URL. Defaults to False.
 
         Returns:
@@ -239,11 +234,11 @@ class RetailerSpider(scrapy.Spider):
         """
         domain = urlparse(url).netloc.lstrip('www.')
 
-        if ('fr.vestiairecollective.com' in domain) and retailer_id:
+        if ('fr.vestiairecollective.com' in domain) and spider_type == "scraper":
             # use javascript only for products listing page
             javascript = True if not product_page else False
 
-        elif ("sunglasshut.com" in domain) and retailer_id:
+        elif ("sunglasshut.com" in domain) and spider_type == "scraper":
             # always use javascript for sunglasshut
             javascript = True
 
