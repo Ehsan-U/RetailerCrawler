@@ -29,8 +29,8 @@ class RetailerSpider(scrapy.Spider):
         pages = products.get_pages(self.SPIDER_TYPE)
 
         for page in pages:
-            url = self.make_url(page)
-            js = self.use_javascript(url, page.get("spider_type"))
+            url = self.modify_url(url=page['url'], spider_type=page['spider_type'])
+            js = self.use_javascript(url, spider_type=page.get("spider_type"))
 
             request = self.make_request(url, callback=self.parse, cb_kwargs={"page_meta": page}, js=js)
             yield request
@@ -63,20 +63,21 @@ class RetailerSpider(scrapy.Spider):
             for product in response.xpath(path.PRODUCTS):
                 # only discounted products
                 if product.xpath(path.DISCOUNTED):
-                    url = response.urljoin(product.xpath(path.PRODUCT_URL).get())
+                    product_link = response.urljoin(product.xpath(path.PRODUCT_URL).get())
+                    url = self.modify_url(product_link, spider_type=spider_type, product_page=True)
                     js = self.use_javascript(url, spider_type, product_page=True)
 
                     request = self.make_request(url, callback=self.parse_product, cb_kwargs={"page_meta": page_meta}, js=js)
                     yield request
 
             # pagination
-            if not self.reached_end(response, path.ELEMENT):
-                self.PAGE_NO += 1
-                next_page = build_paginated_url(page_meta['url'], self.PAGE_NO)
-                js = self.use_javascript(next_page, spider_type)
-
-                request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta}, js=js)
-                yield request
+            # if not self.reached_end(response, path.ELEMENT):
+            #     self.PAGE_NO += 1
+            #     next_page = build_paginated_url(page_meta['url'], self.PAGE_NO)
+            #     js = self.use_javascript(next_page, spider_type)
+            #
+            #     request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta}, js=js)
+            #     yield request
 
 
     async def parse_product(self, response: Response, page: ProductPage, page_meta: Dict) -> RetailerItem:
@@ -112,21 +113,18 @@ class RetailerSpider(scrapy.Spider):
 
 
     @staticmethod
-    def make_url(page_meta: Dict) -> str:
+    def modify_url(url: str, spider_type: str, product_page: bool = False) -> str:
         """
-        Get url from page
-
-        Args:
-            page_meta (Dict): The data associated with the page
-
-        Returns:
-            Modified URL if needed otherwise as it is
+        Modifies the URL if needed before making the request.
         """
-        url = page_meta['url']
         domain = urlparse(url).netloc.lstrip('www.')
 
-        if ('sunglasshut.com' in domain) and page_meta["spider_type"] == "scraper":
+        if ('sunglasshut.com' in domain) and spider_type == "scraper" and not product_page:
             url = build_paginated_url(url, 0)
+
+        elif ("amazon.fr" in domain):
+            if product_page:
+                url += "&th=1&psc=1" # select the product size to appear discount
 
         return url
 

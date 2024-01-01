@@ -43,7 +43,7 @@ def build_paginated_url(url: str, page_no: int):
     scheme, netloc, path, query, fragment = urlsplit(url)
     params = dict(qc.split("=") for qc in query.split("&")) if query else {}
 
-    if ('i-run.fr' in netloc) or ('fr.delsey.com' in netloc):
+    if ('i-run.fr' in netloc) or ('fr.delsey.com' in netloc) or ("amazon.fr" in netloc):
         params["page"] = str(page_no)
         query = urlencode(params)
 
