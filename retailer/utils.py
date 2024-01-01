@@ -1,6 +1,5 @@
 from price_parser import Price
-from urllib.parse import urlencode, urlsplit, urlunsplit, unquote
-
+from urllib.parse import urlencode, urlsplit, urlunsplit, unquote, unquote_plus
 
 
 def calculate_discount(discounted_price: str, listed_price: str):
@@ -41,9 +40,9 @@ def build_paginated_url(url: str, page_no: int):
         str: The updated paginated URL.
     """
     scheme, netloc, path, query, fragment = urlsplit(url)
-    params = dict(qc.split("=") for qc in query.split("&")) if query else {}
+    params = dict((qc.split("=") if "=" in qc else (qc, "") for qc in query.split("&"))) if query else {}
 
-    if ('i-run.fr' in netloc) or ('fr.delsey.com' in netloc) or ("amazon.fr" in netloc):
+    if ('i-run.fr' in netloc) or ('fr.delsey.com' in netloc):
         params["page"] = str(page_no)
         query = urlencode(params)
 
@@ -89,6 +88,11 @@ def build_paginated_url(url: str, page_no: int):
         params["pageSize"] = 100
         params['q'] = ':rank-desc'
         query = urlencode(params)
+
+    elif ("amazon.fr" in netloc):
+        params["page"] = str(page_no)
+        params["ref"] = f"sr_pg_{str(page_no)}"
+        query = unquote_plus(urlencode(params))
 
     updated_url = urlunsplit((scheme, netloc, path, query, fragment))
     return updated_url

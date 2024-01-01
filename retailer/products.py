@@ -8,9 +8,8 @@ class Products:
         pass
 
     def fetch_scrapping_urls(self):
-        pages = [
-            {
-                "url": "https://www.amazon.fr/s?k=Chaussures+de+running+femme&i=fashion-womens-shoes&rh=n%3A7477793031%2Cp_n_deal_type%3A26902977031&dc=&c=ts&qid=1702766590&rnid=2492331031&ts_id=7477793031&ref=sr_nr_p_36_5&low-price=40&high-price=",
+        pages = [{
+                "url": "https://www.amazon.fr/s?keywords=Chaussures+de+running+femme&i=fashion-womens-shoes&rh=n%3A7477793031%2Cp_n_deal_type%3A26902977031%2Cp_36%3A4000-%2Cp_n_size_two_browse-vebin%3A14223299031%2Cp_72%3A437873031&dc&c=ts&qid=1704089417&rnid=437872031&ts_id=7477793031&ref=sr_nr_p_72_1&ds=v1%3AK3K9AZ4G%2BDqLzCw66YjsbVlAZ6xnE8NpTfawjlHFY2A",
                 "user_id": 1,
                 "country_id": 75,
                 "retailer_id": 1,

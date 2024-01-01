@@ -21,7 +21,7 @@ class RetailerSpider(scrapy.Spider):
 
     name = "retailer"
     PAGE_NO = 1
-    SPIDER_TYPE = 'checker'
+    SPIDER_TYPE = 'scraper'
 
 
     def start_requests(self) -> Request:
@@ -71,13 +71,13 @@ class RetailerSpider(scrapy.Spider):
                     yield request
 
             # pagination
-            # if not self.reached_end(response, path.ELEMENT):
-            #     self.PAGE_NO += 1
-            #     next_page = build_paginated_url(page_meta['url'], self.PAGE_NO)
-            #     js = self.use_javascript(next_page, spider_type)
-            #
-            #     request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta}, js=js)
-            #     yield request
+            if not self.reached_end(response, path.ELEMENT):
+                self.PAGE_NO += 1
+                next_page = build_paginated_url(page_meta['url'], self.PAGE_NO)
+                js = self.use_javascript(next_page, spider_type)
+
+                request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta}, js=js)
+                yield request
 
 
     async def parse_product(self, response: Response, page: ProductPage, page_meta: Dict) -> RetailerItem:
