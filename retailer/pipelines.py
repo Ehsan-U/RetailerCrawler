@@ -13,7 +13,7 @@ class RetailerPipeline:
         self.products = Products();
 
     def process_item(self, item, spider):
-        if (item.get("scrappingtype") == "product_check"):
+        if (item.get("scrappingtype") == "checker"):
             if (item.get('discounted') == False):
                 self.products.deactivate_product(item['id'])
         else:

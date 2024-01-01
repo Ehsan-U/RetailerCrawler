@@ -15,7 +15,6 @@ class PlaceDestendancesProduct(ProductPage):
     _listed_price = "//div[@class='pricing-wrapper']/div[@class='compared-price']/text()"
     _product_desc = "//div[contains(@class, 'item_description')]//text()[not(parent::style or parent::script)]"
 
-
     @field
     def product_name(self) -> str:
         return self.response.xpath(self._product_name).get()

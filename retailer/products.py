@@ -25,8 +25,8 @@ class Products:
         )
         self.cursor = self.db.cursor()
     
-    def get_urls(self, scrappingtype):
-        if (scrappingtype == "product_check"):
+    def get_pages(self, spider_type):
+        if (spider_type == "checker"):
             return self.fetch_existing_products()
         else:
             return self.fetch_scrapping_urls()
@@ -45,7 +45,7 @@ class Products:
             url['country_id'] = country_id
             url['url'] = link
             url['retailer_id'] = retailer_id
-            url['scrappingtype'] = "scrapping"
+            url['spider_type'] = "scraper"
 
             query_cat = f"SELECT category_id FROM scrapping_urls_category WHERE scrapping_urls_id = {str(_id)}"
             temp = self.db.cursor()
@@ -83,7 +83,7 @@ class Products:
             url['id'] = id
             url['country_id'] = country_id
             url['url'] = link
-            url['scrappingtype'] = "product_check"
+            url['spider_type'] = "checker"
 
             urls.append(url)
 

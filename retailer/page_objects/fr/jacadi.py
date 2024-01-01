@@ -14,7 +14,6 @@ class JacadiProduct(ProductPage):
     _listed_price = "//del[@class='jac-product-price-crossed']/text()"
     _product_desc = "//section[@id='product-description-tab']//text()[not(parent::style or parent::script)]"
 
-
     @field
     def product_name(self) -> str:
         return self.response.xpath(self._product_name).get()

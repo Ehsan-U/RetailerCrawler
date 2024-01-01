@@ -15,7 +15,6 @@ class BhvProduct(ProductPage):
     _listed_price = "//p[@class='product-price-old']/text()"
     _product_desc = "//div[@class='product-description']//text()[not(parent::style or parent::script)]"
 
-
     @field
     def product_name(self) -> str:
         return self.response.xpath(self._product_name).get()

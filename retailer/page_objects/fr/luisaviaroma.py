@@ -16,7 +16,6 @@ class LuisaViaRomaProduct(ProductPage):
     _listed_price = "//div[count(strong)=3]/strong[1]/text()"
     _product_desc = "//span[text()='Details']/parent::h2/parent::div/ul/li//text()"
 
-
     @field
     def product_name(self) -> str:
         return self.response.xpath(self._product_name).get()

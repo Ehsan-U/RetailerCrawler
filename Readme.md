@@ -14,6 +14,6 @@ docker build -t deelio_crawler .
 #### Run
 
 ##### Scrapping
-docker run --rm --add-host host.docker.internal:host-gateway deelio_crawler scrapy crawl retailer_spider
+docker run --rm --add-host host.docker.internal:host-gateway deelio_crawler scrapy crawl retailer
 ##### Product check
-docker run --rm --add-host host.docker.internal:host-gateway deelio_crawler scrapy crawl retailer_spider -a scrappingtype=product_check
+docker run --rm --add-host host.docker.internal:host-gateway deelio_crawler scrapy crawl retailer -a scrappingtype=checker

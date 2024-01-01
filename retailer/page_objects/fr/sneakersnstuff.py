@@ -15,7 +15,6 @@ class SneakersnStuffProduct(ProductPage):
     _listed_price = "//div[@class='product-view__content']//del[@class='price__original']/text()"
     _product_desc = "//div[@id='description']//text()[not(parent::style or parent::script)]"
 
-
     @field
     def product_name(self) -> str:
         return self.response.xpath(self._product_name).get()

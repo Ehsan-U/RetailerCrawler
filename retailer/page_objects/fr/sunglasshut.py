@@ -15,7 +15,6 @@ class SunglasshutProduct(ProductPage):
     _listed_price = "//span[@class='original-price' and @id='listPrice']/text()"
     _product_desc = "//div[@id='collapseTwo']//root/text()"
 
-
     @field
     def product_name(self) -> str:
         return self.response.xpath(self._product_name).get()

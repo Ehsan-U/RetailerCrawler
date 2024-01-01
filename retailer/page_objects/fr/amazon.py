@@ -3,20 +3,20 @@ from web_poet import field
 
 
 
-class IRunProduct(ProductPage):
+class AmazonProduct(ProductPage):
     """
-    Page object for the product page on i-run.fr.
+    Page object for the product page on amazon.fr.
     """
 
-    _product_name = "//div[@id='bc_titre']/h1/text()[2]"
-    _brand_name = "//div[@id='bc_titre']/h1/text()[1]"
-    _prod_images = "//img[@id='img_principale']/@src"
-    _reviews = "//div[@id='bc_comment_global']/div[@class='bc_comment']"
-    _review_stars = ".//span[@class='bc_mark_star']/text()"
-    _review_text = ".//div[@class='bc_comment_content_body']/text()"
-    _discounted_price = "//span[@itemprop='price']/text()"
-    _listed_price = "//div[@class='reduc']/span[@class='prixbarre']/text()"
-    _product_desc = "//div[@id='bc_avis-irun']//text()[not(parent::style or parent::script)]"
+    _product_name = "//span[@id='productTitle']/text()"
+    _brand_name = "//a[@id='bylineInfo']/@href"
+    _prod_images = "//div[@id='imgTagWrapperId']/img/@src"
+    _reviews = "//div[@data-hook='review']"
+    _review_stars = ".//i[contains(@data-hook, 'review-star-rating')]/@class"
+    _review_text = ".//div[@data-hook='review-collapsed']//text()"
+    _discounted_price = "//span[contains(@class, 'priceToPay')]//span[@class='a-price-whole']/text()"
+    _listed_price = "//span[@data-a-strike]/span[@class]/text()"
+    _product_desc = "//div[@id='productDescription']//text()"
 
     @field
     def product_name(self) -> str:
@@ -43,13 +43,14 @@ class IRunProduct(ProductPage):
     def reviews(self) -> list:
         reviews = []
         for review in self.response.xpath(self._reviews):
-            stars = review.xpath(self._review_stars).get('0')
-            value = review.xpath(self._review_text).get()
-            if value and '5/5' in stars:
-                reviews.append({
-                    "review": value.strip(),
-                    "stars": 5
-                })
+            stars = review.xpath(self._review_stars).re_first("\d")
+            value = " ".join(review.xpath(self._review_text).getall()).strip()
+            if value and stars:
+                if int(stars) >= 4:
+                    reviews.append({
+                        "review": value.strip(),
+                        "stars": stars
+                    })
         return reviews 
     
     @field

@@ -133,3 +133,27 @@ class IntersportPaths():
     DISCOUNTED = ".//span[contains(@class, 'price--suggested')]"
     PRODUCT_URL = ".//div[@class='product-card__title']/a[@class='product-url']/@href"
     ELEMENT = "//h1[@class='notfound']" # reached end when exists
+
+
+@dataclass
+class MarionnaudPaths():
+    """
+    Xpaths for the marionnaud.fr domain.
+    """
+
+    PRODUCTS = "//div[contains(@class, 'product-listing-area')]//ul[@class='product-listing product-grid']/li"
+    DISCOUNTED = ".//div[@class='striked']"
+    PRODUCT_URL = "./div/a/@href"
+    ELEMENT = "//a[@class='page-link']"  # reached end when PAGE_NO greater than the length of the element
+
+
+@dataclass
+class AmazonPaths():
+    """
+    Xpaths for the amazon.fr domain.
+    """
+
+    PRODUCTS = "//div[@data-component-type='s-search-result']"
+    DISCOUNTED = ".//span[@data-a-strike]"
+    PRODUCT_URL = ".//div[@data-cy='title-recipe']/h2/a[not(contains(@href, '/click?'))]/@href"
+    ELEMENT = "//span[contains(text(), 'Pas de résultats pour')]"  # reached end when found

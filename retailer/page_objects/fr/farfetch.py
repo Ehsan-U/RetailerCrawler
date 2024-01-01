@@ -14,7 +14,6 @@ class FarfetchProduct(ProductPage):
     _listed_price = "//p[@data-component='PriceOriginal']/text()"
     _product_desc = "//section[@data-component='AccordionItem']//text()[not(parent::style or parent::script)]"
 
-
     @field
     def product_name(self) -> str:
         return self.response.xpath(self._product_name).get()

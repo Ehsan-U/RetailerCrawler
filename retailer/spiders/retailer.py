@@ -19,24 +19,18 @@ class RetailerSpider(scrapy.Spider):
     Spider class for scraping retailer websites.
     """
 
-    name = "retailer_spider"
+    name = "retailer"
     PAGE_NO = 1
-    scrappingtype = 'scrapping'
+    SPIDER_TYPE = 'scraper'
 
 
     def start_requests(self) -> Request:
-        """
-        Generates initial requests to start scraping.
-
-        Returns:
-            Request: The initial request to be processed.
-        """
-        products = Products();
-        pages = products.get_urls(self.scrappingtype)
+        products = Products()
+        pages = products.get_pages(self.SPIDER_TYPE)
 
         for page in pages:
-            url = self.make_url(page)
-            js = self.use_javascript(url, page.get("retailer_id"))
+            url = self.modify_url(url=page['url'], spider_type=page['spider_type'])
+            js = self.use_javascript(url, spider_type=page.get("spider_type"))
 
             request = self.make_request(url, callback=self.parse, cb_kwargs={"page_meta": page}, js=js)
             yield request
@@ -54,12 +48,12 @@ class RetailerSpider(scrapy.Spider):
         Returns:
             Union[Request, Dict]: The next request to be processed or the scraped item.
         """
-        # presence of id in meta indicate status check call
-        if page_meta.get("scrappingtype") != "scrapping":
-            partial_item = await page.to_item()
+        spider_type = page_meta.get("spider_type")
+        if spider_type != "scraper":
+            page_item = await page.to_item()
             item = {
                 **page_meta,
-                "discounted": partial_item.get("discounted_flag")
+                "discounted": page_item.get("discounted_flag")
             }
             yield item
         else:
@@ -69,8 +63,9 @@ class RetailerSpider(scrapy.Spider):
             for product in response.xpath(path.PRODUCTS):
                 # only discounted products
                 if product.xpath(path.DISCOUNTED):
-                    url = response.urljoin(product.xpath(path.PRODUCT_URL).get())
-                    js = self.use_javascript(url, page_meta.get("retailer_id"), product_page=True)
+                    product_link = response.urljoin(product.xpath(path.PRODUCT_URL).get())
+                    url = self.modify_url(product_link, spider_type=spider_type, product_page=True)
+                    js = self.use_javascript(url, spider_type, product_page=True)
 
                     request = self.make_request(url, callback=self.parse_product, cb_kwargs={"page_meta": page_meta}, js=js)
                     yield request
@@ -79,7 +74,7 @@ class RetailerSpider(scrapy.Spider):
             if not self.reached_end(response, path.ELEMENT):
                 self.PAGE_NO += 1
                 next_page = build_paginated_url(page_meta['url'], self.PAGE_NO)
-                js = self.use_javascript(next_page, page_meta.get("retailer_id"))
+                js = self.use_javascript(next_page, spider_type)
 
                 request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta}, js=js)
                 yield request
@@ -97,12 +92,12 @@ class RetailerSpider(scrapy.Spider):
         Returns:
             RetailerItem: The scraped item.
         """
-        partial_item = await page.to_item()
-        item = {**page_meta, **partial_item}
+        page_item = await page.to_item()
+        item = {**page_meta, **page_item}
         # allow only discounted products
         if item.get("discounted_percent"):
 
-            # remove the source page url
+            # remove the unncesessary fields
             item.pop("url")
 
             loader = ItemLoader(item=RetailerItem())
@@ -117,21 +112,18 @@ class RetailerSpider(scrapy.Spider):
 
 
     @staticmethod
-    def make_url(page_meta: Dict) -> str:
+    def modify_url(url: str, spider_type: str, product_page: bool = False) -> str:
         """
-        Get url from page
-
-        Args:
-            page_meta (Dict): The data associated with the page
-
-        Returns:
-            Modified URL if needed otherwise as it is
+        Modifies the URL if needed before making the request.
         """
-        url = page_meta['url']
         domain = urlparse(url).netloc.lstrip('www.')
 
-        if ('sunglasshut.com' in domain) and page_meta.get("retailer_id"):
+        if ('sunglasshut.com' in domain) and spider_type == "scraper" and not product_page:
             url = build_paginated_url(url, 0)
+
+        elif ("amazon.fr" in domain):
+            if product_page:
+                url += "&th=1&psc=1" # select the product size to appear discount
 
         return url
 
@@ -214,8 +206,13 @@ class RetailerSpider(scrapy.Spider):
                 return False
             return True
         
-        elif ('placedestendances.com' in domain) or ("jacadi.fr" in domain): 
+        elif ('placedestendances.com' in domain) or ("jacadi.fr" in domain):
             if int(element.get()) == self.PAGE_NO: # reached end when PAGE_NO equals the value of the element
+                return True
+            return False
+
+        elif ("marionnaud.fr" in domain):
+            if self.PAGE_NO > len(element.getall()): # reached end when PAGE_NO greater than the length of the element
                 return True
             return False
 
@@ -225,13 +222,13 @@ class RetailerSpider(scrapy.Spider):
 
 
     @staticmethod
-    def use_javascript(url: str, retailer_id: int, product_page: bool = False) -> bool:
+    def use_javascript(url: str, spider_type: str, product_page: bool = False) -> bool:
         """
-        Determines whether JavaScript should be used for a given URL and retailer ID.
+        Determines whether JavaScript should be used for a given URL and spider type.
 
         Args:
             url (str): The URL to check.
-            retailer_id (int): The ID of the retailer.
+            spider_type (str): The type of spider.
             product_page (bool): Indicates whether the URL is a product page URL. Defaults to False.
 
         Returns:
@@ -239,13 +236,17 @@ class RetailerSpider(scrapy.Spider):
         """
         domain = urlparse(url).netloc.lstrip('www.')
 
-        if ('fr.vestiairecollective.com' in domain) and retailer_id:
+        if ('fr.vestiairecollective.com' in domain) and spider_type == "scraper":
             # use javascript only for products listing page
             javascript = True if not product_page else False
 
-        elif ("sunglasshut.com" in domain) and retailer_id:
+        elif ("sunglasshut.com" in domain) and spider_type == "scraper":
             # always use javascript for sunglasshut
             javascript = True
+
+        elif ("marionnaud.fr" in domain) and spider_type == "scraper":
+            # use javascript only for product detail page
+            javascript = True if product_page else False
 
         else:
             javascript = False

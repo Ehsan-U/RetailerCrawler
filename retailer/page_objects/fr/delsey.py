@@ -15,7 +15,6 @@ class DelseyProduct(ProductPage):
     _listed_price = "//span[@class='product__price product__price--compare']/span[@class]/text()"
     _product_desc = "//div[contains(@id, 'Product-content')]//text()[not(parent::style or parent::script)]"
 
-
     @field
     def product_name(self) -> str:
         return self.response.xpath(self._product_name).get()
