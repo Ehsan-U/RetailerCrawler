@@ -99,7 +99,6 @@ class RetailerSpider(scrapy.Spider):
 
             # remove the unncesessary fields
             item.pop("url")
-            item.pop("spider_type")
 
             loader = ItemLoader(item=RetailerItem())
             for k, v in item.items():
