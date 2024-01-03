@@ -62,7 +62,7 @@ class RetailerItem(scrapy.Item):
         country_id (scrapy.Field): The country ID associated with the item.
         retailer_id (scrapy.Field): The retailer ID associated with the item.
         category_ids (scrapy.Field): The category IDs associated with the item.
-        scrappingtype (scrapy.Field): The type of scrapping (scrapping new products or checking existing ones).
+        spider_type (scrapy.Field): The type of scrapping (scrapping new products or checking existing ones).
         product_url (scrapy.Field): The URL of the product.
         product_name (scrapy.Field): The name of the product.
         brand_name (scrapy.Field): The brand name of the product.
@@ -84,7 +84,7 @@ class RetailerItem(scrapy.Item):
         output_processor=CustomTakeFirst()
     )
     category_ids = scrapy.Field()
-    scrappingtype = scrapy.Field(
+    spider_type = scrapy.Field(
         output_processor=CustomTakeFirst()
     )
     product_url = scrapy.Field(
