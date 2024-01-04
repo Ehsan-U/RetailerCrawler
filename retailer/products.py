@@ -96,16 +96,16 @@ class Products:
         cursor = self.db.cursor()
         cursor.execute(query)
         self.db.commit()
-        print('Product deactivated')
+        # print('Product deactivated')
 
     def store_product(self, item):
         try:
             exists = self.product_exists(item['product_url']);
 
             if exists:
-                print('URL already exists')
+                # print('URL already exists')
                 if exists[0][1] == 'inactive':
-                    print('Updating product ' + str(exists[0][0]))
+                    # print('Updating product ' + str(exists[0][0]))
                     update_inactive_prod = "UPDATE product SET price = %s, discount = %s, status = %s, updated_at = CURRENT_TIMESTAMP WHERE id = %s"
                     update_values = (
                         item['listed_price'],
@@ -150,7 +150,7 @@ class Products:
                         self.cursor.execute(update_review, review_val)
                 
                 self.db.commit()
-                print('Data inserted into products MariaDB')
+                # print('Data inserted into products MariaDB')
 
             return item
         
