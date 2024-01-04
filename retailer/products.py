@@ -41,6 +41,7 @@ class Products:
         for (_id, user_id, country_id, link, retailer_id) in cursor.fetchall():
             url = {}
            
+            url['scrapping_url_id'] = _id
             url['user_id'] = user_id
             url['country_id'] = country_id
             url['url'] = link
@@ -156,5 +157,13 @@ class Products:
         except Exception as e:
             print(f"Error inserting data into MariaDB: {e}")
             raise DropItem("Item dropped due to database error")
+
+        return
+
+    def update_scrapping_url_scrapped_datetime(self, scrappingurl_id):
+        update_inactive_prod = "UPDATE scrapping_urls SET last_scrapped_at = CURRENT_TIMESTAMP WHERE id = " + str(scrappingurl_id)
+
+        self.cursor.execute(update_inactive_prod)
+        self.db.commit()
 
         return
