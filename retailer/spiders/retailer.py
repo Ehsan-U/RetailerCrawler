@@ -12,8 +12,6 @@ from retailer.page_objects.pages import ProductPage
 from retailer.products import Products
 
 
-
-
 class RetailerSpider(scrapy.Spider):
     """
     Spider class for scraping retailer websites.
@@ -22,11 +20,15 @@ class RetailerSpider(scrapy.Spider):
     name = "retailer"
     PAGE_NO = 1
     SPIDER_TYPE = 'scraper'
+    RETAILER_ID = 0
 
 
     def start_requests(self) -> Request:
         products = Products()
-        pages = products.get_pages(self.SPIDER_TYPE)
+        pages = []
+
+        if self.RETAILER_ID != 0:
+            pages = products.get_pages(self.RETAILER_ID, self.SPIDER_TYPE)
 
         for page in pages:
             scrapping_url_id = page.get("scrapping_url_id")
