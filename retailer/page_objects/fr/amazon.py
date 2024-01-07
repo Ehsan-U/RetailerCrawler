@@ -9,7 +9,7 @@ class AmazonProduct(ProductPage):
     """
 
     _product_name = "//span[@id='productTitle']/text()"
-    _brand_name = "//a[@id='bylineInfo']/@href"
+    _brand_name = "//a[@id='bylineInfo']/text()"
     _prod_images = "//div[@id='imgTagWrapperId']/img/@src"
     _reviews = "//div[@data-hook='review']"
     _review_stars = ".//i[contains(@data-hook, 'review-star-rating')]/@class"
@@ -24,7 +24,8 @@ class AmazonProduct(ProductPage):
     
     @field
     def brand_name(self) -> str:
-        return self.response.xpath(self._brand_name).get()
+        brandname = str(self.response.xpath(self._brand_name).get()).replace('\u202f', ' ').replace(u'\xa0', ' ').replace(u'\xc2', ' ')
+        return brandname.replace('Brand: ', '').replace('Marque : ', '').replace('Visiter la boutique ', '')
 
     @field
     def prod_images(self) -> list:
