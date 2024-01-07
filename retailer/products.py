@@ -102,6 +102,9 @@ class Products:
         try:
             exists = self.product_exists(item['product_url']);
 
+            if not item['brand_name']:
+                return item
+
             if exists:
                 # print('URL already exists')
                 if exists[0][1] == 'inactive':

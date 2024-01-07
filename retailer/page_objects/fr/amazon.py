@@ -24,8 +24,13 @@ class AmazonProduct(ProductPage):
     
     @field
     def brand_name(self) -> str:
-        brandname = str(self.response.xpath(self._brand_name).get()).replace('\u202f', ' ').replace(u'\xa0', ' ').replace(u'\xc2', ' ')
-        return brandname.replace('Brand: ', '').replace('Marque : ', '').replace('Visiter la boutique ', '')
+        brandname = self.response.xpath(self._brand_name).get()
+
+        if brandname:
+            brandname = brandname.replace('\u202f', ' ').replace(u'\xa0', ' ').replace(u'\xc2', ' ')
+            return brandname.replace('Brand: ', '').replace('Marque : ', '').replace('Visiter la boutique ', '')
+
+        return ''
 
     @field
     def prod_images(self) -> list:
