@@ -25,16 +25,16 @@ class Products:
         )
         self.cursor = self.db.cursor()
     
-    def get_pages(self, spider_type):
+    def get_pages(self, retailer_id, spider_type):
         if (spider_type == "checker"):
-            return self.fetch_existing_products()
+            return self.fetch_existing_products(retailer_id)
         else:
-            return self.fetch_scrapping_urls()
+            return self.fetch_scrapping_urls(retailer_id)
         pass
 
-    def fetch_scrapping_urls(self):
+    def fetch_scrapping_urls(self, retailer_id):
         urls = []
-        query = "SELECT su.id, su.user_id, su.country_id, su.url as link, su.retailer_id FROM scrapping_urls AS su LEFT JOIN retailer AS r ON r.id = su.retailer_id WHERE su.status = 'active' AND r.status = 'active';"
+        query = f"SELECT su.id, su.user_id, su.country_id, su.url as link, su.retailer_id FROM scrapping_urls AS su LEFT JOIN retailer AS r ON r.id = su.retailer_id WHERE su.status = 'active' AND r.status = 'active' AND r.id = {retailer_id};"
         cursor = self.db.cursor()
         cursor.execute(query)
 
@@ -72,9 +72,9 @@ class Products:
 
         return results
 
-    def fetch_existing_products(self):
+    def fetch_existing_products(self, retailer_id):
         urls = []
-        query = "SELECT p.id, p.country_id, p.url as link FROM product AS p LEFT JOIN retailer AS r ON r.id = p.retailer_id WHERE p.status = 'active' AND r.status = 'active'"
+        query = f"SELECT p.id, p.country_id, p.url as link FROM product AS p LEFT JOIN retailer AS r ON r.id = p.retailer_id WHERE p.status = 'active' AND r.status = 'active' AND r.id = {retailer_id}"
         cursor = self.db.cursor()
         cursor.execute(query)
 
