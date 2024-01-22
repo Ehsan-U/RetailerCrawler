@@ -58,10 +58,20 @@ class RetailerSpider(scrapy.Spider):
         spider_type = page_meta.get("spider_type")
         if spider_type != "scraper":
             page_item = await page.to_item()
-            item = {
-                **page_meta,
-                "discounted": page_item.get("discounted_flag")
-            }
+            discounted_flag = page_item.get("discounted_flag")
+            if discounted_flag:
+                item = {
+                    **page_meta,
+                    "discounted": discounted_flag,
+                    "listed_price": page_item.get("listed_price"),
+                    "discounted_price": page_item.get("discounted_price"),
+                    "discounted_percent": page_item.get("discounted_percent")
+                }
+            else:
+                item = {
+                    **page_meta,
+                    "discounted": discounted_flag,
+                }
             yield item
         else:
             domain = urlparse(response.url).netloc.lstrip('www.')
