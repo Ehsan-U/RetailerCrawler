@@ -40,7 +40,7 @@ def build_paginated_url(url: str, page_no: int):
         str: The updated paginated URL.
     """
     scheme, netloc, path, query, fragment = urlsplit(url)
-    params = dict((qc.split("=") if "=" in qc else (qc, "") for qc in query.split("&"))) if query else {}
+    params = dict((qc.split("=") if "=" in qc else (qc, "") for qc in query.split("&"))) if (query and not "==" in query) else {}
 
     if ('i-run.fr' in netloc) or ('fr.delsey.com' in netloc):
         params["page"] = str(page_no)
@@ -107,7 +107,7 @@ def build_paginated_url(url: str, page_no: int):
         url += f"&page={page_no}"
         return url
 
-    elif ("mes-bijoux.fr" in netloc):
+    elif ("mes-bijoux.fr" in netloc or "parfumsmoinschers.com" in netloc):
         params['p'] = str(page_no)
         query = urlencode(params)
 

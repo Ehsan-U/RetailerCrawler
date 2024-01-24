@@ -17,12 +17,13 @@ class RetailerSpider(scrapy.Spider):
     """
 
     name = "retailer"
-    PAGE_NO = 1
+    PAGE_NO = 73
 
 
     def start_requests(self) -> Request:
         pages = [{
-            "url": "https://www.mes-bijoux.fr/colliers-et-pendentifs-or-et-diamant/7186-pendentif-or-jaune-et-diamants-006-carat-coeur-tendresse.html",
+            # "url": "https://www.parfumsmoinschers.com/produit/19479-flower-by-kenzo-kenzo-eau-de-parfum-spray-100-ml.html",
+            "url": "https://www.parfumsmoinschers.com/crayons-eyeliners/23549-double-wear-eyeliner-waterproof-infini-estee-lauder--035-g.html",
             "user_id": 1,
             "country_id": 75,
             "spider_type": "checker"
@@ -222,7 +223,7 @@ class RetailerSpider(scrapy.Spider):
         domain = urlparse(response.url).netloc.lstrip('www.')
         element = response.xpath(element_xpath)
         
-        if ('fr.vestiairecollective.com' in domain or 'shoes.fr' in domain or "spartoo.com" in domain or "mes-bijoux.fr" in domain):
+        if ('fr.vestiairecollective.com' in domain or 'shoes.fr' in domain or "spartoo.com" in domain or "mes-bijoux.fr" in domain or "parfumsmoinschers.com" in domain):
             if element:
                 return False
             return True

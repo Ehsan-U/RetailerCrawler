@@ -217,3 +217,15 @@ class MesBijouxPaths():
     DISCOUNTED = ".//div[@data-action='update-price']/div/div[@class='mb-omnibus-left']"
     PRODUCT_URL = "./div/a/@href"
     ELEMENT = "//article[@data-id-product]"  # reached end when not found
+
+
+@dataclass
+class ParfumsMoinsChersPaths():
+    """
+    Xpaths for the parfumsmoinschers.com domain
+    """
+
+    PRODUCTS = "//ul/li[@class='product']"
+    DISCOUNTED = "./span[@class='productDiscount']"
+    PRODUCT_URL = "./a[not(@class)]/@href"
+    ELEMENT = "//ul/li[@class='product']"  # reached end when not found
