@@ -9,7 +9,6 @@ from urllib.parse import urlparse
 from retailer.utils import build_paginated_url
 from retailer.items import RetailerItem
 from retailer.page_objects.pages import ProductPage
-from retailer.products import Products
 
 
 class RetailerSpider(scrapy.Spider):
@@ -19,23 +18,20 @@ class RetailerSpider(scrapy.Spider):
 
     name = "retailer"
     PAGE_NO = 1
-    SPIDER_TYPE = 'scraper'
     RETAILER_ID = 0
 
 
     def start_requests(self) -> Request:
-        products = Products()
-        pages = []
-
-        if self.RETAILER_ID != 0:
-            pages = products.get_pages(self.RETAILER_ID, self.SPIDER_TYPE)
+        pages = [{
+            "url": "https://www.marionnaud.fr/parfum/parfum-femme/eau-de-parfum/chloe-rose-naturelle-intense-eau-de-parfum-chloe/p/102411100",
+            "user_id": 1,
+            "country_id": 75,
+            "retailer_id": 1,
+            "category_ids": [1,2],
+            "spider_type": "checker"
+        }]
 
         for page in pages:
-            scrapping_url_id = page.get("scrapping_url_id")
-            if scrapping_url_id:
-                products.update_scrapping_url_scrapped_datetime(scrapping_url_id)
-                page.pop("scrapping_url_id")
-
             url = self.modify_url(url=page['url'], spider_type=page['spider_type'])
             js = self.use_javascript(url, spider_type=page.get("spider_type"))
 
@@ -72,6 +68,7 @@ class RetailerSpider(scrapy.Spider):
                     **page_meta,
                     "discounted_flag": discounted_flag,
                 }
+            item.pop("url")
             
             loader = ItemLoader(item=RetailerItem())
             for k, v in item.items():
