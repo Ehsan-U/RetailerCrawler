@@ -205,3 +205,15 @@ class GeneraleOptiquePaths():
     DISCOUNTED = ".//span[contains(@class, 'price--discount')]"
     PRODUCT_URL = "./@href"
     ELEMENT = "//div[@class='no-results']"  # reached end when found
+
+
+@dataclass
+class MesBijouxPaths():
+    """
+    Xpaths for the mes-bijoux.fr domain
+    """
+
+    PRODUCTS = "//article[@data-id-product]"
+    DISCOUNTED = ".//div[@data-action='update-price']/div/div[@class='mb-omnibus-left']"
+    PRODUCT_URL = "./div/a/@href"
+    ELEMENT = "//article[@data-id-product]"  # reached end when not found

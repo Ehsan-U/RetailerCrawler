@@ -28,6 +28,7 @@ from retailer.page_objects.fr.shoes import ShoesProduct
 from retailer.page_objects.fr.spartoo import SpartooProduct
 from retailer.page_objects.fr.grandoptical import GrandOpticalProduct
 from retailer.page_objects.fr.generaleoptique import GeneraleOptiqueProduct
+from retailer.page_objects.fr.mesbijoux import MesBijouxProduct
 
 
 from retailer.selectors import *
@@ -157,6 +158,7 @@ SCRAPY_POET_RULES = [
     ApplyRule("spartoo.com", use=SpartooProduct, instead_of=ProductPage),
     ApplyRule("grandoptical.com", use=GrandOpticalProduct, instead_of=ProductPage),
     ApplyRule("generale-optique.com", use=GeneraleOptiqueProduct, instead_of=ProductPage),
+    ApplyRule("mes-bijoux.fr", use=MesBijouxProduct, instead_of=ProductPage),
 ]
 
 
@@ -178,6 +180,7 @@ SCRAPY_XPATHS_RULES = {
     "spartoo.com": SpartooPaths,
     "grandoptical.com": GrandOpticalPaths,
     "generale-optique.com": GeneraleOptiquePaths,
+    "mes-bijoux.fr": MesBijouxPaths,
 }
 
 RETRY_ENABLED = True

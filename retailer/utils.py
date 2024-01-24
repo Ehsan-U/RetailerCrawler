@@ -107,6 +107,10 @@ def build_paginated_url(url: str, page_no: int):
         url += f"&page={page_no}"
         return url
 
+    elif ("mes-bijoux.fr" in netloc):
+        params['p'] = str(page_no)
+        query = urlencode(params)
+
     updated_url = urlunsplit((scheme, netloc, path, query, fragment))
     return updated_url
 

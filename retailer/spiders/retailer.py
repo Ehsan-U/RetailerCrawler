@@ -22,7 +22,7 @@ class RetailerSpider(scrapy.Spider):
 
     def start_requests(self) -> Request:
         pages = [{
-            "url": "https://www.generale-optique.com/lunettes-de-soleil/ray-ban-rb2140-113487/805289126638",
+            "url": "https://www.mes-bijoux.fr/colliers-et-pendentifs-or-et-diamant/7186-pendentif-or-jaune-et-diamants-006-carat-coeur-tendresse.html",
             "user_id": 1,
             "country_id": 75,
             "spider_type": "checker"
@@ -222,7 +222,7 @@ class RetailerSpider(scrapy.Spider):
         domain = urlparse(response.url).netloc.lstrip('www.')
         element = response.xpath(element_xpath)
         
-        if ('fr.vestiairecollective.com' in domain or 'shoes.fr' in domain or "spartoo.com" in domain):
+        if ('fr.vestiairecollective.com' in domain or 'shoes.fr' in domain or "spartoo.com" in domain or "mes-bijoux.fr" in domain):
             if element:
                 return False
             return True
@@ -257,7 +257,7 @@ class RetailerSpider(scrapy.Spider):
         """
         domain = urlparse(url).netloc.lstrip('www.')
 
-        if ('fr.vestiairecollective.com' in domain) and spider_type == "scraper":
+        if ('fr.vestiairecollective.com' in domain or "mes-bijoux.fr" in domain) and spider_type == "scraper":
             # use javascript only for products listing page
             javascript = True if not product_page else False
 
