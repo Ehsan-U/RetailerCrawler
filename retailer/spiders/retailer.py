@@ -22,10 +22,10 @@ class RetailerSpider(scrapy.Spider):
 
     def start_requests(self) -> Request:
         pages = [{
-            "url": "https://www.shoes.fr/Converse-CHUCK-TAYLOR-ALL-STAR-CORE-HI-x95.php",
+            "url": "https://www.spartoo.com/soldes.php#universe=135&gender=F&type=300&seller=spartoo&style=10168&price_min=11&price_max=30",
             "user_id": 1,
             "country_id": 75,
-            "spider_type": "checker"
+            "spider_type": "scraper"
         }]
 
         for page in pages:
@@ -143,7 +143,7 @@ class RetailerSpider(scrapy.Spider):
             if product_page:
                 url += "&th=1&psc=1" # select the product size to appear discount
 
-        elif ("shoes.fr" in domain):
+        elif ("shoes.fr" in domain or "spartoo.com" in domain):
             url = url.replace("php#","php?")
 
         return url
@@ -222,7 +222,7 @@ class RetailerSpider(scrapy.Spider):
         domain = urlparse(response.url).netloc.lstrip('www.')
         element = response.xpath(element_xpath)
         
-        if ('fr.vestiairecollective.com' in domain or 'shoes.fr' in domain):
+        if ('fr.vestiairecollective.com' in domain or 'shoes.fr' in domain or "spartoo.com" in domain):
             if element:
                 return False
             return True

@@ -94,7 +94,7 @@ def build_paginated_url(url: str, page_no: int):
         params["ref"] = f"sr_pg_{str(page_no)}"
         query = unquote_plus(urlencode(params))
 
-    elif ("shoes.fr" in netloc):
+    elif ("shoes.fr" in netloc or "spartoo.com" in netloc):
         url = url.replace("php#", "php?")
         scheme, netloc, path, query, fragment = urlsplit(url)
         params = dict((qc.split("=") if "=" in qc else (qc, "") for qc in query.split("&"))) if query else {}

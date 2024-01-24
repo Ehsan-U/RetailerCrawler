@@ -169,3 +169,15 @@ class ShoesPaths():
     DISCOUNTED = ".//span[@class='productlist_prix' and not(@id)]/s"
     PRODUCT_URL = "./div[@name='zoomInfoDiv']/a/@href"
     ELEMENT = "//span[@class='dis_current_page']" # reached end when not found
+
+
+@dataclass
+class SpartooPaths():
+    """
+    Xpaths for the spartoo.com domain
+    """
+
+    PRODUCTS = "//div[@class='productsList']/div"
+    DISCOUNTED = ".//span[@class='productlist_prix' and not(@id)]/s"
+    PRODUCT_URL = "./div[@name='zoomInfoDiv']/a/@href"
+    ELEMENT = "//span[@class='dis_current_page']"  # reached end when not found
