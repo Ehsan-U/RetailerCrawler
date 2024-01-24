@@ -18,7 +18,6 @@ class RetailerSpider(scrapy.Spider):
 
     name = "retailer"
     PAGE_NO = 1
-    RETAILER_ID = 0
 
 
     def start_requests(self) -> Request:
@@ -26,8 +25,6 @@ class RetailerSpider(scrapy.Spider):
             "url": "https://www.marionnaud.fr/parfum/parfum-femme/eau-de-parfum/chloe-rose-naturelle-intense-eau-de-parfum-chloe/p/102411100",
             "user_id": 1,
             "country_id": 75,
-            "retailer_id": 1,
-            "category_ids": [1,2],
             "spider_type": "checker"
         }]
 
