@@ -27,6 +27,7 @@ from retailer.page_objects.fr.amazon import AmazonProduct
 from retailer.page_objects.fr.shoes import ShoesProduct
 from retailer.page_objects.fr.spartoo import SpartooProduct
 from retailer.page_objects.fr.grandoptical import GrandOpticalProduct
+from retailer.page_objects.fr.generaleoptique import GeneraleOptiqueProduct
 
 
 from retailer.selectors import *
@@ -155,6 +156,7 @@ SCRAPY_POET_RULES = [
     ApplyRule("shoes.fr", use=ShoesProduct, instead_of=ProductPage),
     ApplyRule("spartoo.com", use=SpartooProduct, instead_of=ProductPage),
     ApplyRule("grandoptical.com", use=GrandOpticalProduct, instead_of=ProductPage),
+    ApplyRule("generale-optique.com", use=GeneraleOptiqueProduct, instead_of=ProductPage),
 ]
 
 
@@ -175,6 +177,7 @@ SCRAPY_XPATHS_RULES = {
     "shoes.fr": ShoesPaths,
     "spartoo.com": SpartooPaths,
     "grandoptical.com": GrandOpticalPaths,
+    "generale-optique.com": GeneraleOptiquePaths,
 }
 
 RETRY_ENABLED = True

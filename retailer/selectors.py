@@ -193,3 +193,15 @@ class GrandOpticalPaths():
     DISCOUNTED = ".//span[contains(@class, 'price--discount')]"
     PRODUCT_URL = "./@href"
     ELEMENT = "//div[@class='no-results']"  # reached end when found
+
+
+@dataclass
+class GeneraleOptiquePaths():
+    """
+    Xpaths for the generale-optique.com domain
+    """
+
+    PRODUCTS = "//a[@data-t='product-block']"
+    DISCOUNTED = ".//span[contains(@class, 'price--discount')]"
+    PRODUCT_URL = "./@href"
+    ELEMENT = "//div[@class='no-results']"  # reached end when found

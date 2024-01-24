@@ -22,10 +22,10 @@ class RetailerSpider(scrapy.Spider):
 
     def start_requests(self) -> Request:
         pages = [{
-            "url": "https://www.grandoptical.com/lunettes-de-soleil/selection?gender=Femme&priceFrom=81",
+            "url": "https://www.generale-optique.com/lunettes-de-soleil/ray-ban-rb2140-113487/805289126638",
             "user_id": 1,
             "country_id": 75,
-            "spider_type": "scraper"
+            "spider_type": "checker"
         }]
 
         for page in pages:

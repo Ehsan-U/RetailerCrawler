@@ -101,6 +101,12 @@ def build_paginated_url(url: str, page_no: int):
         params['offset'] = 144 * (page_no - 1)
         query = urlencode(params)
 
+    elif ("generale-optique.com" in netloc):
+        if "&page" in url:
+            url = url.split("&page")[0]
+        url += f"&page={page_no}"
+        return url
+
     updated_url = urlunsplit((scheme, netloc, path, query, fragment))
     return updated_url
 
