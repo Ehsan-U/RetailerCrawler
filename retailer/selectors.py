@@ -156,4 +156,4 @@ class AmazonPaths():
     PRODUCTS = "//div[@data-component-type='s-search-result']"
     DISCOUNTED = ".//span[@data-a-strike]"
     PRODUCT_URL = ".//div[@data-cy='title-recipe']/h2/a[not(contains(@href, '/click?'))]/@href"
-    ELEMENT = "//span[contains(text(), 'Pas de résultats pour')]"  # reached end when found
+    ELEMENT = "//span[contains(text(), 'Pas de résultats pour') or contains(text(), 'Essayez de vérifier votre orthographe')]"  # reached end when found

@@ -62,7 +62,7 @@ class RetailerSpider(scrapy.Spider):
             if discounted_flag:
                 item = {
                     **page_meta,
-                    "discounted": discounted_flag,
+                    "discounted_flag": discounted_flag,
                     "listed_price": page_item.get("listed_price"),
                     "discounted_price": page_item.get("discounted_price"),
                     "discounted_percent": page_item.get("discounted_percent")
@@ -70,9 +70,14 @@ class RetailerSpider(scrapy.Spider):
             else:
                 item = {
                     **page_meta,
-                    "discounted": discounted_flag,
+                    "discounted_flag": discounted_flag,
                 }
-            yield item
+            
+            loader = ItemLoader(item=RetailerItem())
+            for k, v in item.items():
+                loader.add_value(k, v)
+
+            yield loader.load_item()
         else:
             domain = urlparse(response.url).netloc.lstrip('www.')
             path = self.settings.get("SCRAPY_XPATHS_RULES").get(domain)
