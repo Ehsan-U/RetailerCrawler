@@ -79,7 +79,7 @@ def build_paginated_url(url: str, page_no: int):
         params["Page"] = str(page_no)
         query = urlencode(params)
 
-    elif ("intersport.fr" in netloc):
+    elif ("intersport.fr" in netloc or "grandoptical.com" in netloc):
         params["page"] = str(page_no)
         query = urlencode(params)
 
@@ -98,7 +98,7 @@ def build_paginated_url(url: str, page_no: int):
         url = url.replace("php#", "php?")
         scheme, netloc, path, query, fragment = urlsplit(url)
         params = dict((qc.split("=") if "=" in qc else (qc, "") for qc in query.split("&"))) if query else {}
-        params['offset'] = 144 * (page_no - 1) + int(params.get("offset", 0))
+        params['offset'] = 144 * (page_no - 1)
         query = urlencode(params)
 
     updated_url = urlunsplit((scheme, netloc, path, query, fragment))

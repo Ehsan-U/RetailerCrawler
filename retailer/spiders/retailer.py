@@ -22,7 +22,7 @@ class RetailerSpider(scrapy.Spider):
 
     def start_requests(self) -> Request:
         pages = [{
-            "url": "https://www.spartoo.com/soldes.php#universe=135&gender=F&type=300&seller=spartoo&style=10168&price_min=11&price_max=30",
+            "url": "https://www.grandoptical.com/lunettes-de-soleil/selection?gender=Femme&priceFrom=81",
             "user_id": 1,
             "country_id": 75,
             "spider_type": "scraper"

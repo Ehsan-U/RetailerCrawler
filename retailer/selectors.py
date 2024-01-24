@@ -181,3 +181,15 @@ class SpartooPaths():
     DISCOUNTED = ".//span[@class='productlist_prix' and not(@id)]/s"
     PRODUCT_URL = "./div[@name='zoomInfoDiv']/a/@href"
     ELEMENT = "//span[@class='dis_current_page']"  # reached end when not found
+
+
+@dataclass
+class GrandOpticalPaths():
+    """
+    Xpaths for the grandoptical.com domain
+    """
+
+    PRODUCTS = "//a[@data-t='product-block']"
+    DISCOUNTED = ".//span[contains(@class, 'price--discount')]"
+    PRODUCT_URL = "./@href"
+    ELEMENT = "//div[@class='no-results']"  # reached end when found
