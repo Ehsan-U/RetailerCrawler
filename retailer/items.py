@@ -49,7 +49,6 @@ def clean_price(value: str) -> float:
     if isinstance(value, str):
         value = Price.fromstring(value).amount_float
         return value
-
     return value
 
 

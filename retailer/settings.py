@@ -24,6 +24,7 @@ from retailer.page_objects.fr.luisaviaroma import LuisaViaRomaProduct
 from retailer.page_objects.fr.intersport import IntersportProduct
 from retailer.page_objects.fr.marionnaud import MarionnaudProduct
 from retailer.page_objects.fr.amazon import AmazonProduct
+from retailer.page_objects.fr.shoes import ShoesProduct
 
 
 from retailer.selectors import *
@@ -149,6 +150,7 @@ SCRAPY_POET_RULES = [
     ApplyRule("intersport.fr", use=IntersportProduct, instead_of=ProductPage),
     ApplyRule("marionnaud.fr", use=MarionnaudProduct, instead_of=ProductPage),
     ApplyRule("amazon.fr", use=AmazonProduct, instead_of=ProductPage),
+    ApplyRule("shoes.fr", use=ShoesProduct, instead_of=ProductPage)
 ]
 
 
@@ -166,6 +168,7 @@ SCRAPY_XPATHS_RULES = {
     "intersport.fr": IntersportPaths,
     "marionnaud.fr": MarionnaudPaths,
     "amazon.fr": AmazonPaths,
+    "shoes.fr": ShoesPaths,
 }
 
 RETRY_ENABLED = True

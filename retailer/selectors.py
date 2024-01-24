@@ -157,3 +157,15 @@ class AmazonPaths():
     DISCOUNTED = ".//span[@data-a-strike]"
     PRODUCT_URL = ".//div[@data-cy='title-recipe']/h2/a[not(contains(@href, '/click?'))]/@href"
     ELEMENT = "//span[contains(text(), 'Pas de résultats pour') or contains(text(), 'Essayez de vérifier votre orthographe')]"  # reached end when found
+
+
+@dataclass
+class ShoesPaths():
+    """
+    Xpaths for the shoes.fr domain
+    """
+
+    PRODUCTS = "//div[@class='productsList']/div"
+    DISCOUNTED = ".//span[@class='productlist_prix' and not(@id)]/s"
+    PRODUCT_URL = "./div[@name='zoomInfoDiv']/a/@href"
+    ELEMENT = "//span[@class='dis_current_page']" # reached end when not found

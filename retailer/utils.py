@@ -94,6 +94,13 @@ def build_paginated_url(url: str, page_no: int):
         params["ref"] = f"sr_pg_{str(page_no)}"
         query = unquote_plus(urlencode(params))
 
+    elif ("shoes.fr" in netloc):
+        url = url.replace("php#", "php?")
+        scheme, netloc, path, query, fragment = urlsplit(url)
+        params = dict((qc.split("=") if "=" in qc else (qc, "") for qc in query.split("&"))) if query else {}
+        params['offset'] = 144 * (page_no - 1) + int(params.get("offset", 0))
+        query = urlencode(params)
+
     updated_url = urlunsplit((scheme, netloc, path, query, fragment))
     return updated_url
 

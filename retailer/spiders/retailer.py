@@ -22,7 +22,7 @@ class RetailerSpider(scrapy.Spider):
 
     def start_requests(self) -> Request:
         pages = [{
-            "url": "https://www.marionnaud.fr/parfum/parfum-femme/eau-de-parfum/chloe-rose-naturelle-intense-eau-de-parfum-chloe/p/102411100",
+            "url": "https://www.shoes.fr/Converse-CHUCK-TAYLOR-ALL-STAR-CORE-HI-x95.php",
             "user_id": 1,
             "country_id": 75,
             "spider_type": "checker"
@@ -94,6 +94,8 @@ class RetailerSpider(scrapy.Spider):
 
                 request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta}, js=js)
                 yield request
+            else:
+                self.logger.info("\n[+] Reached End\n")
 
 
     async def parse_product(self, response: Response, page: ProductPage, page_meta: Dict) -> RetailerItem:
@@ -140,6 +142,9 @@ class RetailerSpider(scrapy.Spider):
         elif ("amazon.fr" in domain):
             if product_page:
                 url += "&th=1&psc=1" # select the product size to appear discount
+
+        elif ("shoes.fr" in domain):
+            url = url.replace("php#","php?")
 
         return url
 
@@ -217,7 +222,7 @@ class RetailerSpider(scrapy.Spider):
         domain = urlparse(response.url).netloc.lstrip('www.')
         element = response.xpath(element_xpath)
         
-        if ('fr.vestiairecollective.com' in domain):
+        if ('fr.vestiairecollective.com' in domain or 'shoes.fr' in domain):
             if element:
                 return False
             return True
