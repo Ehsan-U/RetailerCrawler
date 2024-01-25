@@ -14,8 +14,8 @@ class RetailerPipeline:
 
     def process_item(self, item, spider):
         if (item.get("spider_type") == "checker"):
-            if (item.get('discounted') == False):
-                self.products.deactivate_product(item['id'])
+            if (item.get('discounted_flag') == False):
+                self.products.deactivate_product(item['product_id'])
         else:
             self.products.store_product(item)
 
