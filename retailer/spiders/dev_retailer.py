@@ -16,7 +16,7 @@ class RetailerSpider(scrapy.Spider):
     Spider class for scraping retailer websites.
     """
 
-    name = "retailer"
+    name = "dev_retailer"
     PAGE_NO = 73
 
 
