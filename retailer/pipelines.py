@@ -16,6 +16,8 @@ class RetailerPipeline:
         if (item.get("spider_type") == "checker"):
             if (item.get('discounted_flag') == False):
                 self.products.deactivate_product(item['product_id'])
+            else:
+                self.products.update_product(item)
         else:
             self.products.store_product(item)
 
