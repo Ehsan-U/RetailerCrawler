@@ -80,8 +80,8 @@ class Products:
 
         for (id, country_id, link) in cursor.fetchall():
             url = {}
-           
-            url['id'] = id
+
+            url['product_id'] = id
             url['country_id'] = country_id
             url['url'] = link
             url['spider_type'] = "checker"
