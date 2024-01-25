@@ -75,7 +75,8 @@ class RetailerSpider(scrapy.Spider):
             
             loader = ItemLoader(item=RetailerItem())
             for k, v in item.items():
-                loader.add_value(k, v)
+                if (k != 'url'):
+                    loader.add_value(k, v)
 
             yield loader.load_item()
         else:

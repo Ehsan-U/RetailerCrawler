@@ -71,6 +71,7 @@ class RetailerItem(scrapy.Item):
         discounted_price (scrapy.Field): The discounted price of the product.
         listed_price (scrapy.Field): The listed price of the product.
         product_desc (scrapy.Field): The description of the product.
+        product_id (scrapy.Field): The product ID associated with the item.
         discounted_flag (scrapy.Field): The discounted flag of the product.
     """
 
@@ -116,6 +117,9 @@ class RetailerItem(scrapy.Item):
         output_processor=CustomTakeFirst()
     )
 
+    product_id = scrapy.Field(
+        output_processor=CustomTakeFirst()
+    )
     discounted_flag = scrapy.Field(
         output_processor=CustomTakeFirst()
     )
