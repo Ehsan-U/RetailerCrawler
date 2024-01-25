@@ -170,3 +170,18 @@ class Products:
         self.db.commit()
 
         return
+
+    def update_product(self, item):
+        print('Updating product price')
+
+        update_inactive_prod = "UPDATE product SET price = %s, discount = %s, discounted_price = %s, updated_at = CURRENT_TIMESTAMP WHERE id = %s"
+        update_values = (
+            item['listed_price'],
+            item['discounted_percent'],
+            item['discounted_price'],
+            item['product_id']
+        )
+        self.cursor.execute(update_inactive_prod, update_values)
+        self.db.commit()
+
+        return
