@@ -10,6 +10,7 @@
 
 <!--- docker rmi deelio_crawler -->
 docker build -t deelio_crawler .
+<!--- docker rmi deelio_crawler; docker build -t deelio_crawler . -->
 
 #### Run
 
