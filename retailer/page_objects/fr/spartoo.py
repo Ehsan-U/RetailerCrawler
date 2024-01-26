@@ -1,3 +1,4 @@
+import re
 from retailer.page_objects.pages import ProductPage
 from web_poet import field
 
@@ -33,6 +34,8 @@ class SpartooProduct(ProductPage):
                     images.append(src)
                 if len(images) == 3:
                     break
+        if len(images) == 1:
+            images = list(set([re.sub(r'500_[ABC]\.jpg', f"500_{letter}.jpg", images[0]) for letter in ['A','B','C']]))
         return images
 
     @field

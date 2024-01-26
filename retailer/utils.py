@@ -104,8 +104,11 @@ def build_paginated_url(url: str, page_no: int):
     elif ("generale-optique.com" in netloc):
         if "&page" in url:
             url = url.split("&page")[0]
-        url += f"&page={page_no}"
-        return url
+            url += f"&page={page_no}"
+            return url
+        else:
+            params['page'] = str(page_no)
+            query = urlencode(params)
 
     elif ("mes-bijoux.fr" in netloc or "parfumsmoinschers.com" in netloc):
         params['p'] = str(page_no)
