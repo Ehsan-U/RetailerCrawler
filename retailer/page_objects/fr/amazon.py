@@ -14,7 +14,7 @@ class AmazonProduct(ProductPage):
     _reviews = "//div[@data-hook='review']"
     _review_stars = ".//i[contains(@data-hook, 'review-star-rating')]/@class"
     _review_text = ".//div[@data-hook='review-collapsed']//text()"
-    _discounted_price = "//span[contains(@class, 'priceToPay')]//span[@class='a-price-whole']/text()"
+    _discounted_price = "//span[contains(@class, 'priceToPay')]//span[@class='a-price-whole' or @class='a-price-fraction']/text()"
     _listed_price = "//span[@data-a-strike]/span[@class]/text()"
     _product_desc = "//div[@id='productDescription']//text()"
 
@@ -61,7 +61,7 @@ class AmazonProduct(ProductPage):
     
     @field
     def discounted_price(self) -> str:
-        return self.response.xpath(self._discounted_price).get()
+        return ".".join(self.response.xpath(self._discounted_price).getall())
     
     @field
     def listed_price(self) -> str:

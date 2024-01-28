@@ -157,3 +157,75 @@ class AmazonPaths():
     DISCOUNTED = ".//span[@data-a-strike]"
     PRODUCT_URL = ".//div[@data-cy='title-recipe']/h2/a[not(contains(@href, '/click?'))]/@href"
     ELEMENT = "//span[contains(text(), 'Pas de résultats pour') or contains(text(), 'Essayez de vérifier votre orthographe')]"  # reached end when found
+
+
+@dataclass
+class ShoesPaths():
+    """
+    Xpaths for the shoes.fr domain
+    """
+
+    PRODUCTS = "//div[@class='productsList']/div"
+    DISCOUNTED = ".//span[@class='productlist_prix' and not(@id)]/s"
+    PRODUCT_URL = "./div[@name='zoomInfoDiv']/a/@href"
+    ELEMENT = "//span[@class='dis_current_page']" # reached end when not found
+
+
+@dataclass
+class SpartooPaths():
+    """
+    Xpaths for the spartoo.com domain
+    """
+
+    PRODUCTS = "//div[@class='productsList']/div"
+    DISCOUNTED = ".//span[@class='productlist_prix' and not(@id)]/s"
+    PRODUCT_URL = "./div[@name='zoomInfoDiv']/a/@href"
+    ELEMENT = "//span[@class='dis_current_page']"  # reached end when not found
+
+
+@dataclass
+class GrandOpticalPaths():
+    """
+    Xpaths for the grandoptical.com domain
+    """
+
+    PRODUCTS = "//a[@data-t='product-block']"
+    DISCOUNTED = ".//span[contains(@class, 'price--discount')]"
+    PRODUCT_URL = "./@href"
+    ELEMENT = "//div[@class='no-results']"  # reached end when found
+
+
+@dataclass
+class GeneraleOptiquePaths():
+    """
+    Xpaths for the generale-optique.com domain
+    """
+
+    PRODUCTS = "//a[@data-t='product-block']"
+    DISCOUNTED = ".//span[contains(@class, 'price--discount')]"
+    PRODUCT_URL = "./@href"
+    ELEMENT = "//div[@class='no-results']"  # reached end when found
+
+
+@dataclass
+class MesBijouxPaths():
+    """
+    Xpaths for the mes-bijoux.fr domain
+    """
+
+    PRODUCTS = "//article[@data-id-product]"
+    DISCOUNTED = ".//div[@data-action='update-price']/div/div[@class='mb-omnibus-left']"
+    PRODUCT_URL = "./div/a/@href"
+    ELEMENT = "//article[@data-id-product]"  # reached end when not found
+
+
+@dataclass
+class ParfumsMoinsChersPaths():
+    """
+    Xpaths for the parfumsmoinschers.com domain
+    """
+
+    PRODUCTS = "//ul/li[@class='product']"
+    DISCOUNTED = "./span[@class='productDiscount']"
+    PRODUCT_URL = "./a[not(@class)]/@href"
+    ELEMENT = "//ul/li[@class='product']"  # reached end when not found

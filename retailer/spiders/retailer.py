@@ -72,6 +72,7 @@ class RetailerSpider(scrapy.Spider):
                     **page_meta,
                     "discounted_flag": discounted_flag,
                 }
+            item.pop("url")
             
             loader = ItemLoader(item=RetailerItem())
             for k, v in item.items():
@@ -101,6 +102,8 @@ class RetailerSpider(scrapy.Spider):
 
                 request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta}, js=js)
                 yield request
+            else:
+                self.logger.info("\n[+] Reached End\n")
 
 
     async def parse_product(self, response: Response, page: ProductPage, page_meta: Dict) -> RetailerItem:
@@ -147,6 +150,9 @@ class RetailerSpider(scrapy.Spider):
         elif ("amazon.fr" in domain):
             if product_page:
                 url += "&th=1&psc=1" # select the product size to appear discount
+
+        elif ("shoes.fr" in domain or "spartoo.com" in domain):
+            url = url.replace("php#","php?")
 
         return url
 
@@ -224,7 +230,7 @@ class RetailerSpider(scrapy.Spider):
         domain = urlparse(response.url).netloc.lstrip('www.')
         element = response.xpath(element_xpath)
         
-        if ('fr.vestiairecollective.com' in domain):
+        if ('fr.vestiairecollective.com' in domain or 'shoes.fr' in domain or "spartoo.com" in domain or "mes-bijoux.fr" in domain or "parfumsmoinschers.com" in domain):
             if element:
                 return False
             return True
@@ -259,7 +265,7 @@ class RetailerSpider(scrapy.Spider):
         """
         domain = urlparse(url).netloc.lstrip('www.')
 
-        if ('fr.vestiairecollective.com' in domain) and spider_type == "scraper":
+        if ('fr.vestiairecollective.com' in domain or "mes-bijoux.fr" in domain) and spider_type == "scraper":
             # use javascript only for products listing page
             javascript = True if not product_page else False
 

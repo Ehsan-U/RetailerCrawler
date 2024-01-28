@@ -24,6 +24,12 @@ from retailer.page_objects.fr.luisaviaroma import LuisaViaRomaProduct
 from retailer.page_objects.fr.intersport import IntersportProduct
 from retailer.page_objects.fr.marionnaud import MarionnaudProduct
 from retailer.page_objects.fr.amazon import AmazonProduct
+from retailer.page_objects.fr.shoes import ShoesProduct
+from retailer.page_objects.fr.spartoo import SpartooProduct
+from retailer.page_objects.fr.grandoptical import GrandOpticalProduct
+from retailer.page_objects.fr.generaleoptique import GeneraleOptiqueProduct
+from retailer.page_objects.fr.mesbijoux import MesBijouxProduct
+from retailer.page_objects.fr.parfumsmoinschers import ParfumsMoinsChersProduct
 
 
 from retailer.selectors import *
@@ -149,6 +155,12 @@ SCRAPY_POET_RULES = [
     ApplyRule("intersport.fr", use=IntersportProduct, instead_of=ProductPage),
     ApplyRule("marionnaud.fr", use=MarionnaudProduct, instead_of=ProductPage),
     ApplyRule("amazon.fr", use=AmazonProduct, instead_of=ProductPage),
+    ApplyRule("shoes.fr", use=ShoesProduct, instead_of=ProductPage),
+    ApplyRule("spartoo.com", use=SpartooProduct, instead_of=ProductPage),
+    ApplyRule("grandoptical.com", use=GrandOpticalProduct, instead_of=ProductPage),
+    ApplyRule("generale-optique.com", use=GeneraleOptiqueProduct, instead_of=ProductPage),
+    ApplyRule("mes-bijoux.fr", use=MesBijouxProduct, instead_of=ProductPage),
+    ApplyRule("parfumsmoinschers.com", use=ParfumsMoinsChersProduct, instead_of=ProductPage),
 ]
 
 
@@ -166,6 +178,12 @@ SCRAPY_XPATHS_RULES = {
     "intersport.fr": IntersportPaths,
     "marionnaud.fr": MarionnaudPaths,
     "amazon.fr": AmazonPaths,
+    "shoes.fr": ShoesPaths,
+    "spartoo.com": SpartooPaths,
+    "grandoptical.com": GrandOpticalPaths,
+    "generale-optique.com": GeneraleOptiquePaths,
+    "mes-bijoux.fr": MesBijouxPaths,
+    "parfumsmoinschers.com": ParfumsMoinsChersPaths
 }
 
 RETRY_ENABLED = True

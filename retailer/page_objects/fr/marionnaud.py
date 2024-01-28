@@ -13,8 +13,8 @@ class MarionnaudProduct(ProductPage):
     _reviews = "//div[@class='product-review']"
     _review_stars = ".//div[@class='star-rating__filled-stars']/@style"
     _review_text = ".//div[@class='product-review__comment']/text()"
-    _discounted_price = "//div[@class='finalPrice']/text()"
-    _listed_price = "//div[@class='markdownPrice priceformat' and sup]/text()"
+    _discounted_price = "//div[@class='finalPrice']//text()"
+    _listed_price = "//div[@class='markdownPrice priceformat']//text()"
     _product_desc = "(//p[@class='prodInfoTxtData'])[1]//text()"
 
     @field
@@ -53,11 +53,11 @@ class MarionnaudProduct(ProductPage):
 
     @field
     def discounted_price(self) -> str:
-        return self.response.xpath(self._discounted_price).get()
+        return ".".join(self.response.xpath(self._discounted_price).getall()).strip().strip('.').replace("€",'')
 
     @field
     def listed_price(self) -> str:
-        return self.response.xpath(self._listed_price).get()
+        return ".".join(self.response.xpath(self._listed_price).getall()).strip().strip('.').replace("€",'')
 
     @field
     def product_desc(self) -> str:
