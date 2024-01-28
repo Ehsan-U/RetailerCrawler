@@ -119,13 +119,14 @@ class Products:
                     self.cursor.execute(update_inactive_prod, update_values)
                     self.db.commit()
             else:
-                update_prods = "INSERT INTO product (title, url, description, price, discount, brandname, status, created_at, updated_at, country_id, brand_id, retailer_id) VALUES (%s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, %s)"
+                update_prods = "INSERT INTO product (title, url, description, price, discount, discounted_price, brandname, status, created_at, updated_at, country_id, brand_id, retailer_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, %s)"
                 prods_val = (
                     item['product_name'],
                     item['product_url'],
                     item['product_desc'],
                     item['listed_price'],
                     item['discounted_percent'],
+                    item['discounted_price'],
                     item['brand_name'],
                     'active',
                     item['country_id'],
@@ -167,6 +168,21 @@ class Products:
         update_inactive_prod = "UPDATE scrapping_urls SET last_scrapped_at = CURRENT_TIMESTAMP WHERE id = " + str(scrappingurl_id)
 
         self.cursor.execute(update_inactive_prod)
+        self.db.commit()
+
+        return
+
+    def update_product(self, item):
+        print('Updating product price')
+
+        update_inactive_prod = "UPDATE product SET price = %s, discount = %s, discounted_price = %s, updated_at = CURRENT_TIMESTAMP WHERE id = %s"
+        update_values = (
+            item['listed_price'],
+            item['discounted_percent'],
+            item['discounted_price'],
+            item['product_id']
+        )
+        self.cursor.execute(update_inactive_prod, update_values)
         self.db.commit()
 
         return
