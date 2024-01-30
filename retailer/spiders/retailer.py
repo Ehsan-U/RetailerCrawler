@@ -229,6 +229,9 @@ class RetailerSpider(scrapy.Spider):
         """
         domain = urlparse(response.url).netloc.lstrip('www.')
         element = response.xpath(element_xpath)
+
+        if 'amazon.fr' in domain and self.PAGE_NO > 100:
+            return True
         
         if ('fr.vestiairecollective.com' in domain or 'shoes.fr' in domain or "spartoo.com" in domain or "mes-bijoux.fr" in domain or "parfumsmoinschers.com" in domain):
             if element:
