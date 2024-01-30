@@ -10,7 +10,7 @@ class BhvProduct(ProductPage):
 
     _product_name = "//p[@class='product-name']/text()"
     _brand_name = "//a[@class='product-brand-text']/text()"
-    _prod_images = "//ul[@class='product-display-images']/li/img/@src"
+    _prod_images = "//ul[contains(@class,'product-display-images')]/li/img/@src"
     _discounted_price = "//p[@class='product-price-current']/text()"
     _listed_price = "//p[@class='product-price-old']/text()"
     _product_desc = "//div[@class='product-description']//text()[not(parent::style or parent::script)]"
