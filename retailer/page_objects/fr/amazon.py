@@ -1,7 +1,5 @@
-from urllib.parse import urlsplit, urlunsplit
 from retailer.page_objects.pages import ProductPage
 from web_poet import field
-import os
 
 
 
@@ -41,12 +39,6 @@ class AmazonProduct(ProductPage):
         for img in imgs:
             if img and isinstance(img, str):
                 src = str(self.response.urljoin(img))
-                scheme, netloc, path, query, fragment = urlsplit(src)
-                filename = os.path.basename(path)
-                if "._" in filename:
-                    new_filename = filename.split("._")[0] + "._AC_SX522_.jpg"
-                    path = os.path.join(os.path.dirname(path), new_filename)
-                src = urlunsplit((scheme, netloc, path, query, fragment))
                 if not src in images:
                     images.append(src)
                 if len(images) == 3:
