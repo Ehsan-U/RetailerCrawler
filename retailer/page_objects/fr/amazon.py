@@ -1,7 +1,5 @@
-from urllib.parse import urlencode, urlsplit, urlunsplit
 from retailer.page_objects.pages import ProductPage
 from web_poet import field
-import os
 
 
 
@@ -19,15 +17,6 @@ class AmazonProduct(ProductPage):
     _discounted_price = "//span[contains(@class, 'priceToPay')]//span[@class='a-price-whole' or @class='a-price-fraction']/text()"
     _listed_price = "//span[@data-a-strike]/span[@class]/text()"
     _product_desc = "//div[@id='productDescription']//text()"
-
-    @field
-    def product_url(self) -> str:
-        url = str(self.response.url)
-        scheme, netloc, path, query, fragment = urlsplit(url)
-        params = {"psc": 1}
-        query = urlencode(params)
-        updated_url = urlunsplit((scheme, netloc, path, query, fragment))
-        return updated_url
 
     @field
     def product_name(self) -> str:
@@ -50,12 +39,6 @@ class AmazonProduct(ProductPage):
         for img in imgs:
             if img and isinstance(img, str):
                 src = str(self.response.urljoin(img))
-                scheme, netloc, path, query, fragment = urlsplit(src)
-                filename = os.path.basename(path)
-                if "._" in filename:
-                    new_filename = filename.split("._")[0] + "._AC_SX522_.jpg"
-                    path = os.path.join(os.path.dirname(path), new_filename)
-                src = urlunsplit((scheme, netloc, path, query, fragment))
                 if not src in images:
                     images.append(src)
                 if len(images) == 3:
