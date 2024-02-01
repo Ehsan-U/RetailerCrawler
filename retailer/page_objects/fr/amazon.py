@@ -1,4 +1,4 @@
-from urllib.parse import urlsplit, urlunsplit
+from urllib.parse import urlencode, urlsplit, urlunsplit
 from retailer.page_objects.pages import ProductPage
 from web_poet import field
 import os
@@ -19,6 +19,15 @@ class AmazonProduct(ProductPage):
     _discounted_price = "//span[contains(@class, 'priceToPay')]//span[@class='a-price-whole' or @class='a-price-fraction']/text()"
     _listed_price = "//span[@data-a-strike]/span[@class]/text()"
     _product_desc = "//div[@id='productDescription']//text()"
+
+    @field
+    def product_url(self) -> str:
+        url = str(self.response.url)
+        scheme, netloc, path, query, fragment = urlsplit(url)
+        params = {"psc": 1}
+        query = urlencode(params)
+        updated_url = urlunsplit((scheme, netloc, path, query, fragment))
+        return updated_url
 
     @field
     def product_name(self) -> str:
