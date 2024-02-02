@@ -265,3 +265,15 @@ class FnacPaths():
     DISCOUNTED = ".//del[@class='oldPrice']"
     PRODUCT_URL = ".//p[@class='Article-desc']/a/@href"
     ELEMENT = "//div[contains(@class, 'noResults')]"  # reached end when found
+
+
+@dataclass
+class NocibePaths():
+    """
+    Xpaths for the nocibe.fr domain
+    """
+
+    PRODUCTS = "//products-list/div[@class='proditem ']"
+    DISCOUNTED = ".//div[@class='proditem__price-strike']"
+    PRODUCT_URL = "./a/@href"
+    ELEMENT = "//products-list[@displayed-products-count='0']"  # reached end when found

@@ -123,6 +123,11 @@ def build_paginated_url(url: str, page_no: int):
         params['SFilt'] = unquote(params['SFilt'])
         query = unquote(urlencode(params))
 
+    elif ("nocibe.fr" in netloc):
+        path = path + f"/I-Page{page_no}_48"
+        params['Paging'] = True
+        query = urlencode(params)
+
     updated_url = urlunsplit((scheme, netloc, path, query, fragment))
     return updated_url
 
