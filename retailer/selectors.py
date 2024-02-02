@@ -255,3 +255,13 @@ class DartyPaths():
     ELEMENT = "//div[contains(@class, 'no_result')]"  # reached end when found
 
 
+@dataclass
+class FnacPaths():
+    """
+    Xpaths for the fnac.com domain
+    """
+
+    PRODUCTS = "//div[contains(@data-automation-id, 'product-block')]"
+    DISCOUNTED = ".//del[@class='oldPrice']"
+    PRODUCT_URL = ".//p[@class='Article-desc']/a/@href"
+    ELEMENT = "//div[contains(@class, 'noResults')]"  # reached end when found
