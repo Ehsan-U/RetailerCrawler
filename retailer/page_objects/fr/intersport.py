@@ -11,7 +11,7 @@ class IntersportProduct(ProductPage):
     _brand_name = "//div[@class='infos-produit--title']/h1/object/a/text()"
     _prod_images = "//img[@id='replacementImg']/@src"
     _discounted_price = "//div[contains(@class, 'current-price')]/text()"
-    _listed_price = "//div[@class='prix-baisse-conseil']/text()"
+    _listed_price = "//div[contains(@class, 'old-price')]/text()"
     _product_desc = "//div[@id='panel-description_id']//div[@class='body-panel']//text()[not(parent::style or parent::script)]"
 
     @field

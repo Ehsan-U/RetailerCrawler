@@ -129,10 +129,10 @@ class IntersportPaths():
     Xpaths for the intersport.fr domain.
     """
 
-    PRODUCTS = "//div[@id='productList']/div"
-    DISCOUNTED = ".//span[contains(@class, 'price--suggested')]"
-    PRODUCT_URL = ".//div[@class='product-card__title']/a[@class='product-url']/@href"
-    ELEMENT = "//h1[@class='notfound']" # reached end when exists
+    PRODUCTS = "//div[@class='product-box']"
+    DISCOUNTED = ".//span[contains(@class, 'product-box__price--crossed')]"
+    PRODUCT_URL = ".//a[@class='product-box__title']/@href"
+    ELEMENT = "//div[@class='no-result']" # reached end when exists
 
 
 @dataclass
@@ -156,7 +156,7 @@ class AmazonPaths():
     PRODUCTS = "//div[@data-component-type='s-search-result']"
     DISCOUNTED = ".//span[@data-a-strike]"
     PRODUCT_URL = ".//div[@data-cy='title-recipe']/h2/a[not(contains(@href, '/click?'))]/@href"
-    ELEMENT = "//span[contains(text(), 'Pas de résultats pour') or contains(text(), 'Essayez de vérifier votre orthographe')]"  # reached end when found
+    ELEMENT = "//span[@class='s-pagination-strip']"  # reached end when not found
 
 
 @dataclass

@@ -1,6 +1,6 @@
 from retailer.page_objects.pages import ProductPage
 from web_poet import field
-
+import json
 
 
 class AmazonProduct(ProductPage):
@@ -10,7 +10,7 @@ class AmazonProduct(ProductPage):
 
     _product_name = "//span[@id='productTitle']/text()"
     _brand_name = "//a[@id='bylineInfo']/text()"
-    _prod_images = "//div[@id='imgTagWrapperId']/img/@src"
+    _prod_images = "//div[@id='imgTagWrapperId']//img"
     _reviews = "//div[@data-hook='review']"
     _review_stars = ".//i[contains(@data-hook, 'review-star-rating')]/@class"
     _review_text = ".//div[@data-hook='review-collapsed']//text()"
@@ -25,24 +25,31 @@ class AmazonProduct(ProductPage):
     @field
     def brand_name(self) -> str:
         brandname = self.response.xpath(self._brand_name).get()
-
         if brandname:
             brandname = brandname.replace('\u202f', ' ').replace(u'\xa0', ' ').replace(u'\xc2', ' ')
             return brandname.replace('Brand: ', '').replace('Marque : ', '').replace('Visiter la boutique ', '')
-
         return ''
 
     @field
     def prod_images(self) -> list:
         images = []
-        imgs = self.response.xpath(self._prod_images).getall()
-        for img in imgs:
-            if img and isinstance(img, str):
-                src = str(self.response.urljoin(img))
-                if not src in images:
-                    images.append(src)
-                if len(images) == 3:
-                    break
+
+        found_imgs = self.response.xpath(self._prod_images)
+        for img in found_imgs:
+            sizes = json.loads(img.xpath("./@data-a-dynamic-image").get("{}"))
+            largest_img, largest_img_dimensions = None, None
+
+            for img_url, dimensions in sizes.items():
+                width, height = dimensions
+                if (largest_img_dimensions is None) or (width * height > largest_img_dimensions[0] * largest_img_dimensions[1]):
+                    largest_img = img_url
+                    largest_img_dimensions = (width, height)
+
+            if largest_img and not largest_img in images:
+                images.append(largest_img)
+
+            if len(images) == 0:
+                images.append(img.xpath("./@data-a-hires").get())
         return images
     
     @field

@@ -233,7 +233,7 @@ class RetailerSpider(scrapy.Spider):
         if 'amazon.fr' in domain and self.PAGE_NO > 100:
             return True
         
-        if ('fr.vestiairecollective.com' in domain or 'shoes.fr' in domain or "spartoo.com" in domain or "mes-bijoux.fr" in domain or "parfumsmoinschers.com" in domain):
+        if ('fr.vestiairecollective.com' in domain or 'shoes.fr' in domain or "spartoo.com" in domain or "mes-bijoux.fr" in domain or "parfumsmoinschers.com" in domain or "amazon.fr" in domain):
             if element:
                 return False
             return True
