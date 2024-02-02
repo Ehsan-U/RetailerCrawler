@@ -30,6 +30,7 @@ from retailer.page_objects.fr.grandoptical import GrandOpticalProduct
 from retailer.page_objects.fr.generaleoptique import GeneraleOptiqueProduct
 from retailer.page_objects.fr.mesbijoux import MesBijouxProduct
 from retailer.page_objects.fr.parfumsmoinschers import ParfumsMoinsChersProduct
+from retailer.page_objects.fr.suisses import SuissesProduct
 
 
 from retailer.selectors import *
@@ -93,7 +94,7 @@ COOKIES_ENABLED = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   "retailer.pipelines.RetailerPipeline": 300,
+#    "retailer.pipelines.RetailerPipeline": 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -161,6 +162,7 @@ SCRAPY_POET_RULES = [
     ApplyRule("generale-optique.com", use=GeneraleOptiqueProduct, instead_of=ProductPage),
     ApplyRule("mes-bijoux.fr", use=MesBijouxProduct, instead_of=ProductPage),
     ApplyRule("parfumsmoinschers.com", use=ParfumsMoinsChersProduct, instead_of=ProductPage),
+    ApplyRule("3suisses.fr", use=SuissesProduct, instead_of=ProductPage),
 ]
 
 
@@ -183,7 +185,8 @@ SCRAPY_XPATHS_RULES = {
     "grandoptical.com": GrandOpticalPaths,
     "generale-optique.com": GeneraleOptiquePaths,
     "mes-bijoux.fr": MesBijouxPaths,
-    "parfumsmoinschers.com": ParfumsMoinsChersPaths
+    "parfumsmoinschers.com": ParfumsMoinsChersPaths,
+    "3suisses.fr": SuissesPaths,
 }
 
 RETRY_ENABLED = True

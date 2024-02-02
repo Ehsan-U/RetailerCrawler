@@ -229,3 +229,15 @@ class ParfumsMoinsChersPaths():
     DISCOUNTED = "./span[@class='productDiscount']"
     PRODUCT_URL = "./a[not(@class)]/@href"
     ELEMENT = "//ul/li[@class='product']"  # reached end when not found
+
+
+@dataclass
+class SuissesPaths():
+    """
+    Xpaths for the 3suisses.fr domain
+    """
+     
+    PRODUCTS = "//article[@class='item--product']"
+    DISCOUNTED = ".//span[contains(@class, 'item__price--old-box')]"
+    PRODUCT_URL = ".//p[@class='item__title ']/a/@href"
+    ELEMENT = "//a[@class=' noDisplay ' and text()='Voir la suite']"  # reached end when found

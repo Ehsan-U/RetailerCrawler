@@ -42,7 +42,6 @@ class RetailerSpider(scrapy.Spider):
             request = self.make_request(url, callback=self.parse, cb_kwargs={"page_meta": page}, js=js)
             yield request
 
-
     async def parse(self, response: Response, page: ProductPage, page_meta: Dict) -> Union[Request, Dict]:
         """
         Parses the response from the initial request or subsequent requests.
@@ -73,7 +72,7 @@ class RetailerSpider(scrapy.Spider):
                     "discounted_flag": discounted_flag,
                 }
             item.pop("url")
-            
+
             loader = ItemLoader(item=RetailerItem())
             for k, v in item.items():
                 if (k != 'url'):
@@ -91,7 +90,7 @@ class RetailerSpider(scrapy.Spider):
                     url = self.modify_url(product_link, spider_type=spider_type, product_page=True)
                     js = self.use_javascript(url, spider_type, product_page=True)
 
-                    request = self.make_request(url, callback=self.parse_product, cb_kwargs={"page_meta": page_meta}, js=js)
+                    request = self.make_request(url, callback=self.parse_product, cb_kwargs={"page_meta": page_meta},js=js)
                     yield request
 
             # pagination
@@ -100,11 +99,10 @@ class RetailerSpider(scrapy.Spider):
                 next_page = build_paginated_url(page_meta['url'], self.PAGE_NO)
                 js = self.use_javascript(next_page, spider_type)
 
-                request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta}, js=js)
+                request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta},js=js)
                 yield request
             else:
                 self.logger.info("\n[+] Reached End\n")
-
 
     async def parse_product(self, response: Response, page: ProductPage, page_meta: Dict) -> RetailerItem:
         """
@@ -136,7 +134,6 @@ class RetailerSpider(scrapy.Spider):
         else:
             pass
 
-
     @staticmethod
     def modify_url(url: str, spider_type: str, product_page: bool = False) -> str:
         """
@@ -149,15 +146,14 @@ class RetailerSpider(scrapy.Spider):
 
         elif ("amazon.fr" in domain):
             if product_page:
-                url += "&th=1&psc=1" # select the product size to appear discount
+                url += "&th=1&psc=1"  # select the product size to appear discount
 
         elif ("shoes.fr" in domain or "spartoo.com" in domain):
-            url = url.replace("php#","php?")
+            url = url.replace("php#", "php?")
 
         return url
 
-
-    def make_request(self, url: str, callback: Callable, cb_kwargs: Dict, js: bool = False, headers: Dict = None) -> Request:
+    def make_request(self, url: str, callback: Callable, cb_kwargs: Dict, js: bool = False,headers: Dict = None) -> Request:
         """
         Creates a scrapy Request object with the given parameters.
 
@@ -186,9 +182,9 @@ class RetailerSpider(scrapy.Spider):
                 {
                     "httpResponseBody": True,
                     "device": "mobile",
-                 }
+                }
             )
-        
+
         if 'farfetch.com' in domain:
             headers = {"Accept-Language": "fr-FR"}
 
@@ -200,21 +196,20 @@ class RetailerSpider(scrapy.Spider):
             if "fr.vestiairecollective.com" in domain:
                 meta["zyte_api_automap"]["actions"] = [
                     # {"action": "waitForTimeout", "timeout": 5},
-                    {"action": "waitForSelector", "selector": {"type": "xpath", "value": "//button[@title='Accepter']"}, "timeout": 10},
+                    {"action": "waitForSelector", "selector": {"type": "xpath", "value": "//button[@title='Accepter']"},"timeout": 10},
                     {"action": "click", "selector": {"type": "xpath", "value": "//button[@title='Accepter']"}},
                     {"action": "scrollBottom", "maxScrollCount": 1},
                 ]
 
             elif "sunglasshut.com" in domain:
                 meta["zyte_api_automap"]["actions"] = [
-                    {"action": "waitForSelector", "selector": {"type": "xpath", "value": "//div[@class='geo-buttons']/button"}, "timeout": 10},
+                    {"action": "waitForSelector","selector": {"type": "xpath", "value": "//div[@class='geo-buttons']/button"}, "timeout": 10},
                     {"action": "click", "selector": {"type": "xpath", "value": "//div[@class='geo-buttons']/button"}},
                     {"action": "scrollBottom", "maxScrollCount": 1},
                 ]
 
         request = scrapy.Request(url, callback=callback, cb_kwargs=cb_kwargs, meta=meta, headers=headers)
         return request
-
 
     def reached_end(self, response: Response, element_xpath: str) -> bool:
         """
@@ -232,26 +227,25 @@ class RetailerSpider(scrapy.Spider):
 
         if 'amazon.fr' in domain and self.PAGE_NO > 100:
             return True
-        
+
         if ('fr.vestiairecollective.com' in domain or 'shoes.fr' in domain or "spartoo.com" in domain or "mes-bijoux.fr" in domain or "parfumsmoinschers.com" in domain or "amazon.fr" in domain):
             if element:
                 return False
             return True
-        
+
         elif ('placedestendances.com' in domain) or ("jacadi.fr" in domain):
-            if int(element.get()) == self.PAGE_NO: # reached end when PAGE_NO equals the value of the element
+            if int(element.get()) == self.PAGE_NO:  # reached end when PAGE_NO equals the value of the element
                 return True
             return False
 
         elif ("marionnaud.fr" in domain):
-            if self.PAGE_NO > len(element.getall()): # reached end when PAGE_NO greater than the length of the element
+            if self.PAGE_NO > len(element.getall()):  # reached end when PAGE_NO greater than the length of the element
                 return True
             return False
 
         if element:
             return True
         return False
-
 
     @staticmethod
     def use_javascript(url: str, spider_type: str, product_page: bool = False) -> bool:
@@ -285,7 +279,6 @@ class RetailerSpider(scrapy.Spider):
 
         return javascript
 
-
     @staticmethod
     def save_screenshot(response):
         """
@@ -297,3 +290,4 @@ class RetailerSpider(scrapy.Spider):
         screenshot: bytes = b64decode(response.raw_api_response["screenshot"])
         with open("screenshot.png", "wb") as f:
             f.write(screenshot)
+
