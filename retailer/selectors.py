@@ -277,3 +277,15 @@ class NocibePaths():
     DISCOUNTED = ".//div[@class='proditem__price-strike']"
     PRODUCT_URL = "./a/@href"
     ELEMENT = "//products-list[@displayed-products-count='0']"  # reached end when found
+
+
+@dataclass
+class BeautySuccessPaths():
+    """
+    Xpaths for the beautysuccess.fr domain
+    """
+
+    PRODUCTS = "//ol[@class='products list items product-items']/li"
+    DISCOUNTED = ".//span[@class='old-price']"
+    PRODUCT_URL = "./div/a/@href"
+    ELEMENT = "//li[@class='item current']/strong/span[2]/text()"  # reached end self.PAGE_NO greater than current

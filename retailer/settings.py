@@ -34,6 +34,7 @@ from retailer.page_objects.fr.suisses import SuissesProduct
 # from retailer.page_objects.fr.darty import DartyProduct
 from retailer.page_objects.fr.fnac import FnacProduct
 from retailer.page_objects.fr.nocibe import NocibeProduct
+from retailer.page_objects.fr.beautysuccess import BeautySuccessProduct
 
 
 from retailer.selectors import *
@@ -169,6 +170,7 @@ SCRAPY_POET_RULES = [
     # ApplyRule("darty.com", use=DartyProduct, instead_of=ProductPage),
     ApplyRule("fnac.com", use=FnacProduct, instead_of=ProductPage),
     ApplyRule("nocibe.fr", use=NocibeProduct, instead_of=ProductPage),
+    ApplyRule("beautysuccess.fr", use=BeautySuccessProduct, instead_of=ProductPage),
 
 ]
 
@@ -197,6 +199,7 @@ SCRAPY_XPATHS_RULES = {
     # "darty.com": DartyPaths,
     "fnac.com": FnacPaths,
     "nocibe.fr": NocibePaths,
+    "beautysuccess.fr": BeautySuccessPaths,
 }
 
 RETRY_ENABLED = True
