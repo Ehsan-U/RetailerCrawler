@@ -241,3 +241,17 @@ class SuissesPaths():
     DISCOUNTED = ".//span[contains(@class, 'item__price--old-box')]"
     PRODUCT_URL = ".//p[@class='item__title ']/a/@href"
     ELEMENT = "//a[@class=' noDisplay ' and text()='Voir la suite']"  # reached end when found
+
+
+@dataclass
+class DartyPaths():
+    """
+    Xpaths for the darty.com domain
+    """
+
+    PRODUCTS = "//div[@class='product_wrapper']"
+    DISCOUNTED = ".//div[contains(@class, 'product-price__price--is-striped')]"
+    PRODUCT_URL = ".//a[@data-automation-id='product_title']/@href"
+    ELEMENT = "//div[contains(@class, 'no_result')]"  # reached end when found
+
+

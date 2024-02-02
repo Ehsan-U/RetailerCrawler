@@ -31,7 +31,7 @@ from retailer.page_objects.fr.generaleoptique import GeneraleOptiqueProduct
 from retailer.page_objects.fr.mesbijoux import MesBijouxProduct
 from retailer.page_objects.fr.parfumsmoinschers import ParfumsMoinsChersProduct
 from retailer.page_objects.fr.suisses import SuissesProduct
-
+from retailer.page_objects.fr.darty import DartyProduct
 
 from retailer.selectors import *
 
@@ -163,6 +163,8 @@ SCRAPY_POET_RULES = [
     ApplyRule("mes-bijoux.fr", use=MesBijouxProduct, instead_of=ProductPage),
     ApplyRule("parfumsmoinschers.com", use=ParfumsMoinsChersProduct, instead_of=ProductPage),
     ApplyRule("3suisses.fr", use=SuissesProduct, instead_of=ProductPage),
+    # ApplyRule("darty.com", use=DartyProduct, instead_of=ProductPage),
+
 ]
 
 
@@ -187,6 +189,7 @@ SCRAPY_XPATHS_RULES = {
     "mes-bijoux.fr": MesBijouxPaths,
     "parfumsmoinschers.com": ParfumsMoinsChersPaths,
     "3suisses.fr": SuissesPaths,
+    # "darty.com": DartyPaths,
 }
 
 RETRY_ENABLED = True

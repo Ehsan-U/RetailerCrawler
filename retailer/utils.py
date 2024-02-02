@@ -1,3 +1,4 @@
+import os
 from price_parser import Price
 from urllib.parse import urlencode, urlsplit, urlunsplit, unquote, unquote_plus
 
@@ -113,6 +114,9 @@ def build_paginated_url(url: str, page_no: int):
     elif ("mes-bijoux.fr" in netloc or "parfumsmoinschers.com" in netloc):
         params['p'] = str(page_no)
         query = urlencode(params)
+
+    elif ("darty.com" in netloc):
+        path = os.path.dirname(path) + f"/page{page_no}.html"
 
     updated_url = urlunsplit((scheme, netloc, path, query, fragment))
     return updated_url
