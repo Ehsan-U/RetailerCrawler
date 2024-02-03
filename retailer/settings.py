@@ -31,7 +31,7 @@ from retailer.page_objects.fr.generaleoptique import GeneraleOptiqueProduct
 from retailer.page_objects.fr.mesbijoux import MesBijouxProduct
 from retailer.page_objects.fr.parfumsmoinschers import ParfumsMoinsChersProduct
 from retailer.page_objects.fr.suisses import SuissesProduct
-# from retailer.page_objects.fr.darty import DartyProduct
+from retailer.page_objects.fr.darty import DartyProduct
 from retailer.page_objects.fr.fnac import FnacProduct
 from retailer.page_objects.fr.nocibe import NocibeProduct
 from retailer.page_objects.fr.beautysuccess import BeautySuccessProduct
@@ -98,7 +98,7 @@ COOKIES_ENABLED = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   "retailer.pipelines.RetailerPipeline": 300,
+#    "retailer.pipelines.RetailerPipeline": 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -167,7 +167,7 @@ SCRAPY_POET_RULES = [
     ApplyRule("mes-bijoux.fr", use=MesBijouxProduct, instead_of=ProductPage),
     ApplyRule("parfumsmoinschers.com", use=ParfumsMoinsChersProduct, instead_of=ProductPage),
     ApplyRule("3suisses.fr", use=SuissesProduct, instead_of=ProductPage),
-    # ApplyRule("darty.com", use=DartyProduct, instead_of=ProductPage),
+    ApplyRule("darty.com", use=DartyProduct, instead_of=ProductPage),
     ApplyRule("fnac.com", use=FnacProduct, instead_of=ProductPage),
     ApplyRule("nocibe.fr", use=NocibeProduct, instead_of=ProductPage),
     ApplyRule("beautysuccess.fr", use=BeautySuccessProduct, instead_of=ProductPage),
@@ -196,7 +196,7 @@ SCRAPY_XPATHS_RULES = {
     "mes-bijoux.fr": MesBijouxPaths,
     "parfumsmoinschers.com": ParfumsMoinsChersPaths,
     "3suisses.fr": SuissesPaths,
-    # "darty.com": DartyPaths,
+    "darty.com": DartyPaths,
     "fnac.com": FnacPaths,
     "nocibe.fr": NocibePaths,
     "beautysuccess.fr": BeautySuccessPaths,

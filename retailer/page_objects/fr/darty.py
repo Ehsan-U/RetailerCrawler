@@ -8,12 +8,12 @@ class DartyProduct(ProductPage):
     Page object for the product page on darty.com
     """
 
-    _product_name = "//div[@data-automation-id='product_title']/h1/span/text()"
-    _brand_name = "//div[@data-automation-id='product_title']/h1/a/text()"
-    _prod_images = "//div[@data-automation-id='product_main_picture']//img/@data-src"
-    _discounted_price = "//div[@class='flags__container']/following-sibling::div[contains(@class, 'product-price__price--is-striped')]/text()"
-    _listed_price = "//div[@class='striped-price-with-tooltip']//div[contains(@class, 'product-price__price--is-striped')]/text()"
-    _product_desc = "//div[@id='product_description']//text()"
+    _product_name = "//span[@itemprop='name']/text()"
+    _brand_name = "//a[@class='product-family']/text()"
+    _prod_images = "//div[@data-automation-id='product_main_picture']//img[@class='']/@src"
+    _discounted_price = "//div[@class='product-price__price price_ir']/text()"
+    _listed_price = "//div[contains(@class, 'product-price__price--is-striped')]/text()"
+    _product_desc = "//div[@itemprop='description']//text()"
 
     @field
     def product_name(self) -> str:

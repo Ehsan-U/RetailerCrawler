@@ -246,13 +246,13 @@ class SuissesPaths():
 @dataclass
 class DartyPaths():
     """
-    Xpaths for the darty.com domain
+    Xpaths for the m.darty.com domain
     """
 
-    PRODUCTS = "//div[@class='product_wrapper']"
+    PRODUCTS = "//div[contains(@id, 'product')]"
     DISCOUNTED = ".//div[contains(@class, 'product-price__price--is-striped')]"
     PRODUCT_URL = ".//a[@data-automation-id='product_title']/@href"
-    ELEMENT = "//div[contains(@class, 'no_result')]"  # reached end when found
+    ELEMENT = "//div[contains(@id, 'product')]"  # reached end when not found
 
 
 @dataclass
