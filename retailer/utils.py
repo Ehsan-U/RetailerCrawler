@@ -6,13 +6,6 @@ from urllib.parse import urlencode, urlsplit, urlunsplit, unquote, unquote_plus
 def calculate_discount(discounted_price: str, listed_price: str):
     """
     Calculate the percentage discount between the discounted price and the listed price.
-
-    Args:
-        discounted_price (str): The discounted price.
-        listed_price (str): The listed price.
-
-    Returns:
-        float: The percentage discount between the discounted price and the listed price.
     """
     if discounted_price is None:
         return float(0)
@@ -32,13 +25,6 @@ def calculate_discount(discounted_price: str, listed_price: str):
 def build_paginated_url(url: str, page_no: int):
     """
     Build a paginated URL by appending the page number to the given URL.
-
-    Args:
-        url (str): The original URL.
-        page_no (int): The page number to be appended.
-
-    Returns:
-        str: The updated paginated URL.
     """
     scheme, netloc, path, query, fragment = urlsplit(url)
     params = dict((qc.split("=") if "=" in qc else (qc, "") for qc in query.split("&"))) if (query and not "==" in query) else {}

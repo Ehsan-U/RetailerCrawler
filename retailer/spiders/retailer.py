@@ -113,7 +113,6 @@ class RetailerSpider(scrapy.Spider):
                 # skip the discounted_flag
                 if k != 'discounted_flag':
                     loader.add_value(k, v)
-
             yield loader.load_item()
         else:
             pass
@@ -181,7 +180,7 @@ class RetailerSpider(scrapy.Spider):
                 result = bool(element)
 
         elif config['end']['condition'] == 'page_no_eq_val':
-            if config['end']['negate'] :
+            if config['end']['negate']:
                 result = not (int(element.get()) == self.PAGE_NO) 
             else: 
                 result = (int(element.get()) == self.PAGE_NO)
@@ -204,7 +203,7 @@ class RetailerSpider(scrapy.Spider):
     @staticmethod
     def use_javascript(url: str, product_page: bool = False) -> bool:
         """
-        Determines whether JavaScript should be used for a given URL and spider type.
+        Determines whether JavaScript should be used for a given URL.
         """
         domain = urlparse(url).netloc.lstrip('www.')
         config = DOMAIN_SETTINGS[domain]

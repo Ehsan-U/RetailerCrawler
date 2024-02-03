@@ -139,7 +139,7 @@ DOMAIN_SETTINGS = {
         'page_limit': 100
     },
 
-    'darty.com': {
+    'm.darty.com': {
         'javascript': {
             'listing_page': False,
             'product_page': False,
