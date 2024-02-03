@@ -9,6 +9,7 @@ from retailer.utils import build_paginated_url
 from retailer.items import RetailerItem
 from retailer.page_objects.pages import ProductPage
 from retailer.products import Products
+from retailer.domain_config import DOMAIN_SETTINGS
 
 
 class RetailerSpider(scrapy.Spider):
@@ -44,14 +45,6 @@ class RetailerSpider(scrapy.Spider):
     async def parse(self, response: Response, page: ProductPage, page_meta: Dict) -> Union[Request, Dict]:
         """
         Parses the response from the initial request or subsequent requests.
-
-        Args:
-            response (Response): The response object.
-            page (ProductPage): The product page object.
-            page_meta (Dict): The metadata associated with the request.
-
-        Returns:
-            Union[Request, Dict]: The next request to be processed or the scraped item.
         """
         spider_type = page_meta.get("spider_type")
         if spider_type != "scraper":
@@ -80,26 +73,23 @@ class RetailerSpider(scrapy.Spider):
             yield loader.load_item()
         else:
             domain = urlparse(response.url).netloc.lstrip('www.')
-            for target, target_paths in self.settings.get("SCRAPY_XPATHS_RULES").items():
-                if target in domain:
-                    path = target_paths
-                    break
+            paths = DOMAIN_SETTINGS[domain]['selectors']
 
-            for product in response.xpath(path.PRODUCTS):
+            for product in response.xpath(paths['PRODUCTS']):
                 # only discounted products
-                if product.xpath(path.DISCOUNTED):
-                    product_link = response.urljoin(product.xpath(path.PRODUCT_URL).get())
+                if product.xpath(paths['DISCOUNTED']):
+                    product_link = response.urljoin(product.xpath(paths['PRODUCT_URL']).get())
                     url = self.modify_url(product_link, spider_type=spider_type, product_page=True)
-                    js = self.use_javascript(url, spider_type, product_page=True)
+                    js = self.use_javascript(url, product_page=True)
 
                     request = self.make_request(url, callback=self.parse_product, cb_kwargs={"page_meta": page_meta}, js=js)
                     yield request
 
             # pagination
-            if not self.reached_end(response, path.ELEMENT):
+            if not self.reached_end(response, paths['ELEMENT']):
                 self.PAGE_NO += 1
                 next_page = build_paginated_url(page_meta['url'], self.PAGE_NO)
-                js = self.use_javascript(next_page, spider_type)
+                js = self.use_javascript(next_page)
 
                 request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta}, js=js)
                 yield request
@@ -110,20 +100,11 @@ class RetailerSpider(scrapy.Spider):
     async def parse_product(self, response: Response, page: ProductPage, page_meta: Dict) -> RetailerItem:
         """
         Parses the response from the product page request.
-
-        Args:
-            response (Response): The response object.
-            page (ProductPage): The product page object.
-            page_meta (Dict): The metadata associated with the request.
-
-        Returns:
-            RetailerItem: The scraped item.
         """
         page_item = await page.to_item()
         item = {**page_meta, **page_item}
         # allow only discounted products
         if item.get("discounted_percent"):
-
             # remove the unncesessary fields
             item.pop("url")
 
@@ -147,11 +128,9 @@ class RetailerSpider(scrapy.Spider):
 
         if ('sunglasshut.com' in domain) and spider_type == "scraper" and not product_page:
             url = build_paginated_url(url, 0)
-
         elif ("amazon.fr" in domain):
             if product_page:
                 url += "&th=1&psc=1" # select the product size to appear discount
-
         elif ("shoes.fr" in domain or "spartoo.com" in domain):
             url = url.replace("php#","php?")
 
@@ -161,56 +140,22 @@ class RetailerSpider(scrapy.Spider):
     def make_request(self, url: str, callback: Callable, cb_kwargs: Dict, js: bool = False, headers: Dict = None) -> Request:
         """
         Creates a scrapy Request object with the given parameters.
-
-        Args:
-            url (str): The URL to make the request to.
-            callback (Callable): The callback function to be called when the response is received.
-            cb_kwargs (Dict): Keyword arguments to be passed to the callback function.
-            js (bool, optional): Indicates whether JavaScript should be enabled for the request. Defaults to False.
-
-        Returns:
-            Request: The scrapy Request object.
         """
         domain = urlparse(url).netloc.lstrip('www.')
+        config = DOMAIN_SETTINGS[domain]
+
+        headers = config.get("headers")
         location = self.settings["GEOLOCATIONS"][
             cb_kwargs['page_meta'].get("country_id", 75)
         ]
         meta = {
             "zyte_api_automap": {
-                "geolocation": location,
+                "geolocation": location, 
+                **config.get("zyte_extra_args", {})
             }
         }
-
-        if "intersport.fr" in domain:
-            headers = {"Referer": "https://www.intersport.fr/"}
-            meta["zyte_api_automap"].update(
-                {
-                    "httpResponseBody": True,
-                    "device": "mobile",
-                 }
-            )
-        if 'farfetch.com' in domain:
-            headers = {"Accept-Language": "fr-FR"}
-
         if js:
-            meta["zyte_api_automap"].update({
-                'browserHtml': True, 
-                'javascript': True
-            })
-
-            if "fr.vestiairecollective.com" in domain:
-                meta["zyte_api_automap"]["actions"] = [
-                    # {"action": "waitForTimeout", "timeout": 5},
-                    {"action": "waitForSelector", "selector": {"type": "xpath", "value": "//button[@title='Accepter']"}, "timeout": 10},
-                    {"action": "click", "selector": {"type": "xpath", "value": "//button[@title='Accepter']"}},
-                    {"action": "scrollBottom", "maxScrollCount": 1},
-                ]
-            elif "sunglasshut.com" in domain:
-                meta["zyte_api_automap"]["actions"] = [
-                    {"action": "waitForSelector", "selector": {"type": "xpath", "value": "//div[@class='geo-buttons']/button"}, "timeout": 10},
-                    {"action": "click", "selector": {"type": "xpath", "value": "//div[@class='geo-buttons']/button"}},
-                    {"action": "scrollBottom", "maxScrollCount": 1},
-                ]
+            meta['zyte_api_automap'].update(config['javascript'].get("args", {}))
 
         request = scrapy.Request(url, callback=callback, cb_kwargs=cb_kwargs, meta=meta, headers=headers)
         return request
@@ -219,85 +164,61 @@ class RetailerSpider(scrapy.Spider):
     def reached_end(self, response: Response, element_xpath: str) -> bool:
         """
         Checks if the end of the page has been reached.
-
-        Args:
-            response (Response): The response object of the page.
-            element_xpath (str): The XPath expression to locate the element indicating the end of the page.
-
-        Returns:
-            bool: True if the end of the page has been reached, False otherwise.
         """
         domain = urlparse(response.url).netloc.lstrip('www.')
+        config = DOMAIN_SETTINGS[domain]
         element = response.xpath(element_xpath)
 
-        if 'amazon.fr' in domain and self.PAGE_NO > 100:
-            return True
-        
-        if ('fr.vestiairecollective.com' in domain or 'shoes.fr' in domain or "spartoo.com" in domain or "mes-bijoux.fr" in domain or "parfumsmoinschers.com" in domain or "amazon.fr" in domain or "darty.com" in domain):
-            if element:
-                return False
-            return True
-        
-        elif ('placedestendances.com' in domain) or ("jacadi.fr" in domain):
-            if int(element.get()) == self.PAGE_NO: # reached end when PAGE_NO equals the value of the element
+        # for amazon only
+        if 'page_limit' in config:
+            if self.PAGE_NO > config['page_limit']:
                 return True
-            return False
+        
+        if config['end']['condition'] == "element_present":
+            if config['end']['negate']:
+                result = not bool(element)
+            else:
+                result = bool(element)
 
-        elif ("marionnaud.fr" in domain):
-            if self.PAGE_NO > len(element.getall()): # reached end when PAGE_NO greater than the length of the element
-                return True
-            return False
-        
-        elif ("beautysuccess.fr" in domain):
-            if self.PAGE_NO > int(element.get('0')): # reached end when PAGE_NO greater than value of the element
-                return True
-            return False
+        elif config['end']['condition'] == 'page_no_eq_val':
+            if config['end']['negate'] :
+                result = not (int(element.get()) == self.PAGE_NO) 
+            else: 
+                result = (int(element.get()) == self.PAGE_NO)
 
-        if element:
-            return True
-        return False
+        elif config['end']['condition'] == 'page_no_gt_len':
+            if config['end']['negate']: 
+                result = not (self.PAGE_NO > len(element.getall())) 
+            else:
+                result = (self.PAGE_NO > len(element.getall()))
+
+        elif config['end']['condition'] == 'page_no_gt_val':
+            if config['end']['negate']:
+                result = not (self.PAGE_NO > int(element.get('0'))) 
+            else:
+                result = (self.PAGE_NO > int(element.get('0')))
+        
+        return result
 
 
     @staticmethod
-    def use_javascript(url: str, spider_type: str, product_page: bool = False) -> bool:
+    def use_javascript(url: str, product_page: bool = False) -> bool:
         """
         Determines whether JavaScript should be used for a given URL and spider type.
-
-        Args:
-            url (str): The URL to check.
-            spider_type (str): The type of spider.
-            product_page (bool): Indicates whether the URL is a product page URL. Defaults to False.
-
-        Returns:
-            bool: True if JavaScript should be used, False otherwise.
         """
         domain = urlparse(url).netloc.lstrip('www.')
+        config = DOMAIN_SETTINGS[domain]
 
-        if ('fr.vestiairecollective.com' in domain or "mes-bijoux.fr" in domain) and spider_type == "scraper":
-            # use javascript only for products listing page
-            javascript = True if not product_page else False
-
-        elif ("sunglasshut.com" in domain) and spider_type == "scraper":
-            # always use javascript for sunglasshut
-            javascript = True
-
-        elif ("marionnaud.fr" in domain) and spider_type == "scraper":
-            # use javascript only for product detail page
-            javascript = True if product_page else False
-
+        if product_page:
+            return config['javascript']['product_page']
         else:
-            javascript = False
-
-        return javascript
+            return config['javascript']['listing_page']  
 
 
     @staticmethod
     def save_screenshot(response):
         """
         Saves a screenshot of the page.
-
-        Args:
-            response (Response): The response object of the page.
         """
         screenshot: bytes = b64decode(response.raw_api_response["screenshot"])
         with open("screenshot.png", "wb") as f:

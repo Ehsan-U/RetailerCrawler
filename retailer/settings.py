@@ -37,9 +37,6 @@ from retailer.page_objects.fr.nocibe import NocibeProduct
 from retailer.page_objects.fr.beautysuccess import BeautySuccessProduct
 
 
-from retailer.selectors import *
-
-
 load_dotenv() 
 
 BOT_NAME = "retailer"
@@ -173,34 +170,6 @@ SCRAPY_POET_RULES = [
     ApplyRule("beautysuccess.fr", use=BeautySuccessProduct, instead_of=ProductPage),
 
 ]
-
-
-SCRAPY_XPATHS_RULES = {
-    "i-run.fr": IrunPaths,
-    "bhv.fr": BhvPaths,
-    "farfetch.com": FarfetchPaths,
-    "fr.delsey.com": DelseyPaths,
-    "fr.vestiairecollective.com": VestiaireCollectivePaths,
-    "placedestendances.com": PlaceDesTendancesPaths,
-    "sunglasshut.com": SunglassHutPaths,
-    "jacadi.fr": JacadiPaths,
-    "sneakersnstuff.com": SneakersnStuffPaths,
-    "luisaviaroma.com": LuisaViaRomaPaths,
-    "intersport.fr": IntersportPaths,
-    "marionnaud.fr": MarionnaudPaths,
-    "amazon.fr": AmazonPaths,
-    "shoes.fr": ShoesPaths,
-    "spartoo.com": SpartooPaths,
-    "grandoptical.com": GrandOpticalPaths,
-    "generale-optique.com": GeneraleOptiquePaths,
-    "mes-bijoux.fr": MesBijouxPaths,
-    "parfumsmoinschers.com": ParfumsMoinsChersPaths,
-    "3suisses.fr": SuissesPaths,
-    "darty.com": DartyPaths,
-    "fnac.com": FnacPaths,
-    "nocibe.fr": NocibePaths,
-    "beautysuccess.fr": BeautySuccessPaths,
-}
 
 RETRY_ENABLED = True
 RETRY_TIMES = 5
