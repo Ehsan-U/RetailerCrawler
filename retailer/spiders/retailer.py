@@ -1,5 +1,4 @@
 from base64 import b64decode
-
 import scrapy
 from scrapy.loader import ItemLoader
 from scrapy.http import Response, Request

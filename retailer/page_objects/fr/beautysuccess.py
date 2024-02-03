@@ -9,16 +9,16 @@ class BeautySuccessProduct(ProductPage):
     Page object for the product page on beautysuccess.fr
     """
 
-    _product_name = "//h1[@class='page-product-title']/span[@class='page-title-wrapper product']/span/text()"
+    _product_name = "//h1[@class='page-product-title']/span[contains(@class, 'product')]//text()"
     _brand_name = "//h1[@class='page-product-title']/span[@class='brand-name']/strong/text()"
     _prod_images = "//meta[@property='og:image']/@content"
     _discounted_price = "//span[contains(@id, 'product-price')]/@data-price-amount" 
     _listed_price = "//span[contains(@id, 'old-price')]/@data-price-amount" 
-    _product_desc = "//div[@class='product data items']//text()"
+    _product_desc = "//div[@class='product data items']/div//text()"
 
     @field
     def product_name(self) -> str:
-        return self.response.xpath(self._product_name).get()
+        return " ".join(self.response.xpath(self._product_name).getall())
     
     @field
     def brand_name(self) -> str:
