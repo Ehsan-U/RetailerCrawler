@@ -95,7 +95,7 @@ COOKIES_ENABLED = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-#    "retailer.pipelines.RetailerPipeline": 300,
+   "retailer.pipelines.RetailerPipeline": 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
