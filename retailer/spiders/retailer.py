@@ -80,7 +80,7 @@ class RetailerSpider(scrapy.Spider):
                 if product.xpath(paths['DISCOUNTED']):
                     product_link = response.urljoin(product.xpath(paths['PRODUCT_URL']).get())
                     url = self.modify_url(product_link, spider_type=spider_type, product_page=True)
-                    js = self.use_javascript(url, product_page=True)
+                    js = self.use_javascript(url, spider_type, product_page=True)
 
                     request = self.make_request(url, callback=self.parse_product, cb_kwargs={"page_meta": page_meta}, js=js)
                     yield request
@@ -89,7 +89,7 @@ class RetailerSpider(scrapy.Spider):
             if not self.reached_end(response, paths['ELEMENT']):
                 self.PAGE_NO += 1
                 next_page = build_paginated_url(page_meta['url'], self.PAGE_NO)
-                js = self.use_javascript(next_page)
+                js = self.use_javascript(next_page, spider_type)
 
                 request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta}, js=js)
                 yield request
@@ -201,12 +201,15 @@ class RetailerSpider(scrapy.Spider):
 
 
     @staticmethod
-    def use_javascript(url: str, product_page: bool = False) -> bool:
+    def use_javascript(url: str, spider_type: str, product_page: bool = False) -> bool:
         """
         Determines whether JavaScript should be used for a given URL.
         """
         domain = urlparse(url).netloc.lstrip('www.')
         config = DOMAIN_SETTINGS[domain]
+
+        if spider_type == "checker":
+            product_page = True
 
         if product_page:
             return config['javascript']['product_page']
