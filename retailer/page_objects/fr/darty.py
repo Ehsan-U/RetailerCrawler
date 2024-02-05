@@ -1,3 +1,4 @@
+from urllib.parse import urlsplit, urlunsplit
 from retailer.page_objects.pages import ProductPage
 from web_poet import field
 
@@ -5,7 +6,7 @@ from web_poet import field
 
 class DartyProduct(ProductPage):
     """
-    Page object for the product page on darty.com
+    Page object for the product page on m.darty.com
     """
 
     _product_name = "//span[@itemprop='name']/text()"
@@ -14,6 +15,14 @@ class DartyProduct(ProductPage):
     _discounted_price = "//div[@class='product-price__price price_ir']/text()"
     _listed_price = "//div[contains(@class, 'product-price__price--is-striped')]/text()"
     _product_desc = "//div[@itemprop='description']//text()"
+
+    @field
+    def product_url(self) -> str:
+        scheme, netloc, path, query, fragment = urlsplit(self.url)
+        netloc = "www.darty.com"
+        path = path.replace("/m/", "/nav/")
+        url = urlunsplit((scheme, netloc, path, query, fragment))
+        return url
 
     @field
     def product_name(self) -> str:

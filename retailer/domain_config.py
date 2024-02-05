@@ -353,5 +353,31 @@ DOMAIN_SETTINGS = {
             "ELEMENT": "//article[@class='page page--empty']" # reached end when exists
         },
         'end': {'condition': "element_present", 'negate': False},
+    },
+
+    'galerieslafayette.com': {
+        'javascript': {
+            'listing_page': True,
+            'product_page': False,
+            'args': {
+                'browserHtml': True, 
+                'javascript': True,
+                "actions": [
+                    {"action": "waitForSelector", "selector": {"type": "xpath", "value": "//button[@id='popin_tc_privacy_button']"}, "timeout": 10},
+                    {"action": "click", "selector": {"type": "xpath", "value": "//button[@id='popin_tc_privacy_button']"}},
+                    {"action": "scrollTo", "top": 10},
+                    # {"action": "scrollBottom", "maxScrollCount": 1},
+                    {"action": "waitForTimeout", "timeout": 10},
+                ],
+                'screenshot': True
+            }
+        },
+        'selectors': {
+            'PRODUCTS': "//a[contains(@data-test-id, 'productcard')]",
+            "DISCOUNTED": ".//div[@class='product-info__price-striked']",
+            "PRODUCT_URL": "./@href",
+            "ELEMENT": "//div[@class='single-push__body']" # reached end when exists
+        },
+        'end': {'condition': "element_present", 'negate': False},
     }
 }

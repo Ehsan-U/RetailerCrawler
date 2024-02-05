@@ -35,7 +35,7 @@ from retailer.page_objects.fr.darty import DartyProduct
 from retailer.page_objects.fr.fnac import FnacProduct
 from retailer.page_objects.fr.nocibe import NocibeProduct
 from retailer.page_objects.fr.beautysuccess import BeautySuccessProduct
-
+from retailer.page_objects.fr.galerieslafayette import GalerieslaFayetteProduct
 
 load_dotenv() 
 
@@ -164,10 +164,11 @@ SCRAPY_POET_RULES = [
     ApplyRule("mes-bijoux.fr", use=MesBijouxProduct, instead_of=ProductPage),
     ApplyRule("parfumsmoinschers.com", use=ParfumsMoinsChersProduct, instead_of=ProductPage),
     ApplyRule("3suisses.fr", use=SuissesProduct, instead_of=ProductPage),
-    ApplyRule("darty.com", use=DartyProduct, instead_of=ProductPage),
+    ApplyRule("m.darty.com", use=DartyProduct, instead_of=ProductPage),
     ApplyRule("fnac.com", use=FnacProduct, instead_of=ProductPage),
     ApplyRule("nocibe.fr", use=NocibeProduct, instead_of=ProductPage),
     ApplyRule("beautysuccess.fr", use=BeautySuccessProduct, instead_of=ProductPage),
+    ApplyRule("galerieslafayette.com", use=GalerieslaFayetteProduct, instead_of=ProductPage),
 
 ]
 

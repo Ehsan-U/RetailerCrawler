@@ -102,6 +102,8 @@ def build_paginated_url(url: str, page_no: int):
         query = urlencode(params)
 
     elif ("darty.com" in netloc):
+        netloc = "m.darty.com"
+        path = path.replace("/nav/", "/m/")
         path = os.path.dirname(path) + f"/page{page_no}.html"
 
     elif ("fnac.com" in netloc):
@@ -114,6 +116,9 @@ def build_paginated_url(url: str, page_no: int):
         params['Paging'] = True
         query = urlencode(params)
 
+    elif ("galerieslafayette.co" in netloc):
+        path = path.rstrip("/") + f"/p:{page_no}"
+        query = urlencode(params)
 
     updated_url = urlunsplit((scheme, netloc, path, query, fragment))
     return updated_url

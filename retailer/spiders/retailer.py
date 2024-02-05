@@ -3,7 +3,7 @@ import scrapy
 from scrapy.loader import ItemLoader
 from scrapy.http import Response, Request
 from typing import Dict, Union, Callable
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlsplit, urlunsplit
 
 from retailer.utils import build_paginated_url
 from retailer.items import RetailerItem
@@ -46,6 +46,7 @@ class RetailerSpider(scrapy.Spider):
         """
         Parses the response from the initial request or subsequent requests.
         """
+        self.save_screenshot(response)
         spider_type = page_meta.get("spider_type")
         if spider_type != "scraper":
             page_item = await page.to_item()
@@ -73,28 +74,35 @@ class RetailerSpider(scrapy.Spider):
             yield loader.load_item()
         else:
             domain = urlparse(response.url).netloc.lstrip('www.')
-            paths = DOMAIN_SETTINGS[domain]['selectors']
+            paths = None
+            for site, settings in DOMAIN_SETTINGS.items():
+                if site in domain:
+                    paths = settings['selectors']
+                    break
 
-            for product in response.xpath(paths['PRODUCTS']):
-                # only discounted products
-                if product.xpath(paths['DISCOUNTED']):
-                    product_link = response.urljoin(product.xpath(paths['PRODUCT_URL']).get())
-                    url = self.modify_url(product_link, spider_type=spider_type, product_page=True)
-                    js = self.use_javascript(url, spider_type, product_page=True)
+            if paths is not None:
+                for product in response.xpath(paths['PRODUCTS']):
+                    # only discounted products
+                    if product.xpath(paths['DISCOUNTED']):
+                        product_link = response.urljoin(product.xpath(paths['PRODUCT_URL']).get())
+                        url = self.modify_url(product_link, spider_type=spider_type, product_page=True)
+                        js = self.use_javascript(url, spider_type, product_page=True)
 
-                    request = self.make_request(url, callback=self.parse_product, cb_kwargs={"page_meta": page_meta}, js=js)
+                        request = self.make_request(url, callback=self.parse_product, cb_kwargs={"page_meta": page_meta}, js=js)
+                        yield request
+
+                # pagination
+                if not self.reached_end(response, paths['ELEMENT']):
+                    self.PAGE_NO += 1
+                    next_page = build_paginated_url(page_meta['url'], self.PAGE_NO)
+                    js = self.use_javascript(next_page, spider_type)
+
+                    request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta}, js=js)
                     yield request
-
-            # pagination
-            if not self.reached_end(response, paths['ELEMENT']):
-                self.PAGE_NO += 1
-                next_page = build_paginated_url(page_meta['url'], self.PAGE_NO)
-                js = self.use_javascript(next_page, spider_type)
-
-                request = self.make_request(url=next_page, callback=self.parse, cb_kwargs={"page_meta": page_meta}, js=js)
-                yield request
+                else:
+                    self.logger.info("\n[+] Reached End\n")
             else:
-                self.logger.info("\n[+] Reached End\n")
+                self.logger.info("\n[+] Domain not found\n")
 
 
     async def parse_product(self, response: Response, page: ProductPage, page_meta: Dict) -> RetailerItem:
@@ -132,7 +140,11 @@ class RetailerSpider(scrapy.Spider):
                 url += "&th=1&psc=1" # select the product size to appear discount
         elif ("shoes.fr" in domain or "spartoo.com" in domain):
             url = url.replace("php#","php?")
-
+        elif ("darty.com" in domain):
+            scheme, netloc, path, query, fragment = urlsplit(url)
+            netloc = "m.darty.com"
+            path = path.replace("/nav/", "/m/")
+            url = urlunsplit((scheme, netloc, path, query, fragment))
         return url
 
 
@@ -207,7 +219,7 @@ class RetailerSpider(scrapy.Spider):
         """
         domain = urlparse(url).netloc.lstrip('www.')
         config = DOMAIN_SETTINGS[domain]
-
+        
         if spider_type == "checker":
             product_page = True
 
