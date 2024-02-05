@@ -42,11 +42,11 @@ class RetailerSpider(scrapy.Spider):
             request = self.make_request(url, callback=self.parse, cb_kwargs={"page_meta": page}, js=js)
             yield request
 
+
     async def parse(self, response: Response, page: ProductPage, page_meta: Dict) -> Union[Request, Dict]:
         """
         Parses the response from the initial request or subsequent requests.
         """
-        self.save_screenshot(response)
         spider_type = page_meta.get("spider_type")
         if spider_type != "scraper":
             page_item = await page.to_item()
