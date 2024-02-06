@@ -28,8 +28,10 @@ class BeautySuccessProduct(ProductPage):
     def prod_images(self) -> list:
         images = []
         data = json.loads(self.response.xpath(self._prod_images).get('{}'))
-        for img in data.get('[data-role=amasty-gallery]', {}).get('Amasty_Conf/js/amzoomer', {}).get('data'):
-            images.append(img.get("full"))
+        for img in data.get('[data-role=amasty-gallery]', {}).get('Amasty_Conf/js/amzoomer', {}).get('data', []):
+            img = img.get("full")
+            if img and (not img in images) and (not img.endswith("sample.webp")):
+                images.append(img)
         return images
     
     @field

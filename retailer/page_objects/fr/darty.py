@@ -10,7 +10,7 @@ class DartyProduct(ProductPage):
     """
 
     _product_name = "//span[@itemprop='name']/text()"
-    _brand_name = "//a[@class='product-family']/text()"
+    _brand_name = "//meta[@name='product_brand']/@content"
     _prod_images = "//div[@data-automation-id='product_main_picture']//img[@class='']/@src"
     _discounted_price = "//div[@class='product-price__price price_ir']/text()"
     _listed_price = "//div[contains(@class, 'product-price__price--is-striped')]/text()"
@@ -30,7 +30,7 @@ class DartyProduct(ProductPage):
     
     @field
     def brand_name(self) -> str:
-        return self.response.xpath(self._brand_name).get()
+        return self.response.xpath(self._brand_name).get('').capitalize()
     
     @field
     def prod_images(self) -> list:
