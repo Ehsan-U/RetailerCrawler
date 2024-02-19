@@ -119,7 +119,7 @@ class Products:
                     self.cursor.execute(update_inactive_prod, update_values)
                     self.db.commit()
             else:
-                update_prods = "INSERT INTO product (title, url, description, price, discount, discounted_price, brandname, status, created_at, updated_at, country_id, brand_id, retailer_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, %s)"
+                update_prods = "INSERT INTO product (title, url, description, price, discount, discounted_price, brandname, status, created_at, updated_at, country_id, user_id, retailer_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, %s)"
                 prods_val = (
                     item['product_name'],
                     item['product_url'],
