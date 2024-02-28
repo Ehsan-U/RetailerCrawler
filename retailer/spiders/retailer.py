@@ -2,7 +2,7 @@ from base64 import b64decode
 import scrapy
 from scrapy.loader import ItemLoader
 from scrapy.http import Response, Request
-from typing import Dict, Union, Callable
+from typing import AsyncGenerator, Dict, Iterable, Union, Callable
 from urllib.parse import urlparse, urlsplit, urlunsplit
 
 from retailer.utils import build_paginated_url
@@ -23,7 +23,7 @@ class RetailerSpider(scrapy.Spider):
     RETAILER_ID = 0
 
 
-    def start_requests(self) -> Request:
+    def start_requests(self) -> Iterable[Request]:
         products = Products()
         pages = []
 
@@ -43,7 +43,7 @@ class RetailerSpider(scrapy.Spider):
             yield request
 
 
-    async def parse(self, response: Response, page: ProductPage, page_meta: Dict) -> Union[Request, Dict]:
+    async def parse(self, response: Response, page: ProductPage, page_meta: Dict) -> AsyncGenerator[Union[Request, Dict], None]:
         """
         Parses the response from the initial request or subsequent requests.
         """
@@ -105,7 +105,7 @@ class RetailerSpider(scrapy.Spider):
                 self.logger.info("\n[+] Domain not found\n")
 
 
-    async def parse_product(self, response: Response, page: ProductPage, page_meta: Dict) -> RetailerItem:
+    async def parse_product(self, response: Response, page: ProductPage, page_meta: Dict) -> AsyncGenerator[RetailerItem, None]:
         """
         Parses the response from the product page request.
         """
@@ -137,7 +137,7 @@ class RetailerSpider(scrapy.Spider):
             url = build_paginated_url(url, 0)
         elif ("amazon.fr" in domain):
             if product_page:
-                url += "&th=1&psc=1" # select the product size to appear discount
+                url += "&psc=1" # select the product size to appear discount
         elif ("shoes.fr" in domain or "spartoo.com" in domain):
             url = url.replace("php#","php?")
         elif ("darty.com" in domain):
