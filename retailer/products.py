@@ -2,10 +2,13 @@ import os
 import mysql.connector
 from dotenv import load_dotenv
 from scrapy.exceptions import DropItem
+from retailer.product_brand import ProductBrand
 
 class Products:
     db = ""
     cursor = ""
+
+    brand_manager: ProductBrand
 
     def __init__(self):
         load_dotenv()
@@ -24,6 +27,7 @@ class Products:
             use_pure=False
         )
         self.cursor = self.db.cursor()
+        self.brand_manager = ProductBrand(self.db)
     
     def get_pages(self, retailer_id, spider_type):
         if (spider_type == "checker"):
@@ -119,7 +123,8 @@ class Products:
                     self.cursor.execute(update_inactive_prod, update_values)
                     self.db.commit()
             else:
-                update_prods = "INSERT INTO product (title, url, description, price, discount, discounted_price, brandname, status, created_at, updated_at, country_id, user_id, retailer_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, %s)"
+                brand_id = self.brand_manager.get_brand(item['brand_name'])
+                update_prods = "INSERT INTO product (title, url, description, price, discount, discounted_price, brandname, status, created_at, updated_at, country_id, user_id, retailer_id, related_brand_name_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, %s, %s)"
                 prods_val = (
                     item['product_name'],
                     item['product_url'],
@@ -131,7 +136,8 @@ class Products:
                     'active',
                     item['country_id'],
                     item['user_id'],
-                    item['retailer_id']
+                    item['retailer_id'],
+                    brand_id
                 )
 
                 self.cursor.execute(update_prods, prods_val)
