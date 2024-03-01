@@ -14,5 +14,7 @@ if __name__ == '__main__':
         use_pure=False
     )
     manager = ProductBrand(db)
+    db.start_transaction()
     manager.update_existent()
+    db.commit()
     db.close()
