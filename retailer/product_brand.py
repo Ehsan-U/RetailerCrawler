@@ -22,14 +22,14 @@ class ProductBrand:
         norm_name = normalise_name(name)
 
         self.cursor.execute(
-            'INSERT IGNORE INTO product_brand_name(displayed_name, normalised_name) VALUES (%s, %s)',
+            'INSERT IGNORE INTO brand(name, normalized_name) VALUES (%s, %s)',
             (name, norm_name)
         )
         brand_id = self.cursor.lastrowid
         if brand_id != 0:
             return brand_id
 
-        self.cursor.execute('SELECT id FROM product_brand_name WHERE normalised_name = %s', (norm_name,))
+        self.cursor.execute('SELECT id FROM brand WHERE normalized_name = %s', (norm_name,))
         res = self.cursor.fetchall()
         return res[0][0]
 
@@ -74,8 +74,8 @@ class ProductBrand:
         insert_cursor.execute('''
             UPDATE product AS p
                    JOIN tmp_product_brand AS tpb ON tpb.product_id = p.id
-                   JOIN product_brand_name AS pbn ON pbn.normalised_name = tpb.brand_name
-            SET p.related_brand_name_id = pbn.id
+                   JOIN brand AS b ON b.normalized_name = tpb.brand_name
+            SET p.brand_id = b.id
         ''')
         insert_cursor.execute('DROP TEMPORARY TABLE tmp_product_brand')
 
@@ -83,7 +83,7 @@ class ProductBrand:
         if len(brands) == 0 or len(products) == 0:
             return
         insert_cursor = self.db.cursor()
-        query = 'INSERT IGNORE INTO product_brand_name(displayed_name, normalised_name) VALUES '
+        query = 'INSERT IGNORE INTO brand(name, normalized_name) VALUES '
         query += '(%s, %s),' * int(len(brands) / 2)
         insert_cursor.execute(query.rstrip(','), brands)
 

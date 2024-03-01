@@ -49,9 +49,9 @@ class TestProductBrand(AbstractTestCase):
         manager.update_existent()
 
         fixtures.execute('''
-            SELECT p.title, b.displayed_name
+            SELECT p.title, b.name
             FROM product AS p
-                 JOIN product_brand_name AS b ON b.id = p.related_brand_name_id
+                 JOIN brand AS b ON b.id = p.brand_id
         ''')
         for (title, brand_name) in fixtures.fetchall():
             if title == 'Prod1' or title == 'Prod2':
