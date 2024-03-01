@@ -61,7 +61,13 @@ class ProductBrand:
 
     def __make_tmp_table(self):
         tmp_cursor = self.db.cursor()
-        tmp_cursor.execute('CREATE TEMPORARY TABLE tmp_product_brand (product_id INT, brand_name VARCHAR(64))')
+        tmp_cursor.execute('''
+            CREATE TEMPORARY TABLE tmp_product_brand(
+                product_id INT, brand_name VARCHAR(64),
+                PRIMARY KEY (product_id) USING BTREE,
+                INDEX brand_name (brand_name) USING BTREE
+            )
+        ''')
 
     def __finalise_update(self):
         insert_cursor = self.db.cursor()
