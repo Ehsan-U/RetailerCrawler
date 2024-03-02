@@ -25,6 +25,8 @@ class AmazonProduct(ProductPage):
         params = dict((qc.split("=") if "=" in qc else (qc, "") for qc in query.split("&"))) if (query and not "==" in query) else {}
         query = urlencode({"psc": params.pop("psc")})
         clean_url = urlunsplit((scheme, netloc, path, query, fragment))
+        if 'ref=' in clean_url:
+            clean_url = clean_url.split("ref=")[0]
         return clean_url
 
     @field
