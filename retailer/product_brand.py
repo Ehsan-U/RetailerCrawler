@@ -25,7 +25,7 @@ class ProductBrand:
             return brand_id
 
         self.cursor.execute('''
-                INSERT IGNORE INTO brand(name, status, normalized_name)
+                INSERT INTO brand(name, status, normalized_name)
                 VALUES (%s, 'active', %s)
             ''',
             (name, norm_name)
