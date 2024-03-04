@@ -53,7 +53,9 @@ class TestProductBrand(AbstractTestCase):
             FROM product AS p
                  JOIN brand AS b ON b.id = p.brand_id
         ''')
-        for (title, brand_name) in fixtures.fetchall():
+        data = fixtures.fetchall()
+        self.assertGreater(len(data), 0)
+        for (title, brand_name) in data:
             if title == 'Prod1' or title == 'Prod2':
                 self.assertEqual('My Brand', brand_name)
             else:

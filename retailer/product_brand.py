@@ -49,4 +49,4 @@ class ProductBrand:
                 UPDATE product
                 SET brand_id = %s
                 WHERE id = %s
-            ''', (product_id, brand_id))
+            ''', (brand_id, product_id))
