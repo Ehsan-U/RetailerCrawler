@@ -37,7 +37,7 @@ class ProductBrand:
         return res[0][0]
 
     def update_existent(self):
-        self.cursor.execute('SELECT id, brandname FROM product')
+        self.cursor.execute('SELECT id, brandname FROM product WHERE brand_id IS NULL')
 
         data = []
         for row in self.cursor.fetchall():
