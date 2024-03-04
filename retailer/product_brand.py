@@ -20,77 +20,33 @@ class ProductBrand:
 
     def get_brand(self, name: str) -> int:
         norm_name = normalise_name(name)
+        brand_id = self._fetch_brand(norm_name)
+        if brand_id > 0:
+            return brand_id
 
         self.cursor.execute('''
-                INSERT INTO brand(name, status, normalized_name)
+                INSERT IGNORE INTO brand(name, status, normalized_name)
                 VALUES (%s, 'active', %s)
-                ON DUPLICATE KEY UPDATE name = name
             ''',
             (name, norm_name)
         )
         brand_id = self.cursor.lastrowid
-        if brand_id != 0:
+        if brand_id > 0:
             return brand_id
+        return self._fetch_brand(norm_name)
 
+    def _fetch_brand(self, norm_name: str) -> int:
         self.cursor.execute('SELECT id FROM brand WHERE normalized_name = %s', (norm_name,))
         res = self.cursor.fetchall()
-        return res[0][0]
+        return res[0][0] if len(res) > 0 else 0
 
     def update_existent(self):
         self.cursor.execute('SELECT id, brandname FROM product')
 
-        data = []
-        for row in self.cursor.fetchall():
-            data.append(row)
-
-        self.__make_tmp_table()
-
-        batch = 0
-        brands = []
-        products = []
-        for (product_id, brand_name) in data:
-            norm_name = normalise_name(brand_name)
-            brands.extend([brand_name, norm_name])
-            products.extend([product_id, norm_name])
-            batch += 1
-            if batch > 50:
-                self.__flush_batch(brands, products)
-                batch = 0
-                brands = []
-                products = []
-
-        self.__flush_batch(brands, products)
-        self.__finalise_update()
-
-    def __make_tmp_table(self):
-        tmp_cursor = self.db.cursor()
-        tmp_cursor.execute('''
-            CREATE TEMPORARY TABLE tmp_product_brand(
-                product_id INT, brand_name VARCHAR(64),
-                PRIMARY KEY (product_id) USING BTREE,
-                INDEX brand_name (brand_name) USING BTREE
-            )
-        ''')
-
-    def __finalise_update(self):
-        insert_cursor = self.db.cursor()
-        insert_cursor.execute('''
-            UPDATE product AS p
-                   JOIN tmp_product_brand AS tpb ON tpb.product_id = p.id
-                   JOIN brand AS b ON b.normalized_name = tpb.brand_name
-            SET p.brand_id = b.id
-        ''')
-        insert_cursor.execute('DROP TEMPORARY TABLE tmp_product_brand')
-
-    def __flush_batch(self, brands: list, products: list):
-        if len(brands) == 0 or len(products) == 0:
-            return
-        insert_cursor = self.db.cursor()
-        query = 'INSERT INTO brand(name, status, normalized_name) VALUES '
-        query += "(%s, 'active', %s)," * int(len(brands) / 2)
-        query = query.rstrip(',') + ' ON DUPLICATE KEY UPDATE name = name'
-        insert_cursor.execute(query.rstrip(','), brands)
-
-        query = 'INSERT INTO tmp_product_brand(product_id, brand_name) VALUES '
-        query += '(%s, %s),' * int(len(products) / 2)
-        insert_cursor.execute(query.rstrip(','), products)
+        for (product_id, brand_name) in self.cursor.fetchall():
+            brand_id = self.get_brand(brand_name)
+            self.cursor.execute('''
+                UPDATE product
+                SET brand_id = %s
+                WHERE id = %s
+            ''', (product_id, brand_id))
