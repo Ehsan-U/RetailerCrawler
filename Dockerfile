@@ -14,6 +14,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 COPY .env ./
 COPY retailer ./retailer
 COPY scrapy.cfg ./scrapy.cfg
+COPY migrate_brands.py ./migrate_brands.py
 
 # WORKDIR /usr/src/app/src
 
