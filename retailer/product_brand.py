@@ -22,8 +22,8 @@ class ProductBrand:
         norm_name = normalise_name(name)
 
         self.cursor.execute(
-            'INSERT IGNORE INTO brand(name, normalized_name) VALUES (%s, %s)',
-            (name, norm_name)
+            'INSERT IGNORE INTO brand(name, status, normalized_name) VALUES (%s, %s)',
+            (name, 'active', norm_name)
         )
         brand_id = self.cursor.lastrowid
         if brand_id != 0:
@@ -83,8 +83,8 @@ class ProductBrand:
         if len(brands) == 0 or len(products) == 0:
             return
         insert_cursor = self.db.cursor()
-        query = 'INSERT IGNORE INTO brand(name, normalized_name) VALUES '
-        query += '(%s, %s),' * int(len(brands) / 2)
+        query = 'INSERT IGNORE INTO brand(name, status, normalized_name) VALUES '
+        query += '(%s, "status", %s),' * int(len(brands) / 2)
         insert_cursor.execute(query.rstrip(','), brands)
 
         query = 'INSERT INTO tmp_product_brand(product_id, brand_name) VALUES '
