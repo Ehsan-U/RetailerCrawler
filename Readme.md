@@ -18,3 +18,5 @@ docker build -t deelio_crawler .
 docker run --rm --add-host host.docker.internal:host-gateway deelio_crawler scrapy crawl retailer -a RETAILER_ID=1
 ##### Product check
 docker run --rm --add-host host.docker.internal:host-gateway deelio_crawler scrapy crawl retailer -a RETAILER_ID=1 -a SPIDER_TYPE=checker
+##### Migrate brands
+docker rmi deelio_crawler; docker build -t deelio_crawler .
