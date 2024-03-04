@@ -18,10 +18,10 @@ class ProductBrand:
         self.db = conn
         self.cursor = conn.cursor()
 
-    def get_brand(self, name: str) -> int:
+    def get_brand(self, name: str) -> int | None:
         norm_name = normalise_name(name)
         brand_id = self._fetch_brand(norm_name)
-        if brand_id > 0:
+        if brand_id is not None:
             return brand_id
 
         self.cursor.execute('''
@@ -35,10 +35,10 @@ class ProductBrand:
             return brand_id
         return self._fetch_brand(norm_name)
 
-    def _fetch_brand(self, norm_name: str) -> int:
+    def _fetch_brand(self, norm_name: str) -> int | None:
         self.cursor.execute('SELECT id FROM brand WHERE normalized_name = %s', (norm_name,))
         res = self.cursor.fetchall()
-        return res[0][0] if len(res) > 0 else 0
+        return res[0][0] if len(res) > 0 else None
 
     def update_existent(self):
         self.cursor.execute('SELECT id, brandname FROM product WHERE brand_id IS NULL')
