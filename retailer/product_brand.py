@@ -21,8 +21,11 @@ class ProductBrand:
     def get_brand(self, name: str) -> int:
         norm_name = normalise_name(name)
 
-        self.cursor.execute(
-            'INSERT IGNORE INTO brand(name, normalized_name) VALUES (%s, %s)',
+        self.cursor.execute('''
+                INSERT INTO brand(name, status, normalized_name)
+                VALUES (%s, 'active', %s)
+                ON DUPLICATE KEY UPDATE name = name
+            ''',
             (name, norm_name)
         )
         brand_id = self.cursor.lastrowid
@@ -83,8 +86,9 @@ class ProductBrand:
         if len(brands) == 0 or len(products) == 0:
             return
         insert_cursor = self.db.cursor()
-        query = 'INSERT IGNORE INTO brand(name, normalized_name) VALUES '
-        query += '(%s, %s),' * int(len(brands) / 2)
+        query = 'INSERT INTO brand(name, status, normalized_name) VALUES '
+        query += "(%s, 'active', %s)," * int(len(brands) / 2)
+        query = query.rstrip(',') + ' ON DUPLICATE KEY UPDATE name = name'
         insert_cursor.execute(query.rstrip(','), brands)
 
         query = 'INSERT INTO tmp_product_brand(product_id, brand_name) VALUES '
