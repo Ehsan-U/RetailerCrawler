@@ -37,6 +37,8 @@ from retailer.page_objects.fr.nocibe import NocibeProduct
 from retailer.page_objects.fr.beautysuccess import BeautySuccessProduct
 from retailer.page_objects.fr.galerieslafayette import GalerieslaFayetteProduct
 
+from retailer.page_objects.ca import amazon as ca_amazon
+
 load_dotenv() 
 
 BOT_NAME = "retailer"
@@ -157,6 +159,7 @@ SCRAPY_POET_RULES = [
     ApplyRule("intersport.fr", use=IntersportProduct, instead_of=ProductPage),
     ApplyRule("marionnaud.fr", use=MarionnaudProduct, instead_of=ProductPage),
     ApplyRule("amazon.fr", use=AmazonProduct, instead_of=ProductPage),
+    ApplyRule("amazon.ca", use=ca_amazon.AmazonProduct, instead_of=ProductPage),
     ApplyRule("shoes.fr", use=ShoesProduct, instead_of=ProductPage),
     ApplyRule("spartoo.com", use=SpartooProduct, instead_of=ProductPage),
     ApplyRule("grandoptical.com", use=GrandOpticalProduct, instead_of=ProductPage),
@@ -180,5 +183,6 @@ REDIRECT_ENABLED = False
 
 GEOLOCATIONS = {
     75: "FR",
-    231: "US"
+    231: "US",
+    37:"CA"
 }

@@ -6,7 +6,7 @@ from urllib.parse import urlsplit, urlunsplit, urlencode
 
 class AmazonProduct(ProductPage):
     """
-    Page object for the product page on amazon.fr.
+    Page object for the product page on amazon.ca
     """
 
     _product_name = "//span[@id='productTitle']/text()"

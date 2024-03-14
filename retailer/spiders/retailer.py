@@ -135,7 +135,7 @@ class RetailerSpider(scrapy.Spider):
 
         if ('sunglasshut.com' in domain) and spider_type == "scraper" and not product_page:
             url = build_paginated_url(url, 0)
-        elif ("amazon.fr" in domain):
+        elif ("amazon." in domain):
             if product_page:
                 url += "&psc=1" # select the product size to appear discount
         elif ("shoes.fr" in domain or "spartoo.com" in domain):

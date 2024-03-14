@@ -138,6 +138,21 @@ DOMAIN_SETTINGS = {
         'end': {'condition': "element_present", 'negate': True},
         'page_limit': 100
     },
+    
+    'amazon.ca': {
+        'javascript': {
+            'listing_page': False,
+            'product_page': False,
+        },
+        'selectors': {
+            'PRODUCTS': "//div[@data-component-type='s-search-result']",
+            "DISCOUNTED": ".//span[@data-a-strike]",
+            "PRODUCT_URL": ".//div[@data-cy='title-recipe']/h2/a[not(contains(@href, '/click?'))]/@href",
+            "ELEMENT": "//span[@class='s-pagination-strip']"  # reached end when not found
+        },
+        'end': {'condition': "element_present", 'negate': True},
+        'page_limit': 100
+    },
 
     'm.darty.com': {
         'javascript': {
