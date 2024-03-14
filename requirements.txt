@@ -5,3 +5,4 @@ scrapy-poet
 web-poet
 python-dotenv
 mysql-connector-python
+unidecode
