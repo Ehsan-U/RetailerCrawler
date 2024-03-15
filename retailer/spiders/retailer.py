@@ -3,7 +3,7 @@ import scrapy
 from scrapy.loader import ItemLoader
 from scrapy.http import Response, Request
 from typing import AsyncGenerator, Dict, Iterable, Union, Callable
-from urllib.parse import urlparse, urlsplit, urlunsplit
+from urllib.parse import urlencode, urlparse, urlsplit, urlunsplit
 
 from retailer.utils import build_paginated_url
 from retailer.items import RetailerItem
@@ -36,7 +36,8 @@ class RetailerSpider(scrapy.Spider):
                 products.update_scrapping_url_scrapped_datetime(scrapping_url_id)
                 page.pop("scrapping_url_id")
 
-            url = self.modify_url(url=page['url'], spider_type=page['spider_type'])
+            product_page = True if page["spider_type"] == "checker" else False
+            url = self.modify_url(url=page['url'], spider_type=page['spider_type'], product_page=product_page)
             js = self.use_javascript(url, spider_type=page.get("spider_type"))
 
             request = self.make_request(url, callback=self.parse, cb_kwargs={"page_meta": page}, js=js)
@@ -137,7 +138,9 @@ class RetailerSpider(scrapy.Spider):
             url = build_paginated_url(url, 0)
         elif ("amazon." in domain):
             if product_page:
-                url += "&psc=1" # select the product size to appear discount
+                scheme, netloc, path, query, fragment = urlsplit(url)
+                query = urlencode({"psc": "1"}) # select the product size to appear discount
+                url = urlunsplit((scheme, netloc, path, query, fragment))
         elif ("shoes.fr" in domain or "spartoo.com" in domain):
             url = url.replace("php#","php?")
         elif ("darty.com" in domain):

@@ -1,7 +1,7 @@
 from retailer.page_objects.pages import ProductPage
 from web_poet import field
 import json
-from urllib.parse import urlsplit, urlunsplit, urlencode
+from urllib.parse import urlsplit, urlunsplit
 
 
 class AmazonProduct(ProductPage):
@@ -22,11 +22,9 @@ class AmazonProduct(ProductPage):
     @field
     def product_url(self) -> str:
         scheme, netloc, path, query, fragment = urlsplit(str(self.response.url))
-        if '&psc=' in query: 
-            params = dict((qc.split("=") if "=" in qc else (qc, "") for qc in query.split("&"))) if (query and not "==" in query) else {}
-            query = urlencode({"psc": params.pop("psc")})
-            if 'ref=' in path:
-                path = path.split("ref=")[0]
+        query = ''
+        if 'ref=' in path:
+            path = path.split("ref=")[0]
         url = urlunsplit((scheme, netloc, path, query, fragment))
         return url
 
