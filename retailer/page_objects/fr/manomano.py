@@ -15,7 +15,7 @@ class ManomanoProduct(ProductPage):
     _review_text = ".//div[@style='-webkit-line-clamp:3']/text()"
     _discounted_price = "//div[@data-testid='main-price-exponent']/parent::div//text()"
     _listed_price = "//div[contains(text(), '€') and not(@data-testid='main-price-exponent')]/text()"
-    _product_desc = "//div[@data-testid='description-content']/text()"
+    _product_desc = "//div[@data-testid='description-content']//text()"
 
     @field
     def product_name(self) -> str:

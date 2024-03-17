@@ -22,8 +22,8 @@ class AsosProduct(ProductPage):
     
     @field
     def brand_name(self) -> str:
-        data = json.loads(self.response.xpath(self._brand_name).get())
-        return data['brand']['name']
+        data = json.loads(self.response.xpath(self._brand_name).get('{}'))
+        return data.get("brand", {}).get("name")
     
     @field
     def prod_images(self) -> list:
