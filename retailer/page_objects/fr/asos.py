@@ -12,8 +12,8 @@ class AsosProduct(ProductPage):
     _product_name = "//h1/text()"
     _brand_name = "//script[@id='split-structured-data']/text()"
     _prod_images = "//div[@class='product-carousel']/img/@src"
-    _discounted_price = "//span[@data-testid='current-price']/text()"
-    _listed_price = "//span[@data-testid='previous-price' and contains(text(), 'Avant')]/text()"
+    _discounted_price = "//div[@data-testid='product-price']/span[@data-testid='current-price']/text()"
+    _listed_price = "(//div[@data-testid='product-price']//span[@data-testid='previous-price'])[last()]/text()"
     _product_desc = "//div[@id='productDescription']//text()"
 
     @field
@@ -40,11 +40,11 @@ class AsosProduct(ProductPage):
     
     @field
     def discounted_price(self) -> str:
-        return self.response.xpath(self._discounted_price).re_first("\d+\,\d+")
+        return self.response.xpath(self._discounted_price).get()
     
     @field
     def listed_price(self) -> str:
-        return self.response.xpath(self._listed_price).re_first("\d+\,\d+")
+        return self.response.xpath(self._listed_price).get()
     
     @field
     def product_desc(self) -> str:
