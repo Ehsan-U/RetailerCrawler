@@ -38,6 +38,7 @@ from retailer.page_objects.fr.beautysuccess import BeautySuccessProduct
 from retailer.page_objects.fr.galerieslafayette import GalerieslaFayetteProduct
 from retailer.page_objects.fr import manomano as ca_manomano
 from retailer.page_objects.fr import asos as ca_asos
+from retailer.page_objects.fr import footlocker as ca_footlocker
 
 from retailer.page_objects.ca import amazon as ca_amazon
 
@@ -175,13 +176,14 @@ SCRAPY_POET_RULES = [
     ApplyRule("beautysuccess.fr", use=BeautySuccessProduct, instead_of=ProductPage),
     ApplyRule("galerieslafayette.com", use=GalerieslaFayetteProduct, instead_of=ProductPage),
     ApplyRule("manomano.fr", use=ca_manomano.ManomanoProduct, instead_of=ProductPage),
-    ApplyRule("asos.com", use=ca_asos.AsosProduct, instead_of=ProductPage)
+    ApplyRule("asos.com", use=ca_asos.AsosProduct, instead_of=ProductPage),
+    ApplyRule("footlocker.fr", use=ca_footlocker.FootlockerProduct, instead_of=ProductPage)
 
 ]
 
 RETRY_ENABLED = True
 RETRY_TIMES = 5
-RETRY_HTTP_CODES = [403, 520, 521]
+RETRY_HTTP_CODES = [403, 520, 521, 304]
 REDIRECT_ENABLED = False
 
 

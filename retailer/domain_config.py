@@ -423,5 +423,26 @@ DOMAIN_SETTINGS = {
             "ELEMENT": "//a[@data-auto-id='loadMoreProducts']" # reached end when not exists
         },
         'end': {'condition': "element_present", 'negate': True},
+    },
+    
+    'footlocker.fr': {
+        'javascript': {
+            'listing_page': False,
+            'product_page': True,
+            'args': {
+                'browserHtml': True, 
+                'javascript': True,
+                "actions": [
+                    {"action": "waitForTimeout","timeout": 5,"onError": "return"}
+                ]
+            }
+        },
+        'selectors': {
+            'PRODUCTS': "//div[contains(@class, 'ProductCard')]/a",
+            "DISCOUNTED": ".//span[@class='ProductPrice-original']", 
+            "PRODUCT_URL": "./@href",
+            "ELEMENT": "//li[contains(@class, 'Pagination-option--next')]/a" # reached end when not exists
+        },
+        'end': {'condition': "element_present", 'negate': True},
     }
 }
