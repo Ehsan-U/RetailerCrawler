@@ -31,7 +31,7 @@ class FnacProduct(ProductPage):
         data = json.loads(self.response.xpath(self._brand_name).get('{}'))
         imgs = data.get("image", [])
         for img in imgs:
-            if not img in images:
+            if img not in images:
                 images.append(img)
             if len(images) == 3:
                 break

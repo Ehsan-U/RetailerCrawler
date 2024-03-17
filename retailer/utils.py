@@ -27,9 +27,9 @@ def build_paginated_url(url: str, page_no: int):
     Build a paginated URL by appending the page number to the given URL.
     """
     scheme, netloc, path, query, fragment = urlsplit(url)
-    params = dict((qc.split("=") if "=" in qc else (qc, "") for qc in query.split("&"))) if (query and not "==" in query) else {}
+    params = dict((qc.split("=") if "=" in qc else (qc, "") for qc in query.split("&"))) if (query and "==" not in query) else {}
 
-    if ('i-run.fr' in netloc) or ('fr.delsey.com' in netloc) or ("3suisses.fr" in netloc):
+    if ('i-run.fr' in netloc) or ('fr.delsey.com' in netloc) or ("3suisses.fr" in netloc) or ('manomano.fr' in netloc):
         params["page"] = str(page_no)
         query = urlencode(params)
 
@@ -76,7 +76,7 @@ def build_paginated_url(url: str, page_no: int):
         params['q'] = ':rank-desc'
         query = urlencode(params)
 
-    elif ("amazon.fr" in netloc):
+    elif ("amazon." in netloc):
         params["page"] = str(page_no)
         params["ref"] = f"sr_pg_{str(page_no)}"
         query = unquote_plus(urlencode(params))

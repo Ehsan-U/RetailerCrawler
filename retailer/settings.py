@@ -36,6 +36,7 @@ from retailer.page_objects.fr.fnac import FnacProduct
 from retailer.page_objects.fr.nocibe import NocibeProduct
 from retailer.page_objects.fr.beautysuccess import BeautySuccessProduct
 from retailer.page_objects.fr.galerieslafayette import GalerieslaFayetteProduct
+from retailer.page_objects.fr import manomano as ca_manomano
 
 from retailer.page_objects.ca import amazon as ca_amazon
 
@@ -172,6 +173,7 @@ SCRAPY_POET_RULES = [
     ApplyRule("nocibe.fr", use=NocibeProduct, instead_of=ProductPage),
     ApplyRule("beautysuccess.fr", use=BeautySuccessProduct, instead_of=ProductPage),
     ApplyRule("galerieslafayette.com", use=GalerieslaFayetteProduct, instead_of=ProductPage),
+    ApplyRule("manomano.fr", use=ca_manomano.ManomanoProduct, instead_of=ProductPage)
 
 ]
 

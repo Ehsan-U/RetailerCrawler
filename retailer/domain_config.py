@@ -391,5 +391,19 @@ DOMAIN_SETTINGS = {
             "ELEMENT": "//div[@class='single-push__body']" # reached end when exists
         },
         'end': {'condition': "element_present", 'negate': False},
+    },
+
+    'manomano.fr': {
+        'javascript': {
+            'listing_page': False,
+            'product_page': False
+        },
+        'selectors': {
+            'PRODUCTS': "//a[contains(@href, '/p/')]",
+            "DISCOUNTED": ".//span[@data-testid='price-retail']", 
+            "PRODUCT_URL": "./@href",
+            "ELEMENT": "//span[text()='Pagination']" # reached end when not exists
+        },
+        'end': {'condition': "element_present", 'negate': True},
     }
 }
