@@ -29,7 +29,7 @@ def build_paginated_url(url: str, page_no: int):
     scheme, netloc, path, query, fragment = urlsplit(url)
     params = dict((qc.split("=") if "=" in qc else (qc, "") for qc in query.split("&"))) if (query and "==" not in query) else {}
 
-    if ('i-run.fr' in netloc) or ('fr.delsey.com' in netloc) or ("3suisses.fr" in netloc) or ('manomano.fr' in netloc):
+    if ('i-run.fr' in netloc) or ('fr.delsey.com' in netloc) or ("3suisses.fr" in netloc) or ('manomano.fr' in netloc) or ("asos.com" in netloc):
         params["page"] = str(page_no)
         query = urlencode(params)
 

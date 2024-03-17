@@ -10,7 +10,7 @@ from retailer.products import Products
 
 class RetailerPipeline:
     def __init__(self):
-        self.products = Products();
+        self.products = Products()
 
     def process_item(self, item, spider):
         if (item.get("spider_type") == "checker"):

@@ -405,5 +405,23 @@ DOMAIN_SETTINGS = {
             "ELEMENT": "//span[text()='Pagination']" # reached end when not exists
         },
         'end': {'condition': "element_present", 'negate': True},
+    },
+
+    'asos.com': {
+        'javascript': {
+            'listing_page': False,
+            'product_page': True,
+            'args': {
+                'browserHtml': True, 
+                'javascript': True,
+            }
+        },
+        'selectors': {
+            'PRODUCTS': "//article",
+            "DISCOUNTED": ".//span[contains(@class, 'reducedPrice')]", 
+            "PRODUCT_URL": "./a/@href",
+            "ELEMENT": "//a[@data-auto-id='loadMoreProducts']" # reached end when not exists
+        },
+        'end': {'condition': "element_present", 'negate': True},
     }
 }
