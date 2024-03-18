@@ -36,6 +36,8 @@ class AsosProduct(ProductPage):
                     images.append(src)
                 if len(images) == 3:
                     break
+        if len(images) > 1:
+            images[0], images[1] = images[1], images[0]
         return images
     
     @field
