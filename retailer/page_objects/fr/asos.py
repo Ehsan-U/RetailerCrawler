@@ -11,7 +11,7 @@ class AsosProduct(ProductPage):
 
     _product_name = "//h1/text()"
     _brand_name = "//script[@id='split-structured-data']/text()"
-    _prod_images = "//div[@class='product-carousel']/img/@src"
+    _prod_images = "//div[@class='gallery-images']//div[@class='fullImageContainer']/img/@src"
     _discounted_price = "//div[@data-testid='product-price']/span[@data-testid='current-price']/text()"
     _listed_price = "(//div[@data-testid='product-price']//span[@data-testid='previous-price'])[last()]/text()"
     _product_desc = "//div[@id='productDescription']//text()"
