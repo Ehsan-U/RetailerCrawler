@@ -36,9 +36,10 @@ from retailer.page_objects.fr.fnac import FnacProduct
 from retailer.page_objects.fr.nocibe import NocibeProduct
 from retailer.page_objects.fr.beautysuccess import BeautySuccessProduct
 from retailer.page_objects.fr.galerieslafayette import GalerieslaFayetteProduct
-from retailer.page_objects.fr import manomano as ca_manomano
-from retailer.page_objects.fr import asos as ca_asos
-from retailer.page_objects.fr import footlocker as ca_footlocker
+from retailer.page_objects.fr import manomano as fr_manomano
+from retailer.page_objects.fr import asos as fr_asos
+from retailer.page_objects.fr import footlocker as fr_footlocker
+from retailer.page_objects.fr import carrefour as fr_carrefour
 
 from retailer.page_objects.ca import amazon as ca_amazon
 
@@ -175,10 +176,10 @@ SCRAPY_POET_RULES = [
     ApplyRule("nocibe.fr", use=NocibeProduct, instead_of=ProductPage),
     ApplyRule("beautysuccess.fr", use=BeautySuccessProduct, instead_of=ProductPage),
     ApplyRule("galerieslafayette.com", use=GalerieslaFayetteProduct, instead_of=ProductPage),
-    ApplyRule("manomano.fr", use=ca_manomano.ManomanoProduct, instead_of=ProductPage),
-    ApplyRule("asos.com", use=ca_asos.AsosProduct, instead_of=ProductPage),
-    ApplyRule("footlocker.fr", use=ca_footlocker.FootlockerProduct, instead_of=ProductPage)
-
+    ApplyRule("manomano.fr", use=fr_manomano.ManomanoProduct, instead_of=ProductPage),
+    ApplyRule("asos.com", use=fr_asos.AsosProduct, instead_of=ProductPage),
+    ApplyRule("footlocker.fr", use=fr_footlocker.FootlockerProduct, instead_of=ProductPage),
+    ApplyRule("carrefour.fr", use=fr_carrefour.CarrefourProduct, instead_of=ProductPage)
 ]
 
 RETRY_ENABLED = True

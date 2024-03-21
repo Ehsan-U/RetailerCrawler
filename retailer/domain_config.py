@@ -444,5 +444,26 @@ DOMAIN_SETTINGS = {
             "ELEMENT": "//li[contains(@class, 'Pagination-option--next')]/a" # reached end when not exists
         },
         'end': {'condition': "element_present", 'negate': True},
+    },
+
+    'carrefour.fr': {
+        'javascript': {
+            'listing_page': True,
+            'product_page': False,
+            'args': {
+                'browserHtml': True, 
+                'javascript': True,
+                "actions": [
+                    {"action": "waitForTimeout","timeout": 5,"onError": "return"}
+                ]
+            }
+        },
+        'selectors': {
+            'PRODUCTS': "//article",
+            "DISCOUNTED": ".//div[contains(@class, 'product-price__amount--old')]", 
+            "PRODUCT_URL": ".//a[@data-testid='product-card-title']/@href",
+            "ELEMENT": "//article" # reached end when not exists
+        },
+        'end': {'condition': "element_present", 'negate': True},
     }
 }

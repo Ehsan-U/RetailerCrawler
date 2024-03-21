@@ -124,6 +124,10 @@ def build_paginated_url(url: str, page_no: int):
         params['currentPage'] = page_no - 1
         query = urlencode(params)
 
+    elif ("carrefour.fr" in netloc):
+        params["page"] = str(page_no)
+        query = unquote_plus(urlencode(params))
+
     updated_url = urlunsplit((scheme, netloc, path, query, fragment))
     return updated_url
 
