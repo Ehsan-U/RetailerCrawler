@@ -90,4 +90,7 @@ class AmazonProduct(ProductPage):
     
     @field
     def discounted_flag(self) -> bool:
-        return bool(self.response.xpath(self._listed_price).get())
+        if self.discounted_percent:
+            return True
+        else:
+            return False
