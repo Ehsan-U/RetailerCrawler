@@ -449,12 +449,13 @@ DOMAIN_SETTINGS = {
     'carrefour.fr': {
         'javascript': {
             'listing_page': True,
-            'product_page': False,
+            'product_page': True,
             'args': {
                 'browserHtml': True, 
                 'javascript': True,
                 "actions": [
-                    {"action": "waitForTimeout","timeout": 5,"onError": "return"}
+                    {"action":"waitForTimeout","timeout": 5,"onError": "return"},
+                    {"action":"click","selector": {"type": "xpath","value":"//div[@id='product-characteristics-table']//button[1]"}, "onError": "return"}
                 ]
             }
         },
