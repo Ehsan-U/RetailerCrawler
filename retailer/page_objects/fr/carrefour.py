@@ -17,7 +17,7 @@ class CarrefourProduct(ProductPage):
     _review_body = ".//p[@data-testid='customer-review-comment']//text()"
     _discounted_price = "//div[@data-testid='product-price__amount--main']/span[1]/text()"
     _listed_price = "//div[@class='product-price__amount product-price__amount--old']/span[1]/text()"
-    _product_desc = "//div[@id='product-characteristics']//text()[not(ancestor::script)]"
+    _product_desc = "//div[@id='product-characteristics']//text()[not(ancestor::script) and not(ancestor::button)]"
 
     @field
     def product_name(self) -> str:
