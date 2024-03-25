@@ -67,7 +67,7 @@ class Products:
 
     def product_exists(self, product_url):
         cursor = self.db.cursor()
-        query = "SELECT id, status FROM product WHERE url = '" + product_url + "'"
+        query = "SELECT id, status, scrapping_url_id FROM product WHERE url = '" + product_url + "'"
         cursor.execute(query)
         results = cursor.fetchall()
 
@@ -111,20 +111,21 @@ class Products:
 
             if exists:
                 # print('URL already exists')
-                if exists[0][1] == 'inactive':
+                if exists[0][1] == 'inactive' or exists[0][2] is None:
                     # print('Updating product ' + str(exists[0][0]))
-                    update_inactive_prod = "UPDATE product SET price = %s, discount = %s, status = %s, updated_at = CURRENT_TIMESTAMP WHERE id = %s"
+                    update_inactive_prod = "UPDATE product SET price = %s, discount = %s, status = %s, updated_at = CURRENT_TIMESTAMP, scrapping_url_id = %s WHERE id = %s"
                     update_values = (
                         item['listed_price'],
                         item['discounted_percent'],
                         'active',
+                        item['scrapping_url_id'],
                         exists[0][0]
                     )
                     self.cursor.execute(update_inactive_prod, update_values)
                     self.db.commit()
             else:
                 brand_id = self.brand_manager.get_brand(item['brand_name'])
-                update_prods = "INSERT INTO product (title, url, description, price, discount, discounted_price, brandname, status, created_at, updated_at, country_id, user_id, retailer_id, brand_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, %s, %s)"
+                update_prods = "INSERT INTO product (title, url, description, price, discount, discounted_price, brandname, status, created_at, updated_at, country_id, user_id, retailer_id, brand_id, scrapping_url_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, %s, %s, %s)"
                 prods_val = (
                     item['product_name'],
                     item['product_url'],
@@ -137,7 +138,8 @@ class Products:
                     item['country_id'],
                     item['user_id'],
                     item['retailer_id'],
-                    brand_id
+                    brand_id,
+                    item['scrapping_url_id']
                 )
 
                 self.cursor.execute(update_prods, prods_val)
