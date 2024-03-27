@@ -15,8 +15,8 @@ class AmazonProduct(ProductPage):
     _reviews = "//div[@data-hook='review']"
     _review_stars = ".//i[contains(@data-hook, 'review-star-rating')]/@class"
     _review_text = ".//div[@data-hook='review-collapsed']//text()"
-    _discounted_price = "//span[contains(@class, 'priceToPay')]//span[@class='a-price-whole' or @class='a-price-fraction']/text()"
-    _listed_price = "//span[@data-a-strike]/span[@class]/text()"
+    _discounted_price = "//div[@id='centerCol']//span[contains(@class, 'priceToPay')]//span[@class='a-price-whole' or @class='a-price-fraction']/text()"
+    _listed_price = "//div[@id='centerCol']//span[@data-a-strike]/span[@class]/text()"
     _product_desc = "//div[@id='productDescription']//text()"
 
     @field
