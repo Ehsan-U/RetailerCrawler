@@ -34,7 +34,6 @@ class RetailerSpider(scrapy.Spider):
             scrapping_url_id = page.get("scrapping_url_id")
             if scrapping_url_id:
                 products.update_scrapping_url_scrapped_datetime(scrapping_url_id)
-                page.pop("scrapping_url_id")
 
             product_page = True if page["spider_type"] == "checker" else False
             url = self.modify_url(url=page['url'], spider_type=page['spider_type'], product_page=product_page)

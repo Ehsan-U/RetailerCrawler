@@ -72,6 +72,7 @@ class RetailerItem(scrapy.Item):
         product_desc (scrapy.Field): The description of the product.
         product_id (scrapy.Field): The product ID associated with the item.
         discounted_flag (scrapy.Field): The discounted flag of the product.
+        scrapping_url_id (scrapy.Field): The scrapping url ID associated with the item.
     """
 
     user_id = scrapy.Field(
@@ -120,6 +121,9 @@ class RetailerItem(scrapy.Item):
         output_processor=CustomTakeFirst()
     )
     discounted_flag = scrapy.Field(
+        output_processor=CustomTakeFirst()
+    )
+    scrapping_url_id = scrapy.Field(
         output_processor=CustomTakeFirst()
     )
 
