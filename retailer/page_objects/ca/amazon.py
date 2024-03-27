@@ -90,7 +90,7 @@ class AmazonProduct(ProductPage):
     
     @field
     def discounted_flag(self) -> bool:
-        if self.discounted_percent:
+        if self.discounted_percent and self.discounted_percent > 0:
             return True
         else:
             return False
