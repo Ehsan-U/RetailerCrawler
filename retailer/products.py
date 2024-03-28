@@ -248,15 +248,15 @@ class Products:
 
             for i in item['prod_images']:
                 update_images = "INSERT INTO product_image (product_id, src, filesrc) VALUES (%s, %s, %s)"
-                images_val = (item['product_id'], i, '')           
+                images_val = (item['product_id'], i, '')
                 self.cursor.execute(update_images, images_val)
-            
+
             for i in item['reviews']:
                 if (i.get('review')):
                     update_review = "INSERT INTO product_review (product_id, review, stars) VALUES (%s, %s, %s)"
                     review_val = (item['product_id'], i['review'], i['stars'])
                     self.cursor.execute(update_review, review_val)
-            
+
             self.db.commit()
             print('Data inserted into products MariaDB')
 
