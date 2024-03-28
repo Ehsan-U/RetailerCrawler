@@ -80,7 +80,7 @@ class Products:
 
     def fetch_existing_products(self, retailer_id):
         urls = []
-        query = f"SELECT p.id, p.country_id, p.url as link FROM product AS p LEFT JOIN retailer AS r ON r.id = p.retailer_id WHERE p.status = 'active' AND r.status = 'active' AND r.id = {retailer_id}"
+        query = f"SELECT p.id, p.country_id, p.url as link FROM product AS p LEFT JOIN retailer AS r ON r.id = p.retailer_id WHERE p.status = 'active' AND r.status = 'active' AND r.id = {retailer_id} AND (discounted_price != 0 OR trend = false OR p.created_at < DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY))"
         cursor = self.db.cursor()
         cursor.execute(query)
 
