@@ -32,6 +32,8 @@ class Products:
     def get_pages(self, retailer_id, spider_type):
         if (spider_type == "checker"):
             return self.fetch_existing_products(retailer_id)
+        elif (spider_type == "manual_scrapping"):
+            return self.fetch_products_to_scrap()
         else:
             return self.fetch_scrapping_urls(retailer_id)
         pass
@@ -78,7 +80,7 @@ class Products:
 
     def fetch_existing_products(self, retailer_id):
         urls = []
-        query = f"SELECT p.id, p.country_id, p.url as link FROM product AS p LEFT JOIN retailer AS r ON r.id = p.retailer_id WHERE p.status = 'active' AND r.status = 'active' AND r.id = {retailer_id}"
+        query = f"SELECT p.id, p.country_id, p.url as link FROM product AS p LEFT JOIN retailer AS r ON r.id = p.retailer_id WHERE p.status = 'active' AND r.status = 'active' AND r.id = {retailer_id} AND (discounted_price != 0 OR trend = false OR p.created_at < DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY))"
         cursor = self.db.cursor()
         cursor.execute(query)
 
@@ -89,6 +91,24 @@ class Products:
             url['country_id'] = country_id
             url['url'] = link
             url['spider_type'] = "checker"
+
+            urls.append(url)
+
+        return urls
+
+    def fetch_products_to_scrap(self):
+        urls = []
+        query = f"SELECT p.id, p.country_id, p.url as link FROM product AS p WHERE p.status = 'to_scrap'"
+        cursor = self.db.cursor()
+        cursor.execute(query)
+
+        for (id, country_id, link) in cursor.fetchall():
+            url = {}
+
+            url['product_id'] = id
+            url['country_id'] = country_id
+            url['url'] = link
+            url['spider_type'] = "manual_scrapping"
 
             urls.append(url)
 
@@ -125,7 +145,7 @@ class Products:
                     self.db.commit()
             else:
                 brand_id = self.brand_manager.get_brand(item['brand_name'])
-                update_prods = "INSERT INTO product (title, url, description, price, discount, discounted_price, brandname, status, created_at, updated_at, country_id, user_id, retailer_id, brand_id, scrapping_url_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, %s, %s, %s)"
+                update_prods = "INSERT INTO product (title, url, description, price, discount, discounted_price, brandname, status, created_at, updated_at, country_id, user_id, retailer_id, brand_id, scrapping_url_id, trend) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, %s, %s, %s, false)"
                 prods_val = (
                     item['product_name'],
                     item['product_url'],
@@ -155,11 +175,12 @@ class Products:
                     images_val = (last_product_id, i, '')           
                     self.cursor.execute(update_images, images_val)
                 
-                for i in item['reviews']:
-                    if (i.get('review')):
-                        update_review = "INSERT INTO product_review (product_id, review, stars) VALUES (%s, %s, %s)"
-                        review_val = (last_product_id, i['review'], i['stars'])
-                        self.cursor.execute(update_review, review_val)
+                if (item.get('reviews')):
+                    for i in item['reviews']:
+                        if (i.get('review')):
+                            update_review = "INSERT INTO product_review (product_id, review, stars) VALUES (%s, %s, %s)"
+                            review_val = (last_product_id, i['review'], i['stars'])
+                            self.cursor.execute(update_review, review_val)
                 
                 self.db.commit()
                 # print('Data inserted into products MariaDB')
@@ -192,5 +213,57 @@ class Products:
         )
         self.cursor.execute(update_inactive_prod, update_values)
         self.db.commit()
+
+        return
+
+    def update_manually_scapped_product(self, item):
+        try:
+            if not item['brand_name']:
+                return item
+
+            if (not item.get('listed_price') and not item.get('discounted_price')):
+                return item
+
+            if not item.get('listed_price'):
+                item['listed_price'] = item['discounted_price']
+                item['discounted_price'] = 0
+                item['discounted_percent'] = 0
+
+            brand_id = self.brand_manager.get_brand(item['brand_name'])
+
+            # print('Updating manually added product ' + str(exists[0][0]))
+            update_prod = "UPDATE product SET title = %s, description = %s, price = %s, discount = %s, discounted_price = %s, status = %s, brandname = %s, brand_id = %s, updated_at = CURRENT_TIMESTAMP WHERE id = %s"
+            update_values = (
+                item['product_name'],
+                item['product_desc'],
+                item['listed_price'],
+                item['discounted_percent'],
+                item['discounted_price'],
+                'active',
+                item['brand_name'],
+                brand_id,
+                item['product_id']
+            )
+            self.cursor.execute(update_prod, update_values)
+
+            for i in item['prod_images']:
+                update_images = "INSERT INTO product_image (product_id, src, filesrc) VALUES (%s, %s, %s)"
+                images_val = (item['product_id'], i, '')           
+                self.cursor.execute(update_images, images_val)
+            
+            for i in item['reviews']:
+                if (i.get('review')):
+                    update_review = "INSERT INTO product_review (product_id, review, stars) VALUES (%s, %s, %s)"
+                    review_val = (item['product_id'], i['review'], i['stars'])
+                    self.cursor.execute(update_review, review_val)
+            
+            self.db.commit()
+            print('Data inserted into products MariaDB')
+
+            return item
+        
+        except Exception as e:
+            # print(f"Error inserting data into MariaDB: {e}")
+            raise DropItem("Item dropped due to database error")
 
         return
