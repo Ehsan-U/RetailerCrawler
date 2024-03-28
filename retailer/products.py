@@ -261,7 +261,7 @@ class Products:
             print('Data inserted into products MariaDB')
 
             return item
-        
+
         except Exception as e:
             # print(f"Error inserting data into MariaDB: {e}")
             raise DropItem("Item dropped due to database error")
