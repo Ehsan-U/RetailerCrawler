@@ -229,6 +229,9 @@ class Products:
                 item['discounted_price'] = 0
                 item['discounted_percent'] = 0
 
+            if not item.get('discounted_price'):
+                item['discounted_price'] = 0
+
             brand_id = self.brand_manager.get_brand(item['brand_name'])
 
             # print('Updating manually added product ' + str(exists[0][0]))
