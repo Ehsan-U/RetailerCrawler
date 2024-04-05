@@ -145,7 +145,7 @@ class Products:
                     self.db.commit()
             else:
                 brand_id = self.brand_manager.get_brand(item['brand_name'])
-                update_prods = "INSERT INTO product (title, url, description, price, discount, discounted_price, brandname, status, created_at, updated_at, country_id, user_id, retailer_id, brand_id, scrapping_url_id, trend) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, %s, %s, %s, false)"
+                update_prods = "INSERT INTO product (title, url, description, price, discount, discounted_price, brandname, status, created_at, updated_at, country_id, user_id, retailer_id, brand_id, scrapping_url_id, trend, comment) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, %s, %s, %s, %s, %s, false, '')"
                 prods_val = (
                     item['product_name'],
                     item['product_url'],
