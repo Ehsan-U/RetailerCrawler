@@ -466,5 +466,19 @@ DOMAIN_SETTINGS = {
             "ELEMENT": "//article" # reached end when not exists
         },
         'end': {'condition': "element_present", 'negate': True},
+    },
+
+    '3suisses.fr': {
+        'javascript': {
+            'listing_page': False,
+            'product_page': False,
+        },
+        'selectors': {
+            'PRODUCTS': "//article[@class='item--product']",
+            "DISCOUNTED": ".//span[contains(@class, 'item__price--old-box')]", 
+            "PRODUCT_URL": ".//p[@class='item__title ']/a/@href",
+            "ELEMENT": "//a[@class=' noDisplay ' and text()='Voir la suite']"  # reached end when found
+        },
+        'end': {'condition': "element_present", 'negate': False},
     }
 }
