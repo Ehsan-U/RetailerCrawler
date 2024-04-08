@@ -18,6 +18,8 @@ class RetailerPipeline:
                 self.products.deactivate_product(item['product_id'])
             else:
                 self.products.update_product(item)
+        elif (item.get("spider_type") == "manual_scrapping"):
+            self.products.update_manually_scapped_product(item)
         else:
             self.products.store_product(item)
 

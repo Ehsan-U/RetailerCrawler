@@ -11,7 +11,7 @@ class FarfetchProduct(ProductPage):
     _brand_name = "//a[@data-component='LinkGhostDark']/text()"
     _prod_images = "//img[contains(@alt, 'Image')]/@src"
     _discounted_price = "//p[@data-component='PriceFinalLarge']/text()"
-    _listed_price = "//p[@data-component='PriceOriginal']/text()"
+    _listed_price = "//p[@data-component='PriceOriginal' or @data-component='PriceLarge']/text()"
     _product_desc = "//section[@data-component='AccordionItem']//text()[not(parent::style or parent::script)]"
 
     @field

@@ -27,7 +27,7 @@ class RetailerSpider(scrapy.Spider):
         products = Products()
         pages = []
 
-        if self.RETAILER_ID != 0:
+        if self.RETAILER_ID != 0 or self.SPIDER_TYPE == "manual_scrapping":
             pages = products.get_pages(self.RETAILER_ID, self.SPIDER_TYPE)
 
         for page in pages:
@@ -35,11 +35,14 @@ class RetailerSpider(scrapy.Spider):
             if scrapping_url_id:
                 products.update_scrapping_url_scrapped_datetime(scrapping_url_id)
 
-            product_page = True if page["spider_type"] == "checker" else False
+            product_page = True if page["spider_type"] == "checker" or page["spider_type"] == "manual_scrapping" else False
             url = self.modify_url(url=page['url'], spider_type=page['spider_type'], product_page=product_page)
             js = self.use_javascript(url, spider_type=page.get("spider_type"))
 
-            request = self.make_request(url, callback=self.parse, cb_kwargs={"page_meta": page}, js=js)
+            if page["spider_type"] != "manual_scrapping":
+                request = self.make_request(url, callback=self.parse, cb_kwargs={"page_meta": page}, js=js)
+            else:
+                request = self.make_request(url, callback=self.parse_product, cb_kwargs={"page_meta": page}, js=js)
             yield request
 
 
@@ -112,7 +115,7 @@ class RetailerSpider(scrapy.Spider):
         page_item = await page.to_item()
         item = {**page_meta, **page_item}
         # allow only discounted products
-        if item.get("discounted_percent"):
+        if item.get("discounted_percent") or item["spider_type"] == "manual_scrapping":
             # remove the unncesessary fields
             item.pop("url")
 
@@ -222,7 +225,7 @@ class RetailerSpider(scrapy.Spider):
         domain = urlparse(url).netloc.lstrip('www.')
         config = DOMAIN_SETTINGS[domain]
         
-        if spider_type == "checker":
+        if spider_type == "checker" or spider_type == "manual_scrapping":
             product_page = True
 
         if product_page:
